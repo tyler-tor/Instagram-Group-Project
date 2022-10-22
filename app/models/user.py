@@ -10,6 +10,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    #added first/lastname ----------------------------------------
+    first_name = db.Column(db.String(255), nullable=False)
+    last_name = db.Column(db.String(255), nullable=False)
+
+    posts = db.relationship('Post', back_populates='user')
 
     @property
     def password(self):
@@ -26,5 +31,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            #added firstname and lastname -------------------------
+            'firstName': self.first_name,
+            'lastName': self.last_name
         }
