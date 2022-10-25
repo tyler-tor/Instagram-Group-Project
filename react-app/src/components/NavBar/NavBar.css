@@ -1,0 +1,9 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar-right-side-container {
+  display: flex;
+  justify-content: space-between;
+}
