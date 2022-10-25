@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -13,6 +14,8 @@ class User(db.Model, UserMixin):
     #added first/lastname ----------------------------------------
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.Datetime, default=datetime.now)
+    updated_at = db.Column(db.Datetime, default=datetime.now, onupdate=datetime.now)
 
     posts = db.relationship('Post', back_populates='user')
 
@@ -34,5 +37,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             #added firstname and lastname -------------------------
             'firstName': self.first_name,
-            'lastName': self.last_name
+            'lastName': self.last_name,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
         }
