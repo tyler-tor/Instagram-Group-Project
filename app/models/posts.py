@@ -10,8 +10,8 @@ class Post(db.Model):
     likes = db.Column(db.Integer, default=0)
     img_url = db.Column(db.String(255))
     caption = db.Column(db.String(150))
-    created_at = db.Column(db.Datetime, default=datetime.now)
-    updated_at = db.Column(db.Datetime, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     users = db.relationship('user', back_populates="post")
 
