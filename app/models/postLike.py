@@ -2,27 +2,24 @@ from .db import db
 from datetime import datetime
 
 
-class Post(db.Model):
-    __tablename__ = 'posts'
+class PostLike(db.Model):
+    __tablename__ = 'post_likes'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    likes = db.Column(db.Integer, default=0)
-    img_url = db.Column(db.String(255))
-    caption = db.Column(db.String(150))
+    post_id = db.Column(db.Integer, db.ForeignKey('images.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    users = db.relationship('user', back_populates="post", cascade='all, delete-orphan')
+    users = db.relationship('user', back_populates="post_likes", cascade='all, delete-orphan')
+    posts = db.relationship('post', back_populates='post_likes', cascade='all, delete-orphan')
 
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.user_id,
-            'likes': self.likes,
-            'imgUrl': self.img_url,
-            'caption': self.caption,
+            'imageId': self.image_id,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }
