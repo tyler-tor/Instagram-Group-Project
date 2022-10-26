@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/LoginPage/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import LoginForm from "./components/LoginPage";
 import { authenticate } from "./store/session";
 
 function App() {
@@ -28,9 +29,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        {/* <Route path="/" exact={true}>
+        <Route path="/" exact={true}>
           <LoginForm />
-        </Route> */}
+        </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>

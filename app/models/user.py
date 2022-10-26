@@ -3,6 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
+followers= db.Table('followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('users.id'))
+)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -17,7 +21,19 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
+    posts = db.relationship('Post', back_populates='users', cascade='all, delete-orphan')
+    comments = db.relationship('Comment', back_populates='users', cascade='all, delete-orphan')
+
+    # follows = db.relationship('User', secondary='follows', primaryjoin="follows.c.user_id==users.c.id",
+    #                             secondaryjoin="follows.c.following_id==users.c.id", backref=db.backref('follows', lazy='dynamic'),
+    #                             cascade='all, delete-orphan', single_parent=True)
+    followed = db.relationship(
+        'User', secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('test', lazy='dynamic'), lazy='dynamic')
+
+    post_likes = db.relationship('PostLike', back_populates='users', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -38,6 +54,7 @@ class User(db.Model, UserMixin):
             #added firstname and lastname -------------------------
             'firstName': self.first_name,
             'lastName': self.last_name,
+            'followers': {follower.id:follower for follower in self.test},
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }

@@ -1,22 +1,24 @@
-from app.models import db, Follow
+from app.models import db, followers
+
+
 
 
 def seed_follows():
-    follow1 = Follow(
-        user_id = 1,
-        following_id= 2,
+    follow1 = followers(
+        follower_id = 1,
+        followed_id= 2,
     )
-    follow2 = Follow(
-        user_id = 2,
-        following_id= 3,
+    follow2 = followers(
+        follower_id = 2,
+        followed_id= 3,
     )
-    follow3 = Follow(
-        user_id = 3,
-        following_id= 1,
+    follow3 = followers(
+        follower_id = 3,
+        followed_id= 1,
     )
-    follow4 = Follow(
-        user_id = 3,
-        following_id= 2,
+    follow4 = followers(
+        follower_id = 3,
+        followed_id= 2,
     )
     db.session.add(follow1)
     db.session.add(follow2)

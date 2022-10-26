@@ -11,8 +11,8 @@ class PostLike(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    users = db.relationship('user', back_populates="post_likes", cascade='all, delete-orphan')
-    posts = db.relationship('post', back_populates='post_likes', cascade='all, delete-orphan')
+    users = db.relationship('User', back_populates="post_likes", cascade='all, delete-orphan', single_parent=True)
+    posts = db.relationship('Post', back_populates='post_likes', cascade='all, delete-orphan', single_parent=True)
 
 
     def to_dict(self):
