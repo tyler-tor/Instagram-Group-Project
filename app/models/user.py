@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
-followers= db.Table('followers',
+follows = db.Table('follows',
     db.Column('follower_id', db.Integer, db.ForeignKey('users.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('users.id'))
 )
@@ -27,11 +27,11 @@ class User(db.Model, UserMixin):
     # follows = db.relationship('User', secondary='follows', primaryjoin="follows.c.user_id==users.c.id",
     #                             secondaryjoin="follows.c.following_id==users.c.id", backref=db.backref('follows', lazy='dynamic'),
     #                             cascade='all, delete-orphan', single_parent=True)
-    followed = db.relationship(
-        'User', secondary=followers,
-        primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin=(followers.c.followed_id == id),
-        backref=db.backref('test', lazy='dynamic'), lazy='dynamic')
+    followers = db.relationship(
+        'User', secondary=follows,
+        primaryjoin=(follows.c.follower_id == id),
+        secondaryjoin=(follows.c.followed_id == id),
+        backref=db.backref('follows', lazy='dynamic'), lazy='dynamic')
 
     post_likes = db.relationship('PostLike', back_populates='users', cascade='all, delete-orphan')
 
@@ -54,7 +54,8 @@ class User(db.Model, UserMixin):
             #added firstname and lastname -------------------------
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'followers': {follower.id:follower for follower in self.test},
+            'followers': [{'userId': follower.id, 'username': follower.username} for follower in self.followers],
+            'following': [{'userId': follower.id, 'username': follower.username} for follower in self.follows],
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }

@@ -23,5 +23,5 @@ def seed_post_likes():
 
 
 def undo_post_likes():
-    db.session.execute('TRUNCATE post_likes RESTART IDENTITY CASCADE;')
+    db.session.execute('DELETE FROM post_likes;')
     db.session.commit()

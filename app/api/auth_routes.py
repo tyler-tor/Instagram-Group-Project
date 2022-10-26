@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Post
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -24,7 +24,10 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        curr_user = current_user.to_dict()
+        posts = Post.query.filter(Post.user_id == curr_user['id']).all()
+        curr_user['Posts'] = [post.to_dict() for post in posts]
+        return curr_user
     return {'errors': ['Unauthorized']}
 
 
@@ -41,7 +44,7 @@ def login():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
-        print('TEST------------------------------------', user.test)
+        # print('TEST------------------------------------', user.test)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -66,7 +69,9 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            first_name=form.data['firstName'],
+            last_name=form.data['lastName']
         )
         db.session.add(user)
         db.session.commit()
