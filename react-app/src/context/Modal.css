@@ -20,8 +20,10 @@
 }
 
 #modal-content {
+  display: flex;
+  justify-content: center;
   position: absolute;
-  background-color:white;
+  background-color:transparent;
   border-radius: 12px;
   width: 100%;
   max-width: 568px;

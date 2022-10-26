@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
+import HomeFeed from "./components/HomeFeed";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,6 +42,9 @@ function App() {
         <ProtectedRoute path="/explore" exact={true}>
           Explore
         </ProtectedRoute>
+        {/* <Route path="/" exact={true}>
+          <HomeFeed />
+        </Route> */}
         <Route path="/" exact={true}>
           <LoginPage />
         </Route>
