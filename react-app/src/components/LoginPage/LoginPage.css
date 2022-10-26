@@ -36,13 +36,13 @@
   display: inline-block;
 }
 
-.login-form-container {
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-form-children {
+.form-children {
   margin-bottom: 6px
 }
 
@@ -93,12 +93,49 @@
 .login-page-left-side-container {
   height: 581.141px;
   width: 380.312px;
+  display: flex;
+  justify-content: flex-end;
   margin-right: 32px;
   margin-bottom: 12px;
-  border: 1px solid black;
 }
 
 .carousel-container {
+  display: flex;
+  justify-content: flex-end;
   height: 536.836px;
   width: 250px;
+}
+
+
+.sign-up-container {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  border: 1px solid rgb(219, 219, 219);
+  background-color: white;
+  padding: 20px 0px;
+}
+
+.sign-up-form-header-text {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 25px;
+  margin: 0 40px 20px;
+  text-align: center;
+  color: rgb(142, 142, 142);
+  padding: 0px 60px;
+
+}
+
+.sign-up-form-policy-text {
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 20px;
+  text-align: center;
+  color: rgb(142, 142, 142);
+  padding: 0px 20%;
+  margin: 20px 0px;
+
 }

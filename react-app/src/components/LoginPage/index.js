@@ -8,7 +8,6 @@ const LoginPage = () => {
   return (
     <div className="papa-div">
       <div className="login-page-left-side-container">
-        This will be slideshow
         <Carousel />
       </div>
       <div className="login-page-right-side-container">

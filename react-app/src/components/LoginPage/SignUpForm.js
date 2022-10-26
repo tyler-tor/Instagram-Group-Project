@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
@@ -17,13 +19,21 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
     }
   };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+  };
+
+  const updatefirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -39,55 +49,93 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+    <div className="sign-up-container">
+      <div className="logo-holder"></div>
+      <form className="form-container" onSubmit={onSignUp}>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <h2 className="sign-up-form-header-text">
+          Sign up to see photos and videos from your friends.
+        </h2>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={updateUsername}
+            value={username}
+          ></input>
+        </div>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="text"
+            name="First Name"
+            placeholder="First Name"
+            onChange={updateUsername}
+            value={username}
+          ></input>
+        </div>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="text"
+            name="Last Name"
+            placeholder="Last Name"
+            onChange={updateUsername}
+            value={username}
+          ></input>
+        </div>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={updateEmail}
+            value={email}
+          ></input>
+        </div>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="password"
+            name="password"
+            placeholder="Repeat Password"
+            onChange={updatePassword}
+            value={password}
+          ></input>
+        </div>
+        <div className="form-children">
+          <input
+            className="form-input-text-boxes"
+            type="password"
+            name="repeat_password"
+            placeholder="Repeat Password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          ></input>
+        </div>
+        <h3 className="sign-up-form-policy-text">
+          <strong></strong>
+          By signing up, you agree to our{" "}
+          <strong> Terms, Privacy Policy </strong> and{" "}
+          <strong>Cookies Policy</strong>.
+        </h3>
+        <button className="form-default-submit-button" type="submit">
+          Sign Up
+        </button>
+      </form>
+    </div>
   );
 };
 

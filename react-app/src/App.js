@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/LoginPage/SignUpForm";
 import NavBar from "./components/NavBar";
-import ProtectedRoute from "./components/LoginPage/ProtectedRoute";
+import ProtectedRoute from "./components/utils/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
+import { useSelector } from "react-redux";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +37,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/explore" exact={true}>
+          Explore
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <LoginPage />
