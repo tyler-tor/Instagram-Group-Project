@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/LoginPage/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import TempFollow from "./components/TempFollow";
 import LoginForm from "./components/LoginPage";
 import { authenticate } from "./store/session";
 
@@ -43,6 +44,10 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
           <LoginPage />
+        </ProtectedRoute>
+        {/*Route for testing follow and unfollow*/}
+        <ProtectedRoute path='/follow' exact={true}>
+          <TempFollow />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

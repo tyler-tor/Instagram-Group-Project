@@ -30,6 +30,7 @@ def delete_user(id):
         db.session.commit()
         return user.to_dict()
 
+
 @user_routes.route('/<int:id>/followers', methods=['GET'])
 @login_required
 def get_followers(id):
@@ -41,9 +42,12 @@ def get_followers(id):
         #error handling here later
         pass
     user = user.to_dict()
-    print('TEST------------------------------------------------>',user['followers'])
+
+    # [post_arr.append(post.to_dict()) for post in posts]
+    # print('TEST------------------------------------------------>',user['followers'])
 
     return {'followers': user['followers']}
+
 
 @user_routes.route('/<int:id>/following', methods=['GET'])
 @login_required
@@ -54,5 +58,45 @@ def get_following(id):
     user = User.query.get(id)
     if(user):
         user = user.to_dict()
-        print('TEST------------------------->',user['following'])
+        # print('TEST------------------------->',user['following'])
         return{'following': user['following']}
+
+@user_routes.route('/<int:id>/follow', methods=['POST'])
+@login_required
+#test with id 6 and id 7
+def follow_user(id):
+    curr_user = User.query.get(current_user.id)
+    f_user = User.query.get(id)
+    if(curr_user and f_user):
+
+        f_user.followers.append(curr_user)
+
+        db.session.add(f_user)
+        db.session.commit()
+
+        curr_user = curr_user.to_dict()
+        f_user = f_user.to_dict()
+
+        return{'Current User': curr_user, 'Following User' : f_user}
+    #add error handling later!
+
+@user_routes.route('/<int:id>/follow', methods=['DELETE'])
+@login_required
+def unfollow_user(id):
+    curr_user = User.query.get(current_user.id)
+    f_user = User.query.get(id)
+
+    if(curr_user and f_user):
+        # curr_user_dict = curr_user.to_dict()
+
+        for idx, user in enumerate(f_user.followers):
+            # user = user.to_dict()
+
+            if(user.id == curr_user.id):
+                print('MATCH!!!', idx)
+                #remove current users from following users follower array
+                f_user.followers.remove(user)
+                db.session.add(f_user)
+                db.session.commit()
+                return {'Message': f'user {curr_user.id} unfollows user {f_user.id}'}
+        #error handling later!
