@@ -5,6 +5,8 @@ import * as sessionActions from "../../store/session";
 import LogoutButton from "./LogoutButton";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineUserCircle } from "react-icons/hi";
+import { FaUserCircle } from "react-icons/fa";
+
 import { logout } from "../../store/session";
 
 function ProfileDropDownMenu({ user }) {
@@ -51,7 +53,7 @@ function ProfileDropDownMenu({ user }) {
 
   return (
     <>
-      <AiOutlineUser
+      <FaUserCircle
         onClick={openMenu}
         className="icon-buttons side-step profile-button"
       />

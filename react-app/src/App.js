@@ -42,9 +42,9 @@ function App() {
         <ProtectedRoute path="/explore" exact={true}>
           Explore
         </ProtectedRoute>
-        {/* <Route path="/" exact={true}>
+        <Route path="/" exact={true}>
           <HomeFeed />
-        </Route> */}
+        </Route>
         <Route path="/" exact={true}>
           <LoginPage />
         </Route>

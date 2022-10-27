@@ -10,20 +10,21 @@ import {
   AiOutlineCompass,
   AiOutlinePlusSquare,
   AiFillHome,
-  AiOutlineUser,
 } from "react-icons/ai";
 import "./NavBar.css";
 
 const NavBar = () => {
   return (
     <div className="navbar-container">
-      <NavLink to={`/`}>
-        <div className="navbar-logo-container">
-          <img className="logo-wrapper" src={logo} alt="logo" />
-        </div>
-      </NavLink>
-      <div>Search</div>
-      <div>
+      <div className="navbar-child logo-portion">
+        <NavLink to={`/`}>
+          <div className="navbar-logo-container">
+            <img className="logo-wrapper" src={logo} alt="logo" />
+          </div>
+        </NavLink>
+      </div>
+      <div className="navbar-child search-portion">Search</div>
+      <div className="navbar-child right-part-portion">
         <div className="nav-bar-right-side-container">
           <NavLink to={`/`} className="icon-wrapper">
             <AiFillHome className="icon-buttons" />
