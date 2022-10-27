@@ -24,7 +24,35 @@ def user(id):
 @login_required
 def delete_user(id):
     user = User.query.get(id)
+    print('TEST-------------------------->', user.to_dict())
     if current_user.is_authenticated and current_user.id == user.id:
         db.session.delete(user)
         db.session.commit()
         return user.to_dict()
+
+@user_routes.route('/<int:id>/followers', methods=['GET'])
+@login_required
+def get_followers(id):
+    '''
+        get users followers by id
+    '''
+    user = User.query.get(id)
+    if(not user):
+        #error handling here later
+        pass
+    user = user.to_dict()
+    print('TEST------------------------------------------------>',user['followers'])
+
+    return {'followers': user['followers']}
+
+@user_routes.route('/<int:id>/following', methods=['GET'])
+@login_required
+def get_following(id):
+    '''
+        get user's who user(id) is following
+    '''
+    user = User.query.get(id)
+    if(user):
+        user = user.to_dict()
+        print('TEST------------------------->',user['following'])
+        return{'following': user['following']}
