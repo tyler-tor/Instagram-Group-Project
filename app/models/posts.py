@@ -13,7 +13,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    users = db.relationship('User', back_populates="posts", cascade='all, delete-orphan', single_parent=True)
+    users = db.relationship('User', back_populates="posts", single_parent=True)
     comments = db.relationship('Comment', back_populates="posts", cascade='all, delete-orphan', single_parent=True)
     post_likes = db.relationship('PostLike', back_populates="posts", cascade='all, delete-orphan')
 

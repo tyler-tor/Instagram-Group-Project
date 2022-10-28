@@ -1,5 +1,5 @@
 from crypt import methods
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user, logout_user
 from app.models import Post, User, db
 from app.forms.create_post import CreatePost
@@ -32,15 +32,16 @@ def posts():
 @login_required
 def create_post():
     form = CreatePost()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post(
             user_id=current_user.id,
-            caption=form.data['Caption'],
-            img_url=form.data['Image']
+            caption=form.data['caption'],
+            img_url=form.data['img_url']
         )
         db.session.add(post)
         db.session.commit()
-        return post.to_dict()
+        return { 'test': 'test'}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -48,9 +49,10 @@ def create_post():
 @login_required
 def update_post(id):
     form = UpdatePost()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit:
         post = Post.query.get(id)
-        post.caption = form.data['Caption']
+        post.caption = form.data['caption']
         db.session.commit()
         return post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -60,7 +62,8 @@ def update_post(id):
 @login_required
 def delete_post(id):
     post = Post.query.get(id)
-    db.session.delete(post)
-    db.session.commit()
-    return {'message': 'Success'}
-    
+    if post and current_user.id == post.user_id:
+        db.session.delete(post)
+        db.session.commit()
+        return {'message': 'Success'}
+    return {'errors': 'This post does not exist'}

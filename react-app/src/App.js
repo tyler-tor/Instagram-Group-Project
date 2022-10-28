@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/utils/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import TempFollow from "./components/TempFollow";
+import TempPost from "./components/CreatePost/TempPost";
 import LoginForm from "./components/LoginPage";
 import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
@@ -51,8 +52,13 @@ function App() {
         <ProtectedRoute path='/follow' exact={true}>
           <TempFollow />
         </ProtectedRoute>
+        {/* Route for testing posts */}
+        <ProtectedRoute path='/posts' exact={true}>
+          <TempPost />
+        </ProtectedRoute>
         <Route path="/" exact={true}>
           <HomeFeed />
+          <LoginPage />
         </Route>
         {/* <Route path="/" exact={true}>
           <LoginPage />
