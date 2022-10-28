@@ -17,6 +17,8 @@ import UserProfile from "./components/UserProfile";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,17 +28,19 @@ function App() {
     })();
   }, [dispatch]);
 
+  useEffect(() => {
+    if (user) setLoggedIn(true);
+    else setLoggedIn(false);
+  }, [user]);
+
   if (!loaded) {
     return null;
   }
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {loggedIn && <NavBar />}
       <Switch>
-        {/* <Route path="/" exact={true}>
-          <LoginForm />
-        </Route> */}
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
@@ -50,20 +54,22 @@ function App() {
           Explore
         </ProtectedRoute>
         {/*Route for testing follow and unfollow*/}
-        <ProtectedRoute path='/follow' exact={true}>
+        <ProtectedRoute path="/follow" exact={true}>
           <TempFollow />
         </ProtectedRoute>
         {/* Route for testing posts */}
-        <ProtectedRoute path='/posts' exact={true}>
+        <ProtectedRoute path="/posts" exact={true}>
           <TempPost />
         </ProtectedRoute>
-        <Route path="/" exact={true}>
-          <HomeFeed />
-          <LoginPage />
-        </Route>
-        {/* <Route path="/" exact={true}>
-          <LoginPage />
-        </Route> */}
+        {loggedIn ? (
+          <Route path="/" exact={true}>
+            <HomeFeed />
+          </Route>
+        ) : (
+          <Route path="/" exact={true}>
+            <LoginPage />
+          </Route>
+        )}
       </Switch>
     </BrowserRouter>
   );
