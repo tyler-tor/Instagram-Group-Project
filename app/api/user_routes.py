@@ -34,13 +34,11 @@ def user(id):
 @login_required
 def delete_user(id):
     user = User.query.get(id)
-    # try:
     if current_user.is_authenticated and current_user.id == user.id:
         logout_user()
         db.session.delete(user)
         db.session.commit()
-        return user.to_dict()
+        return {'message': 'Success'}
     #----------------------------need to fix error handling for when you delete a given user -------------------------------------------------------
-    # except:
-    #     error = Exception('You are not this user')
-    #     return {'errors': error}, 401
+    error = Exception('You are not this user')
+    return {'errors': validation_errors_to_error_messages(error)}, 401
