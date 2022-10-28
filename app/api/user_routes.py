@@ -34,6 +34,7 @@ def user(id):
 @login_required
 def delete_user(id):
     user = User.query.get(id)
+    print('TEST-------------------------->', user.to_dict())
     if current_user.is_authenticated and current_user.id == user.id:
         logout_user()
         db.session.delete(user)
