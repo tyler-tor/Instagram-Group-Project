@@ -1,0 +1,28 @@
+.user-profile-papa-div {
+  padding: 30px 20px 0px ;
+}
+
+.user-profile-header-container {
+  display: flex;
+  max-width: 935px;
+  max-height: 161px;
+  margin-bottom: 44px;
+  border: 1px solid black;
+}
+
+.user-info-box-profile-photo-container {
+  margin-right: 30px;
+  width: 290px;
+}
+
+#user-profile-wrapper {
+  height: 150px;
+  width: 150px;
+  border-radius: 1000px;
+}
+
+#user-profile-wrapper img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
