@@ -58,6 +58,7 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'followers': [{'userId': follower.id, 'username': follower.username} for follower in self.followers],
             'following': [{'userId': follower.id, 'username': follower.username} for follower in self.follows],
+            'profilePicture': self.profile_picture,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }
