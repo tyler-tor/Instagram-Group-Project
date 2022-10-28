@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { FaRegSmile } from "react-icons/fa";
 import PostSettingsModal from "./PostSettingsModal";
 import stock from "../../images/stock.jpg";
+import { NavLink } from "react-router-dom";
 
 const ActualFeed = () => {
   return (
@@ -13,9 +14,9 @@ const ActualFeed = () => {
         <div className="feed-child post-username-and-settings-container">
           <div className="poster-username-and-circle">
             <FaUserCircle className="poster-profile-picture-for-post" />
-            <a className="poster-username">
-              <strong>theoman42</strong>
-            </a>
+            <NavLink to={"/:userId"} className="poster-username">
+              <strong className="username-text">theoman42</strong>
+            </NavLink>
           </div>
           <PostSettingsModal />
         </div>

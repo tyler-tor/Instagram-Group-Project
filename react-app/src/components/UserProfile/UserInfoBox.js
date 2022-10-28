@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import screenshot from "../../images/screenshot1-2x.png";
 
 const UserInfoBox = () => {
@@ -6,7 +6,7 @@ const UserInfoBox = () => {
     <div className="user-profile-header-container">
       <div className="user-info-box-profile-photo-container">
         <div id="user-profile-wrapper">
-          <img src={screenshot} alt="profile picture" />
+          <img src={screenshot} alt="profile" />
         </div>
       </div>
     </div>

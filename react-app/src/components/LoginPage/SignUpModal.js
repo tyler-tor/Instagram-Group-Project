@@ -7,9 +7,9 @@ const SignUpFormModal = () => {
 
   return (
     <>
-      <a className="sign-up-modal-text" onClick={() => setShowModal(true)}>
+      <span className="sign-up-modal-text" onClick={() => setShowModal(true)}>
         Sign Up
-      </a>
+      </span>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <SignUpForm onClose={() => setShowModal(false)} />

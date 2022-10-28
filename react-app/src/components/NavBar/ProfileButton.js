@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
-import LogoutButton from "./LogoutButton";
-import { AiOutlineUser } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { FaUserCircle } from "react-icons/fa";
 
 import { logout } from "../../store/session";
 
-function ProfileDropDownMenu({ user }) {
-  const sessionUser = useSelector((state) => state.session.user);
+function ProfileDropDownMenu() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState("isHidden");
 

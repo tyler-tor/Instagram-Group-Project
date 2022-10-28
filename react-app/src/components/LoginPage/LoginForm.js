@@ -18,6 +18,10 @@ const LoginForm = () => {
     }
   };
 
+  const demoLogIn = async (e) => {
+    await dispatch(login("demo@aa.io", "password"));
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -66,7 +70,9 @@ const LoginForm = () => {
         </div>
       </form>
       <div className="or-styling"> or </div>
-      <button className="form-default-submit-button demo">Demo Login</button>
+      <button className="form-default-submit-button demo" onClick={demoLogIn}>
+        Demo Login
+      </button>
     </div>
   );
 };

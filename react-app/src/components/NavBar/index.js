@@ -1,10 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import LogoutButton from "./LogoutButton";
 import ProfileDropDownMenu from "./ProfileButton";
-import home from "../../images/home.png";
-import add from "../../images/add.png";
-import explore from "../../images/compass.png";
 import logo from "../../images/Instagram_logo.png";
 import {
   AiOutlineCompass,

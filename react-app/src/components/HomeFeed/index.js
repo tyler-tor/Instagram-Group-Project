@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CircleFaces from "./CircleFaces";
 import ActualFeed from "./ActualFeed";
 import "./HomeFeed.css";
