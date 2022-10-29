@@ -119,3 +119,15 @@ def unfollow_user(id):
                 return{'Current User': curr_user, 'Following User' : f_user}
                 # return {'Message': f'user {curr_user.id} unfollows user {f_user.id}'}
         #error handling later!
+
+@user_routes.route('/<int:id>/likes', methods=['GET'])
+@login_required
+def get_all_liked_posts(id):
+    user = User.query.get(id)
+    if(user):
+        post_arr = []
+        for like in user.post_likes:
+            # print('DEBUG USERS LIKED POST ---------------------------------------', like.posts.to_dict())
+            post_arr.append(like.posts.to_dict())
+
+        return {'likedPosts' : post_arr}
