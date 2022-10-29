@@ -29,7 +29,7 @@ def update_comment(id):
         if form.validate_on_submit:
             comment.body = form.data['body']
             db.session.commit()
-            return comment.to_dict()
+            return {'test': 'test'}
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return {'errors': 'This comment does not belong to you!'}
 

@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 // import User from "./components/User";
 import TempFollow from "./components/TempFollow";
 import TempPost from "./components/CreatePost/TempPost";
+import TempComment from './components/CreateComment/TempComment'
 import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
 import HomeFeed from "./components/HomeFeed";
@@ -37,12 +38,12 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/users" exact={true}>
+        {/* <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/:userId" exact={true}>
           <UserProfile />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/explore" exact={true}>
           Explore
         </ProtectedRoute>
@@ -53,6 +54,10 @@ function App() {
         {/* Route for testing posts */}
         <ProtectedRoute path="/posts" exact={true}>
           <TempPost />
+        </ProtectedRoute>
+        {/* Route for testing comments */}
+        <ProtectedRoute path="/comments" exact={true}>
+          <TempComment />
         </ProtectedRoute>
         {user ? (
           <Route path="/" exact={true}>
