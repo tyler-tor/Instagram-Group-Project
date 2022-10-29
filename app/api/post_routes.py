@@ -1,9 +1,10 @@
 from crypt import methods
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user, logout_user
-from app.models import Post, User, db
+from app.models import Post, User, Comment, db
 from app.forms.create_post import CreatePost
 from app.forms.update_post import UpdatePost
+from app.forms.create_comment import CreateComment
 
 
 post_routes = Blueprint('posts', __name__)
@@ -41,7 +42,7 @@ def create_post():
         )
         db.session.add(post)
         db.session.commit()
-        return { 'test': 'test'}
+        return post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -67,3 +68,38 @@ def delete_post(id):
         db.session.commit()
         return {'message': 'Success'}
     return {'errors': 'This post does not exist'}
+
+
+@post_routes.route('/<int:id>/comments')
+@login_required
+def comments_on_post(id):
+    post = Post.query.get(id)
+    if post:
+        comments = Comment.query.filter(Comment.post_id == post.id).options(db.joinedload(Comment.users)).all()
+        print(comments)
+        comments_dict = {}
+        comments_dict["Comments"] = [{**comment.to_dict(), 'users': {
+            'username': comment.users.username, 'id': comment.users.id
+            }} for comment in comments]
+        return comments_dict
+    return {'errors': 'This post does not exist'}
+
+
+@post_routes.route('/<int:id>/comments', methods=['POST'])
+@login_required
+def create_comment_post(id):
+    post = Post.query.get(id)
+    form = CreateComment()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(
+            user_id=current_user.id,
+            body=form.data['body'],
+            post_id=post.id
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+

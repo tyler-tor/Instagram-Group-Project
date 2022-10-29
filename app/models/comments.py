@@ -24,5 +24,4 @@ class Comment(db.Model):
             'body': self.body,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
-
         }
