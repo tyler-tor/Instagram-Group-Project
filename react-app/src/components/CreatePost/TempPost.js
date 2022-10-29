@@ -25,22 +25,22 @@ const TempPost = () => {
         //     console.log(data)
         // }
         // -------------------------update--------------------------------
-        const response = await fetch('/api/posts/1', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                caption: caption
-            })
-        })
-        // -------------------------delete-----------------------------------------------
-        // const response = await fetch('/api/posts/4', {
-        //     method: 'DELETE',
+        // const response = await fetch('/api/posts/1', {
+        //     method: 'PUT',
         //     headers: {
         //         'Content-Type': 'application/json'
-        //     }
+        //     },
+        //     body: JSON.stringify({
+        //         caption: caption
+        //     })
         // })
+        // -------------------------delete-----------------------------------------------
+        const response = await fetch('/api/posts/4', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 
     const updateCaption = (e) => {
