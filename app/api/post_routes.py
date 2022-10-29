@@ -26,7 +26,9 @@ def validation_errors_to_error_messages(validation_errors):
 def posts():
     posts = Post.query.options(db.joinedload(Post.users)).all()
     posts_dict = {}
-    posts_dict["Posts"] = [{**post.to_dict(), 'users': post.users.username} for post in posts]
+    posts_dict["Posts"] = [{**post.to_dict(), 'users': {
+        'username': post.users.username, 'profilePicture': post.users.profile_picture,
+        'userId': post.users.id}} for post in posts]
     return posts_dict
 
 
@@ -129,7 +131,7 @@ def unlike_post(id):
                 return{'msg' : f'user {current_user.id} unliked post {id}'}
         return {'errors' : 'coult not find post'}
 
-        
+
 @post_routes.route('/<int:id>/comments')
 @login_required
 def comments_on_post(id):

@@ -24,22 +24,26 @@ const TempComment = () => {
         //     console.log(data)
         // }
         // -------------------------update--------------------------------
-        // const response = await fetch('/api/comments/4', {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         body: body
-        //     })
-        // })
-        // -------------------------delete-----------------------------------------------
         const response = await fetch('/api/comments/4', {
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                body: body
+            })
         })
+        if(response.ok){
+            let data = await response.json()
+            console.log(data)
+        }
+        // -------------------------delete-----------------------------------------------
+        // const response = await fetch('/api/comments/4', {
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
     }
 
     const updateBody = (e) => {
