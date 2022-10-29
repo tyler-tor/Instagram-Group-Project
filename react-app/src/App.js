@@ -13,6 +13,8 @@ import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
 import HomeFeed from "./components/HomeFeed";
 import UserProfile from "./components/UserProfile";
+import TempLogOut from "./components/TempLogout";
+import TempLogin from "./components/TempLogin";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,6 +36,15 @@ function App() {
     <BrowserRouter>
       {user && <NavBar />}
       <Switch>
+        {/* <Route path="/" exact={true}>
+          <LoginForm />
+        </Route> */}
+        <Route path="/debug" exact={true}>
+          <SignUpForm />
+          <TempLogin />
+          <TempLogOut />
+        </Route>
+
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>

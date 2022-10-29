@@ -1,7 +1,7 @@
 from crypt import methods
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user, logout_user
-from app.models import Post, User, db
+from app.models import Post, User, db, PostLike
 from app.forms.create_post import CreatePost
 from app.forms.update_post import UpdatePost
 
@@ -67,3 +67,62 @@ def delete_post(id):
         db.session.commit()
         return {'message': 'Success'}
     return {'errors': 'This post does not exist'}
+
+
+# Add post like endpoints here!
+@post_routes.route('/<int:id>/likes', methods=['GET'])
+@login_required
+def get_user_liked(id):
+    '''
+        get all users that liked a post
+    '''
+    post = Post.query.get(id)
+    if(post):
+        post_user_liked_arr = [post_like.users.to_dict() for post_like in post.post_likes]
+        # print('DEBUG IN POSTLIKES --------------------------------------------', post_user_liked_arr)
+        post_user_dict = {'user' : []}
+        for user in post_user_liked_arr:
+            post_user_dict['user'].append({'id':user['id'], 'username':user['username'], 'profilePic':user['profilePicture']})
+            print(user)
+        return post_user_dict
+    return {'errors': 'This post does not exist'}, 404
+
+@post_routes.route('/<int:id>/likes', methods=['POST'])
+@login_required
+def like_post(id):
+    '''
+        current user like a post
+    '''
+    post = Post.query.get(id)
+    user = User.query.get(current_user.id)
+    if(post):
+        post_like = PostLike(
+        user_id=current_user.id,
+        post_id=id
+        )
+
+        post_dict = post.to_dict()
+        user_dict = user.to_dict()
+        user_post = {'userId': user_dict['id'], 'postId': post_dict['id']}
+        db.session.add(post_like)
+        db.session.commit()
+        return user_post
+    return{'errors': 'This post does not exist'}, 404
+
+@post_routes.route('/<int:id>/likes', methods=['DELETE'])
+@login_required
+def unlike_post(id):
+    '''
+        current user unlike post
+    '''
+    post = Post.query.get(id)
+    user = User.query.get(current_user.id)
+    if(post):
+        for post in post.post_likes:
+            # print('DEBUG TEST IN DELETE ROUTE---------------------------------------------',post.to_dict())
+            post_dict = post.to_dict()
+            if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
+                db.session.delete(post)
+                db.session.commit()
+                return{'msg' : f'user {current_user.id} unliked post {id}'}
+        return {'errors' : 'coult not find post'}
