@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-const TempPost = () => {
+const TempComment = () => {
     const user = useSelector(state => state.session.user);
     // const dispatch = useDispatch()
-    const [caption, setCaption] = useState('');
-    const [imageUrl, setImageUrl] = useState('')
+    const [body, setBody] = useState('');
 
-    const onSubPost = async (e) => {
+    const onSubComment = async (e) => {
         e.preventDefault();
-        // const response = await fetch(`/api/posts/`, {
+        // const response = await fetch(`/api/posts/1/comments`, {
         //     method: 'POST',
         //     headers: {
         //       'Content-Type': 'application/json'
         //     },
         //     body: JSON.stringify({
         //         user_id: user.id,
-        //         caption: caption,
-        //         img_url: imageUrl
+        //         body: body,
+        //         post_id: 1
         //     })
         //   });
         // if(response.ok){
@@ -25,17 +24,17 @@ const TempPost = () => {
         //     console.log(data)
         // }
         // -------------------------update--------------------------------
-        // const response = await fetch('/api/posts/1', {
+        // const response = await fetch('/api/comments/4', {
         //     method: 'PUT',
         //     headers: {
         //         'Content-Type': 'application/json'
         //     },
         //     body: JSON.stringify({
-        //         caption: caption
+        //         body: body
         //     })
         // })
         // -------------------------delete-----------------------------------------------
-        const response = await fetch('/api/posts/4', {
+        const response = await fetch('/api/comments/4', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,38 +42,24 @@ const TempPost = () => {
         })
     }
 
-    const updateCaption = (e) => {
-        setCaption(e.target.value);
-      };
-
-    const updateImageUrl = (e) => {
-        setImageUrl(e.target.value);
+    const updateBody = (e) => {
+        setBody(e.target.value);
       };
 
 
     return(
         <>
             <div>
-                <form onSubmit={onSubPost}
-                action='/api/posts/'>
+                <form onSubmit={onSubComment}
+                action='/api/posts/:postId/comments'>
                     <div>
-                        <label>Caption</label>
+                        <label>Body</label>
                         <input
-                            name='caption'
+                            name='body'
                             type='text'
-                            value={caption}
-                            onChange={updateCaption}
+                            value={body}
+                            onChange={updateBody}
                         >
-
-                        </input>
-                        <label>Image Url</label>
-                        <input
-                            name='img_url'
-                            type='text'
-                            value={imageUrl}
-                            onChange={updateImageUrl}
-                        >
-
                         </input>
                     </div>
                     <button type='submit'>Submit</button>
@@ -86,4 +71,4 @@ const TempPost = () => {
 
 }
 
-export default TempPost
+export default TempComment
