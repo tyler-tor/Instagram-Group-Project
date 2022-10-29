@@ -1,7 +1,7 @@
 from crypt import methods
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user, logout_user
-from app.models import User, db
+from app.models import User, db, Post
 
 user_routes = Blueprint('users', __name__)
 
@@ -26,8 +26,12 @@ def users():
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
+    #included all posts by the user in the return, it will be useful for looking at profile pages.
     user = User.query.get(id)
-    return user.to_dict()
+    user = user.to_dict()
+    posts = Post.query.filter(Post.user_id == user['id']).all()
+    user['Posts'] = [post.to_dict() for post in posts]
+    return user
 
 
 @user_routes.route('/<int:id>', methods=['DELETE'])

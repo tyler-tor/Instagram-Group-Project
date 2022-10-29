@@ -13,6 +13,8 @@ import LoginForm from "./components/LoginPage";
 import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
 import HomeFeed from "./components/HomeFeed";
+import TempLogOut from "./components/TempLogout";
+import TempLogin from "./components/TempLogin";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +38,12 @@ function App() {
         {/* <Route path="/" exact={true}>
           <LoginForm />
         </Route> */}
+        <Route path="/debug" exact={true}>
+          <SignUpForm />
+          <TempLogin />
+          <TempLogOut />
+        </Route>
+
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
@@ -60,6 +68,7 @@ function App() {
           <HomeFeed />
           <LoginPage />
         </Route>
+
         {/* <Route path="/" exact={true}>
           <LoginPage />
         </Route> */}
