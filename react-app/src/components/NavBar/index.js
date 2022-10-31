@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import ProfileDropDownMenu from "./ProfileButton";
+import ProfileDropDownMenu from "./ProfileDropDownMenu";
 import logo from "../../images/Instagram_logo.png";
+import SearchBar from "./SearchBar";
 import {
   AiOutlineCompass,
   AiOutlinePlusSquare,
@@ -19,7 +20,9 @@ const NavBar = () => {
           </div>
         </NavLink>
       </div>
-      <div className="navbar-child search-portion">Search</div>
+      <div className="navbar-child search-portion">
+        <SearchBar />
+      </div>
       <div className="navbar-child right-part-portion">
         <div className="nav-bar-right-side-container">
           <NavLink to={`/`} className="icon-wrapper">
