@@ -6,7 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 import { logout } from "../../store/session";
 
-function ProfileDropDownMenu() {
+const ProfileDropDownMenu = () => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState("isHidden");
 
@@ -60,6 +60,6 @@ function ProfileDropDownMenu() {
       </div>
     </>
   );
-}
+};
 
 export default ProfileDropDownMenu;

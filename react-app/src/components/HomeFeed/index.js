@@ -2,6 +2,7 @@ import React from "react";
 import CircleFaces from "./CircleFaces";
 import ActualFeed from "./ActualFeed";
 import "./HomeFeed.css";
+import SideStuff from "./SideStuff";
 
 const HomeFeed = () => {
   return (
@@ -15,7 +16,9 @@ const HomeFeed = () => {
             <ActualFeed />
           </div>
         </div>
-        <div>Sidestuff</div>
+        <div>
+          <SideStuff />
+        </div>
       </section>
     </div>
   );

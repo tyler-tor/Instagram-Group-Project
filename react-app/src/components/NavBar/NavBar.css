@@ -1,15 +1,15 @@
 
 .navbar-container {
+  position: fixed;
+  top: 0;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60px;
+  width: 100%;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(219, 219, 219);
-}
-
-.navbar-child{
-
 }
 
 .logo-portion{
@@ -17,9 +17,17 @@
 }
 
 .search-portion{
+  background-color: rgb(239, 239, 239);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
   width: 268px;
   height: 36px;
-  border: 1px solid rgb(219, 219, 219);
+}
+
+.search-portion-input-area {
+  color: rgb(119, 119, 119);
+  padding-left: 14px;
 }
 
 .right-part-portion {
@@ -105,7 +113,8 @@
   align-items: center;
   cursor: pointer;
   width: auto;
-  padding: 10px
+  padding: 10px;
+  text-decoration: none
 }
 
 .profile-dropdown-button:hover {
