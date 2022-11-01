@@ -140,3 +140,34 @@ div.isHidden  {
 .log-out {
   border-top: 1px solid rgb(219, 219, 219);
 }
+
+
+/* Post Form Styling */
+
+.post-form-wrapper {
+  height: 500px;
+  width: 500px;
+  background-color: white;
+}
+
+.post-form-container {
+  height: 500px;
+  width: 500px;
+  background-color: white;
+}
+
+.post-form-children {
+
+}
+
+.post-form-input-text-boxes {
+
+}
+
+.post-form-default-submit-button {
+
+}
+
+.post-form-modal-text {
+
+}
