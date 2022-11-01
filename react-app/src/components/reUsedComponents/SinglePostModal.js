@@ -8,22 +8,27 @@ import { FaRegSmile } from "react-icons/fa";
 import EditCaptionFormModal from "./EditCaptionModal";
 import DeletePostModal from './DeletePostModal/index'
 import { deletePost } from "../../store/post";
+import { getAllComments } from "../../store/comments";
 
 const SinglePostModal = ({post}) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [myPost, setMyPost] = useState(false);
   const user = useSelector(state => state.session.user)
+  const comments = Object.values(useSelector(state => state.comments))
   const dispatch = useDispatch();
 
   // const post_comments = useSelector(state => state.comments)
-  console.log('IN MODAL!!', user.id);
+  // console.log('IN MODAL!!', user.id);
   useEffect(() => {
-    /*
-      dispatch(loadComments(post.id)).then(() => {
-        setIsLoaded(true)
-      })
-    */
+
+      //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
+
+      // dispatch(getAllComments(post.id)).then(() => {
+      //   setIsLoaded(true)
+      // })
+      // console.log(comments);
+
   },[dispatch])
 
   useEffect(()=>{
@@ -35,6 +40,9 @@ const SinglePostModal = ({post}) => {
   },[post, user])
 
   const clickModal = () =>{
+      dispatch(getAllComments(post.id)).then(() => {
+        setIsLoaded(true)
+      })
     setShowModal(true)
   }
 
@@ -42,13 +50,13 @@ const SinglePostModal = ({post}) => {
   //! there is a warning for a cleanup in a useEffect function.
   //! i am guessing this is because when a post is deleted, one of the modals is not
   //! getting cleaned up propery.
-  const deletePostTest = async e =>{
-    e.preventDefault()
-    const del = await dispatch(deletePost(post.id))
-    .then(()=>{
-        console.log('TEST DELETE STARTED');
-    })
-  }
+  // const deletePostTest = async e =>{
+  //   e.preventDefault()
+  //   const del = await dispatch(deletePost(post.id))
+  //   .then(()=>{
+  //       console.log('TEST DELETE STARTED');
+  //   })
+  // }
 
   return (
     <>
@@ -86,6 +94,25 @@ const SinglePostModal = ({post}) => {
 
               <div className="post-modal-comments-section">
                 {/*Add Comments here!*/}
+
+                {isLoaded && (<>
+                  <ul>
+                      {comments.map(comment =>{
+
+                        return(
+                            <li key={comment.id}>
+                                {comment.body}
+                            </li>
+                        )
+
+
+                      })}
+
+                  </ul>
+
+
+
+                </>)}
               </div>
               <div className="post-modal-like-comment-icon">
                 <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" />
