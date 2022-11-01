@@ -9,11 +9,13 @@ import EditCaptionFormModal from "./EditCaptionModal";
 import DeletePostModal from './DeletePostModal/index'
 import { deletePost } from "../../store/post";
 import { getAllComments } from "../../store/comments";
+import { postComment } from "../../store/comments";
 
 const SinglePostModal = ({post}) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [myPost, setMyPost] = useState(false);
+  const [comment, setComment] = useState('')
   const user = useSelector(state => state.session.user)
   const comments = Object.values(useSelector(state => state.comments))
   const dispatch = useDispatch();
@@ -24,9 +26,9 @@ const SinglePostModal = ({post}) => {
 
       //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
 
-      // dispatch(getAllComments(post.id)).then(() => {
-      //   setIsLoaded(true)
-      // })
+      dispatch(getAllComments(post.id)).then(() => {
+        setIsLoaded(true)
+      })
       // console.log(comments);
 
   },[dispatch])
@@ -40,10 +42,27 @@ const SinglePostModal = ({post}) => {
   },[post, user])
 
   const clickModal = () =>{
-      dispatch(getAllComments(post.id)).then(() => {
-        setIsLoaded(true)
-      })
+      // dispatch(getAllComments(post.id)).then(() => {
+      //   setIsLoaded(true)
+      // })
     setShowModal(true)
+  }
+
+  const updateComment = e =>{
+    setComment(e.target.value)
+  }
+
+  const submitComment = async (e) => {
+    setComment('')
+    const newComment = {
+      postId: post.id,
+      body : comment
+    }
+    await dispatch(postComment(newComment)).then((res)=>{
+      console.log('Posted Comment', res);
+    })
+
+    // console.log(newComment);
   }
 
   //! This is used to test deleting without a modal. When deleting with modal
@@ -98,19 +117,19 @@ const SinglePostModal = ({post}) => {
                 {isLoaded && (<>
                   <ul>
                       {comments.map(comment =>{
+                        if(comment.postId == post.id){
+                          return(
+                              <li key={comment.id}>
+                                  {comment.body}
+                              </li>
+                          )
 
-                        return(
-                            <li key={comment.id}>
-                                {comment.body}
-                            </li>
-                        )
+                        }
 
 
                       })}
 
                   </ul>
-
-
 
                 </>)}
               </div>
@@ -125,10 +144,13 @@ const SinglePostModal = ({post}) => {
               <div className="post-modal-add-comment-container">
                 <div className="left-hand-container-for-post-modal-comment-input">
                   <FaRegSmile className="comment-smiley-face" />
-                  <div>Add a comment</div>
+                  {/* <div>Add a comment</div> */}
+                  <form>
+                      <input type='text' placeholder={'Add a comment'} value={comment} onChange={updateComment}/>
+                  </form>
                 </div>
                 <div className="right-hand-container-for-post-modal-comment-input">
-                  <button>Post</button>
+                  <button onClick={submitComment}>Post</button>
                 </div>
               </div>
             </div>
