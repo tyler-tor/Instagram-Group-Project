@@ -1,0 +1,113 @@
+.post-modal-container {
+  height: auto;
+  width: 827px;
+  display: flex;
+  border-radius: 8px;
+  background-color: rgb(239, 239, 239);
+}
+
+.post-modal-image-wrapper {
+  background-color: black;
+  height: 408.75px;
+  width: 327px;
+  padding: 27.5px 0px;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.post-modal-image-wrapper img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.post-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  height: 463.75px;
+  width: 500px;
+}
+
+.post-modal-username-picture-row {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  margin-left: 16px;
+}
+
+.post-modal-content-container-image-wrapper {
+  height: 32px;
+  width: 32px;
+}
+
+.post-modal-content-container-image-wrapper img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+
+.username-styling-and-margin-post-modal {
+  margin-left: 14px;
+}
+
+.post-modal-comments-section {
+  height: 234.75px;
+  padding: 0px 16px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.post-modal-like-comment-icon {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 6px 16px 8px;
+}
+
+.post-modal-icons-likes-comments {
+  height: 24px;
+  width: 24px;
+  padding: 8px;
+}
+
+.except-first-icon-in-modal {
+  padding-left: 0px;
+}
+
+.post-modal-likes-count {
+  padding: 0px 16px;
+  margin-bottom: 8px;
+}
+
+.post-modal-date-posted {
+  padding-left: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  color: rgb(142, 142, 142);
+  font-size: 12px;
+}
+
+.post-modal-add-comment-container {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  justify-content:space-between;
+}
+
+.left-hand-container-for-post-modal-comment-input {
+  display: flex;
+  align-items: center;
+}
+
+.right-hand-container-for-post-modal-comment-input {
+  display: flex;
+  align-items: center;
+}
+
+.right-hand-container-for-post-modal-comment-input button{
+  color: rgb(0, 149, 246);
+  border: none;
+  align-items: center;
+  font-weight: bold;
+}

@@ -1,28 +1,79 @@
 .user-profile-papa-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 30px 20px 0px ;
 }
 
 .user-profile-header-container {
   display: flex;
   max-width: 935px;
-  max-height: 161px;
-  margin-bottom: 44px;
-  border: 1px solid black;
+  margin-bottom: 50px;
+  border-bottom: 1px solid rgb(219, 219, 219);
 }
 
 .user-info-box-profile-photo-container {
-  margin-right: 30px;
-  width: 290px;
+  display: flex;
+  align-items: center;
 }
 
 #user-profile-wrapper {
   height: 150px;
   width: 150px;
-  border-radius: 1000px;
+  margin: 50px 90px 50px 50px;
 }
 
 #user-profile-wrapper img {
   object-fit: cover;
   height: 100%;
   width: 100%;
+  border-radius: 100%;
+
+}
+
+.user-profile-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 257px;
+  width: 613px;
+
+}
+
+.username-and-follow-button-row {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  justify-content:space-between;
+}
+
+.username-and-follow-button-row button{
+  color: white;
+  width: 75.4px;
+  background-color: rgb(0, 149, 246);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 5px 9px;
+  cursor: pointer;
+  margin: 0px 20% 0px;
+}
+
+.username-and-follow-button-row div{
+  font-size: 28px;
+}
+
+.posts-followers-following-row {
+  display: flex;
+  margin: 20px 0px 24px 0px;
+  height: 24px;
+}
+
+.posts-followers-following-row-children-except-first{
+  margin-left: 10px;
+}
+
+.user-profile-caption {
+  display: flex;
+  flex-direction: column;
 }

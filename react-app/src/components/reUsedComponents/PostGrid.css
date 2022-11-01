@@ -1,0 +1,22 @@
+.post-grid-container {
+  display: flex;
+}
+
+.post-grid-children {
+  width: 293px;
+  height: 293px;
+}
+
+.post-grid-children img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.post-grid-children img:hover {
+ cursor: pointer;
+}
+
+.first-two-grid-children {
+  margin-right: 28px
+}

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/LoginPage/SignUpForm";
 import NavBar from "./components/NavBar";
-import ProtectedRoute from "./components/utils/ProtectedRoute";
+import ProtectedRoute from "./components/reUsedComponents/ProtectedRoute";
 import UsersList from "./components/UsersList";
 // import User from "./components/User";
 import TempFollow from "./components/TempFollow";
@@ -16,6 +16,7 @@ import HomeFeed from "./components/HomeFeed";
 import UserProfile from "./components/UserProfile";
 import TempLogOut from "./components/TempLogout";
 import TempLogin from "./components/TempLogin";
+import ExplorePage from "./components/ExplorePage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +52,9 @@ function App() {
         </Route>
         {/* <ProtectedRoute path="/users" exact={true}>
           <UsersList />
+        </ProtectedRoute>
+        <ProtectedRoute path="/explore" exact={true}>
+          <ExplorePage />
         </ProtectedRoute>
         <ProtectedRoute path="/:userId" exact={true}>
           <UserProfile />
