@@ -27,6 +27,12 @@ def posts():
     posts_dict["Posts"] = [{**post.to_dict(), 'users': post.users.username} for post in posts]
     return posts_dict
 
+@post_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def get_post_by_id(id):
+    post = Post.query.get(id)
+    post_dict = post.to_dict()
+    return post_dict
 
 @post_routes.route('/', methods=['POST'])
 @login_required
