@@ -9,13 +9,11 @@ import UsersList from "./components/UsersList";
 // import User from "./components/User";
 import TempFollow from "./components/TempFollow";
 import TempPost from "./components/CreatePost/TempPost";
-import TempComment from './components/CreateComment/TempComment'
+import TempComment from "./components/CreateComment/TempComment";
 import { authenticate } from "./store/session";
 import { useSelector } from "react-redux";
 import HomeFeed from "./components/HomeFeed";
 import UserProfile from "./components/UserProfile";
-import TempLogOut from "./components/TempLogout";
-import TempLogin from "./components/TempLogin";
 import ExplorePage from "./components/ExplorePage";
 
 function App() {
@@ -58,9 +56,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/:userId" exact={true}>
           <UserProfile />
-        </ProtectedRoute> */}
-        <ProtectedRoute path="/explore" exact={true}>
-          Explore
         </ProtectedRoute>
         {/*Route for testing follow and unfollow*/}
         <ProtectedRoute path="/follow" exact={true}>
