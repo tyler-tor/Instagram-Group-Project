@@ -32,14 +32,14 @@ def posts():
     return posts_dict
 
 @post_routes.route('/<int:id>', methods=['GET'])
-@login_required
+# @login_required
 def get_post_by_id(id):
     post = Post.query.get(id)
     post_dict = post.to_dict()
     return post_dict
 
 @post_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_post():
     form = CreatePost()
     form['csrf_token'].data = request.cookies['csrf_token']

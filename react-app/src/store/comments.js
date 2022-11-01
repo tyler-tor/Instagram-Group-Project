@@ -1,18 +1,16 @@
-const GET_POSTS = "posts/GET_POSTS";
-const ADD_POST = "posts/ADD_POST";
+const GET_COMMENTS = "posts/GET_COMMENTS";
 
-const getPosts = (posts) => ({
+const getComments = (comments) => ({
   type: GET_POSTS,
   payload: posts,
 });
 
-export const getAllPosts = () => async (dispatch) => {
-  const response = await fetch("/api/posts/");
+export const getAllComments = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${id}/comments/`);
 
   if (response.ok) {
     const data = await response.json();
-    console.log("test", data);
-    dispatch(getPosts(data.Posts));
+    dispatch(getPosts(data.Comments));
     return data;
   }
 
