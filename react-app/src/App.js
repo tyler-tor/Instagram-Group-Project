@@ -36,19 +36,7 @@ function App() {
     <BrowserRouter>
       {user && <NavBar />}
       <Switch>
-        {/* <Route path="/" exact={true}>
-          <LoginForm />
-        </Route> */}
-        <Route path="/debug" exact={true}>
-          <SignUpForm />
-          <TempLogin />
-          <TempLogOut />
-        </Route>
-
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        {/* <ProtectedRoute path="/users" exact={true}>
+        <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/explore" exact={true}>
@@ -56,18 +44,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/:userId" exact={true}>
           <UserProfile />
-        </ProtectedRoute>
-        {/*Route for testing follow and unfollow*/}
-        <ProtectedRoute path="/follow" exact={true}>
-          <TempFollow />
-        </ProtectedRoute>
-        {/* Route for testing posts */}
-        <ProtectedRoute path="/posts" exact={true}>
-          <TempPost />
-        </ProtectedRoute>
-        {/* Route for testing comments */}
-        <ProtectedRoute path="/comments" exact={true}>
-          <TempComment />
         </ProtectedRoute>
         {user ? (
           <Route path="/" exact={true}>
