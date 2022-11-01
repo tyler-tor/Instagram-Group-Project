@@ -22,7 +22,7 @@ export const postComment = (comment) => async (dispatch) =>{
   })
   if(response.ok){
     const newComment = await response.json()
-    // console.log('IN THUNK FOR COMMENTS===================', newComment);
+    console.log('IN THUNK FOR COMMENTS===================', newComment);
     dispatch(postCommentAction(newComment))
     return newComment
   }

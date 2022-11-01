@@ -163,7 +163,7 @@ def comments_on_post(id):
         print(comments)
         comments_dict = {}
         comments_dict["Comments"] = [{**comment.to_dict(), 'users': {
-            'username': comment.users.username, 'id': comment.users.id
+            'username': comment.users.username, 'id': comment.users.id, 'profilePicture' : comment.users.profile_picture
             }} for comment in comments]
         return comments_dict
     return {'errors': 'This post does not exist'}
@@ -173,7 +173,9 @@ def comments_on_post(id):
 @login_required
 def create_comment_post(id):
     post = Post.query.get(id)
+    user = User.query.get(current_user.id)
     form = CreateComment()
+    user = user.to_dict()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         comment = Comment(
@@ -183,5 +185,11 @@ def create_comment_post(id):
         )
         db.session.add(comment)
         db.session.commit()
-        return comment.to_dict()
+        comment_dict = comment.to_dict()
+        comment_dict['users'] = {
+            'userId': user['id'],
+            'username': user['username'],
+            'profilePicture' : user['profilePicture']
+        }
+        return comment_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
