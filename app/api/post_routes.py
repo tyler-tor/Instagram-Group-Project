@@ -32,10 +32,17 @@ def posts():
     return posts_dict
 
 @post_routes.route('/<int:id>', methods=['GET'])
-# @login_required
+@login_required
 def get_post_by_id(id):
     post = Post.query.get(id)
     post_dict = post.to_dict()
+    if post :
+        user = User.query.get(post.user_id)
+        post_dict['users'] = {
+            'profilePicture' : user.profile_picture,
+            'userId' : user.id,
+            'username' : user.username
+        }
     return post_dict
 
 @post_routes.route('/', methods=['POST'])
@@ -62,9 +69,17 @@ def update_post(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit:
         post = Post.query.get(id)
+        user = User.query.get(post.user_id)
         post.caption = form.data['caption']
         db.session.commit()
-        return post.to_dict()
+        post_dict = post.to_dict()
+        #updated code to match the return from the other post routes. needed to include the associated user.
+        post_dict['users'] = {
+            'profilePicture' : user.profile_picture,
+            'userId' : user.id,
+            'username' : user.username
+        }
+        return post_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

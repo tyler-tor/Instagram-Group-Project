@@ -1,5 +1,6 @@
 const GET_POSTS = "posts/GET_POSTS";
 const ADD_POST = "posts/ADD_POST";
+const UPDATE_POST = 'posts/UPDATE_POST';
 
 const getPosts = (posts) => ({
   type: GET_POSTS,
@@ -10,6 +11,27 @@ const addPostAction = (post) => ({
   type: ADD_POST,
   payload: post
 })
+
+const updatePostAction = (caption) => ({
+  type: UPDATE_POST,
+  payload : caption
+})
+
+export const updatePost = (caption) => async (dispatch) =>{
+  const response = await fetch(`/api/posts/${caption.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type' : 'application/json'},
+    body: JSON.stringify({
+      caption: caption.caption
+    })
+  })
+  if(response.ok){
+    const editedPost = await response.json()
+    dispatch(updatePostAction(editedPost))
+    // console.log('DEBUG EDITED POST-------------------', editedPost);
+    return editedPost
+  }
+}
 
 export const addPost = (post) => async (dispatch) =>{
   const response = await fetch('/api/posts/',{
@@ -34,7 +56,7 @@ export const getAllPosts = () => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("test", data);
+    // console.log("test", data);
     dispatch(getPosts(data.Posts));
     return data;
   }
@@ -56,6 +78,11 @@ export default function postsReducer(state = {}, action) {
         ...state,
         [action.payload.post.id] : action.payload.post
       }
+    case UPDATE_POST:
+      newState = {...state}
+      // console.log('TEST IN REDUCER', action.payload);
+      newState[action.payload.id] = action.payload
+      return newState
     default:
       return state;
   }

@@ -5,15 +5,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { FaRegSmile } from "react-icons/fa";
-import profilePhoto from "../../images/screenshot1-2x.png";
+import EditCaptionFormModal from "./EditCaptionModal";
 
 const SinglePostModal = ({post}) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [myPost, setMyPost] = useState(false);
+  const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
 
   // const post_comments = useSelector(state => state.comments)
-
+  console.log('IN MODAL!!', user.id);
   useEffect(() => {
     /*
       dispatch(loadComments(post.id)).then(() => {
@@ -21,6 +23,12 @@ const SinglePostModal = ({post}) => {
       })
     */
   },[dispatch])
+
+  useEffect(()=>{
+    if(user.id === post.userId){
+      setMyPost(true)
+    }
+  },[post, user])
 
   const clickModal = () =>{
     setShowModal(true)
@@ -47,6 +55,13 @@ const SinglePostModal = ({post}) => {
 
                 <div className='post-modal-content-container-caption'>
                   <strong>{post.caption}</strong>
+                  {myPost && (
+                    <>
+                        <EditCaptionFormModal postId={post.id}/>
+
+                    </>
+                  )}
+
                 </div>
 
               </div>
