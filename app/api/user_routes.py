@@ -87,7 +87,7 @@ def follow_user(id):
 
         f_user.followers.append(curr_user)
 
-        db.session.add(f_user)
+        # db.session.add(f_user) comment out to prevent duplicates.
         db.session.commit()
 
         curr_user = curr_user.to_dict()
@@ -111,7 +111,7 @@ def unfollow_user(id):
             if(user.id == curr_user.id):
                 #remove current users from following users follower array
                 f_user.followers.remove(user)
-                db.session.add(f_user)
+                # db.session.add(f_user) commented out to prevent adding doubles for updating.
                 db.session.commit()
                 curr_user = curr_user.to_dict()
                 f_user = f_user.to_dict()
