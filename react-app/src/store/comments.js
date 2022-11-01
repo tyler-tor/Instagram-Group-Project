@@ -1,7 +1,7 @@
 const GET_COMMENTS = "posts/GET_COMMENTS";
 
 const getComments = (comments) => ({
-  type: GET_POSTS,
+  type: GET_COMMENTS,
   payload: posts,
 });
 
@@ -20,10 +20,10 @@ export const getAllComments = (id) => async (dispatch) => {
 export default function postsReducer(state = {}, action) {
   let newState;
   switch (action.type) {
-    case GET_POSTS:
+    case GET_COMMENTS:
       newState = { ...state };
-      action.payload.forEach((post) => {
-        newState[post.id] = post;
+      action.payload.forEach((comment) => {
+        newState[comment.id] = comment;
       });
       return newState;
     default:

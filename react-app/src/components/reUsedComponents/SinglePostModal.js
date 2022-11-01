@@ -18,13 +18,13 @@ const SinglePostModal = ({post}) => {
 
   // const post_comments = useSelector(state => state.comments)
   console.log('IN MODAL!!', user.id);
-  // useEffect(() => {
-  //   /*
-  //     dispatch(loadComments(post.id)).then(() => {
-  //       setIsLoaded(true)
-  //     })
-  //   */
-  // },[dispatch])
+  useEffect(() => {
+    /*
+      dispatch(loadComments(post.id)).then(() => {
+        setIsLoaded(true)
+      })
+    */
+  },[dispatch])
 
   useEffect(()=>{
 
@@ -84,7 +84,9 @@ const SinglePostModal = ({post}) => {
 
               </div>
 
-              <div className="post-modal-comments-section"></div>
+              <div className="post-modal-comments-section">
+                {/*Add Comments here!*/}
+              </div>
               <div className="post-modal-like-comment-icon">
                 <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" />
                 <IoChatbubbleOutline className="post-modal-icons-likes-comments reverse" />
