@@ -6,6 +6,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { FaRegSmile } from "react-icons/fa";
 import EditCaptionFormModal from "./EditCaptionModal";
+import DeletePostModal from './DeletePostModal/index'
+import { deletePost } from "../../store/post";
 
 const SinglePostModal = ({post}) => {
   const [showModal, setShowModal] = useState(false);
@@ -16,22 +18,36 @@ const SinglePostModal = ({post}) => {
 
   // const post_comments = useSelector(state => state.comments)
   console.log('IN MODAL!!', user.id);
-  useEffect(() => {
-    /*
-      dispatch(loadComments(post.id)).then(() => {
-        setIsLoaded(true)
-      })
-    */
-  },[dispatch])
+  // useEffect(() => {
+  //   /*
+  //     dispatch(loadComments(post.id)).then(() => {
+  //       setIsLoaded(true)
+  //     })
+  //   */
+  // },[dispatch])
 
   useEffect(()=>{
+
     if(user.id === post.userId){
       setMyPost(true)
     }
+
   },[post, user])
 
   const clickModal = () =>{
     setShowModal(true)
+  }
+
+  //! This is used to test deleting without a modal. When deleting with modal
+  //! there is a warning for a cleanup in a useEffect function.
+  //! i am guessing this is because when a post is deleted, one of the modals is not
+  //! getting cleaned up propery.
+  const deletePostTest = async e =>{
+    e.preventDefault()
+    const del = await dispatch(deletePost(post.id))
+    .then(()=>{
+        console.log('TEST DELETE STARTED');
+    })
   }
 
   return (
@@ -58,6 +74,8 @@ const SinglePostModal = ({post}) => {
                   {myPost && (
                     <>
                         <EditCaptionFormModal postId={post.id}/>
+                        <DeletePostModal postId={post.id}/>
+                        {/* <button onClick={deletePostTest}>Delete</button> */}
 
                     </>
                   )}

@@ -18,6 +18,7 @@ const ExplorePage = () => {
         const data = await res.json();
         console.log(data.errors);
       });
+
   }, [dispatch]);
 
   return (

@@ -1,6 +1,7 @@
 const GET_POSTS = "posts/GET_POSTS";
 const ADD_POST = "posts/ADD_POST";
 const UPDATE_POST = 'posts/UPDATE_POST';
+const DELETE_POST = 'posts/DELETE_POST';
 
 const getPosts = (posts) => ({
   type: GET_POSTS,
@@ -16,6 +17,22 @@ const updatePostAction = (caption) => ({
   type: UPDATE_POST,
   payload : caption
 })
+
+const deletePostAction = (id) =>({
+  type: DELETE_POST,
+  payload: id
+})
+
+export const deletePost = (id) => async (dispatch) =>{
+  const response = await fetch(`/api/posts/${id}`,{
+    method:'DELETE'
+  })
+  if(response.ok){
+    dispatch(deletePostAction(id))
+    return 'Sucess!'
+  }
+  return response
+}
 
 export const updatePost = (caption) => async (dispatch) =>{
   const response = await fetch(`/api/posts/${caption.id}`, {
@@ -83,6 +100,10 @@ export default function postsReducer(state = {}, action) {
       // console.log('TEST IN REDUCER', action.payload);
       newState[action.payload.id] = action.payload
       return newState
+    case DELETE_POST:
+      newState = {...state}
+      delete newState[action.payload];
+      return newState;
     default:
       return state;
   }

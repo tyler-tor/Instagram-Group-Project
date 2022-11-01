@@ -43,6 +43,7 @@ function App() {
           <ExplorePage />
         </ProtectedRoute>
         <ProtectedRoute path="/:userId" exact={true}>
+          {/* <ExplorePage /> */}
           <UserProfile />
         </ProtectedRoute>
         {user ? (

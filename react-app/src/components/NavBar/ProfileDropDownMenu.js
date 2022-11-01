@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -9,6 +9,7 @@ import { logout } from "../../store/session";
 const ProfileDropDownMenu = () => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState("isHidden");
+  const user = useSelector(state=> state.session.user)
 
   //Logout Button
   const onLogout = async (e) => {
@@ -37,7 +38,7 @@ const ProfileDropDownMenu = () => {
 
   sessionLinks = (
     <>
-      <NavLink to={"/:userId"} className="profile-dropdown-button">
+      <NavLink to={`/${user.id}`} className="profile-dropdown-button">
         <HiOutlineUserCircle className="drop-down-profile-icon" />
         <span className="drop-down-menu-span">Profile</span>
       </NavLink>
