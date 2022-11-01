@@ -3,11 +3,8 @@ import { NavLink } from "react-router-dom";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
 import logo from "../../images/Instagram_logo.png";
 import SearchBar from "./SearchBar";
-import {
-  AiOutlineCompass,
-  AiOutlinePlusSquare,
-  AiFillHome,
-} from "react-icons/ai";
+import PostFormModal from "./PostFormModal";
+import { AiOutlineCompass, AiFillHome } from "react-icons/ai";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -28,7 +25,7 @@ const NavBar = () => {
           <NavLink to={`/`} className="icon-wrapper">
             <AiFillHome className="icon-buttons" />
           </NavLink>
-          <AiOutlinePlusSquare className="icon-buttons side-step" />
+          <PostFormModal />
           <NavLink to={`/explore`} className="icon-wrapper">
             <AiOutlineCompass className="icon-buttons side-step" />
           </NavLink>
