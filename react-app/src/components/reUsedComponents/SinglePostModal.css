@@ -48,14 +48,22 @@
   border-radius: 100%;
 }
 
-.username-styling-and-margin-post-modal {
+.username-styling-in-post-modal {
   margin-left: 14px;
+  width: 50px;
+}
+
+.body-styling-in-post-modal {
+  margin-left: 14px;
+  width: 310px;
 }
 
 .post-modal-comments-section {
+  display: flex;
   height: 234.75px;
   padding: 0px 16px;
   border-bottom: 1px solid rgb(219, 219, 219);
+  overflow-y: scroll;
 }
 
 .post-modal-like-comment-icon {
@@ -110,4 +118,35 @@
   border: none;
   align-items: center;
   font-weight: bold;
+}
+
+
+.comments-section-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  margin-top: 0px;
+  list-style: none;
+}
+
+.comments-section-child-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.comments-section-child-container img {
+  object-fit: cover;
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+}
+
+.comment-form-wrapper {
+  width: 432px;
+}
+
+.comment-form-container {
+  display: flex;
+  justify-content: space-between;
 }
