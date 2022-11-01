@@ -33,4 +33,6 @@ def seed_users():
 # dependent entities
 def undo_users():
     db.session.execute('DELETE FROM users;')
+
+    db.session.execute('DELETE FROM follows;') #added this to also clear out the follows table when unseeding.
     db.session.commit()

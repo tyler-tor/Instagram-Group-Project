@@ -31,8 +31,8 @@ class User(db.Model, UserMixin):
     #                             cascade='all, delete-orphan', single_parent=True)
     followers = db.relationship(
         'User', secondary=follows,
-        primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
+        primaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.follower_id == id),
         backref=db.backref('follows', lazy='dynamic'), lazy='dynamic')
 
     post_likes = db.relationship('PostLike', back_populates='users', cascade='all, delete-orphan')
@@ -56,8 +56,8 @@ class User(db.Model, UserMixin):
             #added firstname and lastname -------------------------
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'followers': [{'userId': follower.id, 'username': follower.username} for follower in self.followers],
-            'following': [{'userId': follower.id, 'username': follower.username} for follower in self.follows],
+            'followers': [{'userId': follower.id, 'username': follower.username, 'profilePic': follower.profile_picture} for follower in self.followers],
+            'following': [{'userId': follower.id, 'username': follower.username, 'profilePic': follower.profile_picture} for follower in self.follows],
             'profilePicture': self.profile_picture,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at

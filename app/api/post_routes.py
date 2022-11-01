@@ -31,6 +31,12 @@ def posts():
         'userId': post.users.id}} for post in posts]
     return posts_dict
 
+@post_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def get_post_by_id(id):
+    post = Post.query.get(id)
+    post_dict = post.to_dict()
+    return post_dict
 
 @post_routes.route('/', methods=['POST'])
 @login_required
@@ -104,7 +110,7 @@ def like_post(id):
         user_id=current_user.id,
         post_id=id
         )
-
+        post.likes += 1
         post_dict = post.to_dict()
         user_dict = user.to_dict()
         user_post = {'userId': user_dict['id'], 'postId': post_dict['id']}
@@ -119,13 +125,14 @@ def unlike_post(id):
     '''
         current user unlike post
     '''
-    post = Post.query.get(id)
+    curr_post = Post.query.get(id)
     user = User.query.get(current_user.id)
-    if(post):
-        for post in post.post_likes:
+    if(curr_post):
+        for post in curr_post.post_likes:
             # print('DEBUG TEST IN DELETE ROUTE---------------------------------------------',post.to_dict())
             post_dict = post.to_dict()
             if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
+                curr_post.likes -= 1
                 db.session.delete(post)
                 db.session.commit()
                 return{'msg' : f'user {current_user.id} unliked post {id}'}
