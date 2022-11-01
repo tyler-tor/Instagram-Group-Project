@@ -6,6 +6,29 @@ const getPosts = (posts) => ({
   payload: posts,
 });
 
+const addPostAction = (post) => ({
+  type: ADD_POST,
+  payload: post
+})
+
+export const addPost = (post) => async (dispatch) =>{
+  const response = await fetch('/api/posts/',{
+    method: 'POST',
+    headers: {'Content-Type' : 'application/json'},
+    body: JSON.stringify({
+      user_id: post.userId,
+      caption: post.caption,
+      img_url: post.imgUrl
+    })
+
+  })
+  if(response.ok){
+    const newPost = await response.json()
+    dispatch(addPostAction(newPost))
+    return newPost
+  }
+}
+
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
 
@@ -28,6 +51,11 @@ export default function postsReducer(state = {}, action) {
         newState[post.id] = post;
       });
       return newState;
+    case ADD_POST:
+      return {
+        ...state,
+        [action.payload.post.id] : action.payload.post
+      }
     default:
       return state;
   }

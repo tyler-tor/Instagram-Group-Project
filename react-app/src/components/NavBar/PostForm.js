@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { addPost } from "../../store/post";
 
-const PostForm = () => {
+const PostForm = ({onClose}) => {
   const [errors, setErrors] = useState([]);
   const [caption, setCaption] = useState("");
   const [url, setUrl] = useState("");
@@ -11,6 +12,17 @@ const PostForm = () => {
 
   const onPostSubmit = async (e) => {
     // Need to create a function that posts to database
+    let post = {
+                userId: user.id,
+                caption: caption,
+                imgUrl: url
+              }
+    await dispatch(addPost(post)).then(()=>{
+      onClose()
+    })
+    .catch(e => {
+      console.log(e);
+    })
   };
 
   const updateCaption = (e) => {

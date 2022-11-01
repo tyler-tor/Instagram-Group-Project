@@ -5,13 +5,22 @@ import stock from "../../images/stock.jpg";
 import { useSelector } from "react-redux";
 
 const PostGrid = () => {
-  // const posts = Object.values(useSelector((state) => state.posts));
+  const posts = Object.values(useSelector((state) => state.posts));
+  // console.log(posts);
   // posts.map((post) => {
   return (
     <div className="post-grid-container">
-      <div className="post-grid-children first-two-grid-children">
+      {posts.map(post => {
+        // console.log(post.imgUrl);
+        return(
+          <div className="post-grid-children first-two-grid-children" key={post.id}>
+            <SinglePostModal post={post} />
+          </div>
+        )
+      })}
+      {/* <div className="post-grid-children first-two-grid-children">
         <SinglePostModal img={stock} />
-      </div>
+      </div> */}
       {/* <div className="post-grid-children first-two-grid-children">
           <SinglePostModal img={post.posts[1].imgUrl} />
         </div>
