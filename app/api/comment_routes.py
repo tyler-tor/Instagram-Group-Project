@@ -25,11 +25,19 @@ def update_comment(id):
     form = UpdateComment()
     form['csrf_token'].data = request.cookies['csrf_token']
     comment = Comment.query.get(id)
+    user = User.query.get(current_user.id)
+    user = user.to_dict()
     if comment.user_id == current_user.id:
         if form.validate_on_submit:
             comment.body = form.data['body']
             db.session.commit()
-            return comment.to_dict()
+            comment_dict = comment.to_dict()
+            comment_dict['users'] = {
+            'userId': user['id'],
+            'username': user['username'],
+            'profilePicture' : user['profilePicture']
+            }
+            return comment_dict
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return {'errors': 'This comment does not belong to you!'}
 
