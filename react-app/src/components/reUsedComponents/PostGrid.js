@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PostGrid.css";
 import SinglePostModal from "./SinglePostModal";
 import stock from "../../images/stock.jpg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllFollowingPosts } from "../../store/post";
 
 const PostGrid = () => {
   const posts = Object.values(useSelector((state) => state.posts));
-  // console.log(posts);
-  // posts.map((post) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllFollowingPosts())
+  }, [dispatch])
+
   return (
     <div className="post-grid-container">
       {posts.map(post => {
-        // console.log(post.imgUrl);
         return(
           <div className="post-grid-children first-two-grid-children" key={post.id}>
             <SinglePostModal post={post} />

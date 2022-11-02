@@ -6,16 +6,19 @@ import { FaRegSmile } from "react-icons/fa";
 import PostSettingsModal from "./PostSettingsModal";
 import stock from "../../images/stock.jpg";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ActualFeed = () => {
+  const user = useSelector((state) => state.session.user);
+  
   return (
     <div className="">
       <div className="feed-container">
         <div className="feed-child post-username-and-settings-container">
           <div className="poster-username-and-circle">
             <FaUserCircle className="poster-profile-picture-for-post" />
-            <NavLink to={"/:userId"} className="poster-username">
-              <strong className="username-text">theoman42</strong>
+            <NavLink to={`/${user.id}`} className="poster-username">
+              <strong className="username-text">{user.username}</strong>
             </NavLink>
           </div>
           <PostSettingsModal />

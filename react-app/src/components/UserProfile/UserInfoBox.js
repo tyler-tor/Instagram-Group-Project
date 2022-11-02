@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import screenshot from "../../images/screenshot1-2x.png";
 import PostGrid from "../reUsedComponents/PostGrid";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getAllUsers } from "../../store/users";
 
 const UserInfoBox = () => {
+  const dispatch = useDispatch()
+  const { userId } = useParams()
+  const user = useSelector((state) => state.users[userId]);
+  // console.log(user)
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [dispatch])
+
+  if (!user) {
+    return null
+  }
+
   return (
     <>
       <div className="user-profile-header-container">
         <div className="user-info-box-profile-photo-container">
           <div id="user-profile-wrapper">
-            <img src={screenshot} alt="profile" />
+            <img src={user.profilePicture} alt="profile" />
           </div>
           <div className="user-profile-details-container">
             <div className="username-and-follow-button-row">
-              <div className="username-for-user-profile">theoman42</div>
+              <div className="username-for-user-profile">{user.username}</div>
               <button>Follow</button>
             </div>
             <div className="posts-followers-following-row">
