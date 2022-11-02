@@ -16,6 +16,7 @@ const SinglePostModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [myPost, setMyPost] = useState(false);
+  const [myComment, setMyComment] = useState(false);
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.session.user);
   const comments = Object.values(useSelector((state) => state.comments));
@@ -37,6 +38,12 @@ const SinglePostModal = ({ post }) => {
       setMyPost(true);
     }
   }, [post, user]);
+
+  // useEffect(() => {
+  //   comments.map(comment => {
+
+  //   })
+  // }, [comments, user])
 
   const clickModal = () => {
     // dispatch(getAllComments(post.id)).then(() => {
