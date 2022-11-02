@@ -165,6 +165,11 @@ def comments_on_post(id):
         comments_dict["Comments"] = [{**comment.to_dict(), 'users': {
             'username': comment.users.username, 'id': comment.users.id, 'profilePicture' : comment.users.profile_picture
             }} for comment in comments]
+        for comment in comments_dict['Comments']:
+            comment['myComment'] = False
+            if comment['userId'] == current_user.id:
+                comment['myComment'] = True
+
         return comments_dict
     return {'errors': 'This post does not exist'}
 
@@ -186,6 +191,8 @@ def create_comment_post(id):
         db.session.add(comment)
         db.session.commit()
         comment_dict = comment.to_dict()
+        #! added comment recogintion on the backend to make front end rendering easier.
+        comment_dict['myComment'] = True;
         comment_dict['users'] = {
             'userId': user['id'],
             'username': user['username'],

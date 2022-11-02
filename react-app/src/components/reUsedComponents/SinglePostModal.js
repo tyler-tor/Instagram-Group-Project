@@ -29,7 +29,8 @@ const SinglePostModal = ({ post }) => {
     dispatch(getAllComments(post.id)).then(() => {
       setIsLoaded(true);
     });
-    console.log(comments);
+
+    // console.log(comments);
   }, [dispatch]);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const SinglePostModal = ({ post }) => {
 
   const submitComment = async (e) => {
     e.preventDefault();
-
+    e.target.value = '';
     const payload = {
       postId: post.id,
       body: comment,
@@ -61,8 +62,9 @@ const SinglePostModal = ({ post }) => {
       console.log("Posted Comment", res);
     });
 
-    console.log(newComment);
+    // console.log(newComment);
   };
+
 
   //! This is used to test deleting without a modal. When deleting with modal
   //! there is a warning for a cleanup in a useEffect function.
@@ -132,7 +134,7 @@ const SinglePostModal = ({ post }) => {
                               <div className="body-styling-in-post-modal">
                                 {comment.body}
                               </div>
-                              {user.id == comment.users.id && (
+                              {comment.myComment && (
                                 <CommentSettingsModal
                                   commentId={comment.id}
                                   onClose={() => setShowModal(false)}
