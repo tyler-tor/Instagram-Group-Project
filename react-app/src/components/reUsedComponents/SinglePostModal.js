@@ -11,13 +11,20 @@ import { deletePost } from "../../store/post";
 import { getAllComments } from "../../store/comments";
 import { postComment } from "../../store/comments";
 import CommentSettingsModal from "./EditCommentModal";
+import UserLikedListModal from "./UserLikedListModal";
+import { deleteUserLikedPostId, getUserLikedPostId } from "../../store/user_post_like_list";
+import { addUserLikedPostId } from "../../store/user_post_like_list";
+import { getCurrentPost } from "../../store/currentPost";
+
 
 const SinglePostModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [myPost, setMyPost] = useState(false);
   const [comment, setComment] = useState("");
+  const [likePost, setLikePost] = useState(false);
   const user = useSelector((state) => state.session.user);
+  const likes = Object.values(useSelector(state=>state.userPostLikes));
   const comments = Object.values(useSelector((state) => state.comments));
   const dispatch = useDispatch();
 
@@ -27,11 +34,26 @@ const SinglePostModal = ({ post }) => {
     //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
 
     dispatch(getAllComments(post.id)).then(() => {
+
       setIsLoaded(true);
     });
 
     // console.log(comments);
   }, [dispatch]);
+
+  useEffect(() =>{
+    dispatch(getUserLikedPostId()).then((res)=>{
+      console.log(res);
+      res.forEach(el=>{
+        if(el.postId === post.id){
+
+          // console.log('MATCH!!!!!');
+          setLikePost(true)
+        }
+      })
+    })
+
+  },[dispatch])
 
   useEffect(() => {
     if (user.id === post.userId) {
@@ -52,7 +74,7 @@ const SinglePostModal = ({ post }) => {
 
   const submitComment = async (e) => {
     e.preventDefault();
-    e.target.value = '';
+    setComment('')
     const payload = {
       postId: post.id,
       body: comment,
@@ -66,6 +88,7 @@ const SinglePostModal = ({ post }) => {
   };
 
 
+
   //! This is used to test deleting without a modal. When deleting with modal
   //! there is a warning for a cleanup in a useEffect function.
   //! i am guessing this is because when a post is deleted, one of the modals is not
@@ -77,6 +100,20 @@ const SinglePostModal = ({ post }) => {
   //       console.log('TEST DELETE STARTED');
   //   })
   // }
+
+  const handleLikeButton = (e) =>{
+    e.preventDefault()
+    // dispatch(getUserLikedPostId())
+    if(!likePost){
+      dispatch(addUserLikedPostId(post.id))
+      // dispatch(getCurrentPost(post.id))
+    }
+    else{
+      dispatch(deleteUserLikedPostId(post.id))
+      // dispatch(getCurrentPost(post.id))
+    }
+    setLikePost(!likePost)
+  }
 
   return (
     <>
@@ -150,11 +187,25 @@ const SinglePostModal = ({ post }) => {
                 )}
               </div>
               <div className="post-modal-like-comment-icon">
-                <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" />
+                <button onClick={handleLikeButton}>
+                  {/* <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" /> */}
+                  {likePost ? (
+                    <>
+                      liked
+                    </>
+                  ):
+                    (
+                      <>
+                        notliked
+                      </>
+                    )
+                  }
+                </button>
                 <IoChatbubbleOutline className="post-modal-icons-likes-comments reverse" />
               </div>
               <div className="post-modal-likes-count">
-                <strong> {post.likes} </strong>
+                {/* <strong onClick={getUserLikes}> {post.likes} </strong> */}
+                <UserLikedListModal postId={post.id}/>
               </div>
               <div className="post-modal-date-posted">{post.createdAt}</div>
               <div className="post-modal-add-comment-container">

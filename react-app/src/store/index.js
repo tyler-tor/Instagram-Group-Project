@@ -3,11 +3,19 @@ import thunk from "redux-thunk";
 import postsReducer from "./post";
 import commentsReducer from "./comments";
 import session from "./session";
+import userLikesReducer from "./user_likes";
+import userPostLikeReducer from "./user_post_like_list";
+import currentPostReducer from "./currentPost";
+
 
 const rootReducer = combineReducers({
   session,
   posts: postsReducer,
-  comments: commentsReducer
+  currentPost: currentPostReducer,
+  comments: commentsReducer,
+  userLikes: userLikesReducer,
+  userPostLikes: userPostLikeReducer
+
 });
 
 let enhancer;

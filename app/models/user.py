@@ -56,8 +56,9 @@ class User(db.Model, UserMixin):
             #added firstname and lastname -------------------------
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'followers': [{'userId': follower.id, 'username': follower.username, 'profilePic': follower.profile_picture} for follower in self.followers],
-            'following': [{'userId': follower.id, 'username': follower.username, 'profilePic': follower.profile_picture} for follower in self.follows],
+            'followers': [{'userId': follower.id, 'username': follower.username, 'profilePicture': follower.profile_picture} for follower in self.followers],
+            'following': [{'userId': follower.id, 'username': follower.username, 'profilePicture': follower.profile_picture} for follower in self.follows],
+            'likes' : [{'postId': like.post_id} for like in self.post_likes],
             'profilePicture': self.profile_picture,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at

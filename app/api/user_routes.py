@@ -131,3 +131,15 @@ def get_all_liked_posts(id):
             post_arr.append(like.posts.to_dict())
 
         return {'likedPosts' : post_arr}
+
+@user_routes.route('/likes')
+@login_required
+def get_posts_liked():
+    user = User.query.get(current_user.id)
+
+    user_dict = user.to_dict()
+    for postId in user_dict['likes']:
+        post = Post.query.get(postId['postId'])
+        postId['likes'] = post.likes
+    # print('IN ROUTE ROUTE FOR USERS LIKES--------------------------------------------', user_dict['likes'])
+    return {'likes' : user_dict['likes'] }

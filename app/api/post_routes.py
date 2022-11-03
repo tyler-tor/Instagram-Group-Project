@@ -90,12 +90,16 @@ def delete_post(id):
     if post and current_user.id == post.user_id:
         db.session.delete(post)
         db.session.commit()
+        user = User.query.get(current_user.id)
+
         return {'message': 'Success'}
     return {'errors': 'This post does not exist'}
 
 
 # Add post like endpoints here!
-@post_routes.route('/<int:id>/likes', methods=['GET'])
+
+
+@post_routes.route('/<int:id>/likes/users', methods=['GET'])
 @login_required
 def get_user_liked(id):
     '''
@@ -107,7 +111,7 @@ def get_user_liked(id):
         # print('DEBUG IN POSTLIKES --------------------------------------------', post_user_liked_arr)
         post_user_dict = {'user' : []}
         for user in post_user_liked_arr:
-            post_user_dict['user'].append({'id':user['id'], 'username':user['username'], 'profilePic':user['profilePicture']})
+            post_user_dict['user'].append({'id':user['id'], 'username':user['username'], 'profilePicture':user['profilePicture']})
             print(user)
         return post_user_dict
     return {'errors': 'This post does not exist'}, 404
@@ -119,19 +123,22 @@ def like_post(id):
         current user like a post
     '''
     post = Post.query.get(id)
-    user = User.query.get(current_user.id)
     if(post):
         post_like = PostLike(
         user_id=current_user.id,
         post_id=id
         )
         post.likes += 1
-        post_dict = post.to_dict()
-        user_dict = user.to_dict()
-        user_post = {'userId': user_dict['id'], 'postId': post_dict['id']}
         db.session.add(post_like)
         db.session.commit()
-        return user_post
+        user = User.query.get(current_user.id)
+        #! update return to new user table
+        user_dict = user.to_dict();
+        for postId in user_dict['likes']:
+            post = Post.query.get(postId['postId'])
+            postId['likes'] = post.likes
+
+        return {'likes' : user_dict['likes'] }
     return{'errors': 'This post does not exist'}, 404
 
 @post_routes.route('/<int:id>/likes', methods=['DELETE'])
@@ -141,16 +148,19 @@ def unlike_post(id):
         current user unlike post
     '''
     curr_post = Post.query.get(id)
-    user = User.query.get(current_user.id)
     if(curr_post):
         for post in curr_post.post_likes:
             # print('DEBUG TEST IN DELETE ROUTE---------------------------------------------',post.to_dict())
             post_dict = post.to_dict()
+            curr_post_dict = curr_post.to_dict()
             if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
                 curr_post.likes -= 1
                 db.session.delete(post)
                 db.session.commit()
-                return{'msg' : f'user {current_user.id} unliked post {id}'}
+
+                #! update return with full user dict.
+                print('DELETE LIKE ENDPOINT---------------------------------------------', curr_post_dict)
+                return {'postId': post_dict['postId'], 'likes' : curr_post_dict['likes']}
         return {'errors' : 'coult not find post'}
 
 

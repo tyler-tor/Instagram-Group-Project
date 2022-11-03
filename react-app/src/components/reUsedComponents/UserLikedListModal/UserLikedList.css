@@ -1,0 +1,12 @@
+.user-liked-list{
+    width: 200px;
+    height: fit-content;
+    color:red;
+    background-color: white;
+
+}
+
+.user-likes-profile{
+    height:25px;
+    width:25px;
+}
