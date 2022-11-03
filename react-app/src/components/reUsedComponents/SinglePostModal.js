@@ -19,6 +19,7 @@ import {
 import { addUserLikedPostId } from "../../store/user_post_like_list";
 import { getCurrentPost } from "../../store/currentPost";
 import EditCaptionThreeDotsModal from "./EditCaptionSettingsModal";
+import CommentContainer from "./CommentContainer";
 
 const SinglePostModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
@@ -34,15 +35,15 @@ const SinglePostModal = ({ post }) => {
 
   // const post_comments = useSelector(state => state.comments)
   // console.log('IN MODAL!!', user.id);
-  useEffect(() => {
-    //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
+  // useEffect(() => {
+  //   //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
 
-    dispatch(getAllComments(post.id)).then(() => {
-      setIsLoaded(true);
-    });
+  //   dispatch(getAllComments(post.id)).then(() => {
+  //     setIsLoaded(true);
+  //   });
 
-    // console.log(comments);
-  }, [dispatch]);
+  //   // console.log(comments);
+  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(getUserLikedPostId()).then((res) => {
@@ -148,9 +149,10 @@ const SinglePostModal = ({ post }) => {
               </div>
 
               <div className="post-modal-comments-section">
+                <CommentContainer postId={post.id} setShowModal={setShowModal}/>
                 {isLoaded && (
                   <>
-                    <ul className="comments-section-container">
+                    {/* <ul className="comments-section-container">
                       <li className="comments-section-child-container">
                         <img src={post.users.profilePicture} alt="" />
                         <div className="username-styling-in-post-modal">
@@ -185,7 +187,7 @@ const SinglePostModal = ({ post }) => {
                           );
                         }
                       })}
-                    </ul>
+                    </ul> */}
                   </>
                 )}
               </div>

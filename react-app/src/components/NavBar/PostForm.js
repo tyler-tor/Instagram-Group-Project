@@ -12,17 +12,23 @@ const PostForm = ({onClose}) => {
 
   const onPostSubmit = async (e) => {
     // Need to create a function that posts to database
-    let post = {
-                userId: user.id,
-                caption: caption,
-                imgUrl: url
-              }
-    await dispatch(addPost(post)).then(()=>{
-      onClose()
-    })
-    .catch(e => {
-      console.log(e);
-    })
+    e.preventDefault();
+    if(user){
+      console.log('USER OBJECT',user);
+      console.log('USERID', user.id);
+      let post = {
+                  userId: user.id,
+                  caption: caption,
+                  imgUrl: url
+                }
+      await dispatch(addPost(post)).then(()=>{
+        onClose()
+      })
+      .catch(e => {
+        console.log(e);
+      })
+
+    }
   };
 
   const updateCaption = (e) => {

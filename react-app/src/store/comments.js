@@ -2,6 +2,7 @@ const GET_COMMENTS = "comments/GET_COMMENTS";
 const POST_COMMENT = "comments/ADD_COMMENT";
 const UPDATE_COMMENT = "comments/UPDATE_COMMENT";
 const DELETE_COMMENT = "comments/DELETE_COMMENT";
+const CLEAR_COMMENTS = 'comments/CLEAR_COMMENTS';
 
 const getComments = (comments) => ({
   type: GET_COMMENTS,
@@ -22,6 +23,10 @@ const deleteOneComment = (id) => ({
   type: DELETE_COMMENT,
   payload: id,
 });
+
+export const clearCommentsAction = () =>({
+  type: CLEAR_COMMENTS,
+})
 
 export const postComment = (comment) => async (dispatch) => {
   const { postId, body } = comment;
@@ -85,7 +90,7 @@ export const getAllComments = (id) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    // console.log('IN THUNK---------------------', data);
+    console.log('IN THUNK---------------------', data);
     dispatch(getComments(data.Comments));
     return data;
   }
@@ -97,7 +102,7 @@ export default function commentsReducer(state = {}, action) {
   let newState;
   switch (action.type) {
     case GET_COMMENTS:
-      newState = { ...state };
+      newState = {};
       action.payload.forEach((comment) => {
         newState[comment.id] = comment;
       });
@@ -113,6 +118,9 @@ export default function commentsReducer(state = {}, action) {
     case POST_COMMENT:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
+      return newState;
+    case CLEAR_COMMENTS:
+      newState = {}
       return newState;
     default:
       return state;

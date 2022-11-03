@@ -6,6 +6,8 @@ from app.models import Post, User, Comment, db
 from app.forms.create_post import CreatePost
 from app.forms.update_post import UpdatePost
 from app.forms.create_comment import CreateComment
+#!needed for a query to get the latest post.
+from sqlalchemy import desc
 
 
 post_routes = Blueprint('posts', __name__)
@@ -58,7 +60,17 @@ def create_post():
         )
         db.session.add(post)
         db.session.commit()
-        return post.to_dict()
+        #!Had to requery to get the post with all the info created.
+        return_post = Post.query.order_by(desc(Post.created_at)).first()
+        post_dict = return_post.to_dict()
+        #!Coded added here to fix an issue with the return on thunk action. It is changed to included users key with user info.
+        user = User.query.get(post.user_id)
+        post_dict['users'] = {
+            'profilePicture' : user.profile_picture,
+            'userId' : user.id,
+            'username' : user.username
+        }
+        return post_dict
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -73,7 +85,7 @@ def update_post(id):
         post.caption = form.data['caption']
         db.session.commit()
         post_dict = post.to_dict()
-        #updated code to match the return from the other post routes. needed to include the associated user.
+        #! updated code to match the return from the other post routes. needed to include the associated user.
         post_dict['users'] = {
             'profilePicture' : user.profile_picture,
             'userId' : user.id,
@@ -131,14 +143,15 @@ def like_post(id):
         post.likes += 1
         db.session.add(post_like)
         db.session.commit()
-        user = User.query.get(current_user.id)
-        #! update return to new user table
-        user_dict = user.to_dict();
-        for postId in user_dict['likes']:
-            post = Post.query.get(postId['postId'])
-            postId['likes'] = post.likes
+        # user = User.query.get(current_user.id)
+        # #! update return to new user table
+        # user_dict = user.to_dict();
+        # for postId in user_dict['likes']:
+        #     post = Post.query.get(postId['postId'])
+        #     postId['likes'] = post.likes
 
-        return {'likes' : user_dict['likes'] }
+
+        return {'likes' : post.likes, 'postId' : post.id }
     return{'errors': 'This post does not exist'}, 404
 
 @post_routes.route('/<int:id>/likes', methods=['DELETE'])

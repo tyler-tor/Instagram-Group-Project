@@ -22,8 +22,8 @@ const UserLikedListModal = ({ postId }) => {
   useEffect(() => {
     dispatch(getUserLikedPostId());
   }, [dispatch]);
-  console.log(postId);
-  console.log(postLikes);
+//   console.log(postId);
+//   console.log(postLikes);
 
   return (
     <>
@@ -35,9 +35,14 @@ const UserLikedListModal = ({ postId }) => {
           <>
             {/* {postLikes[postId].likes} */}
             {/* {post.likes} */}
+
             {postLikes[postId] ? (
               <>{postLikes[postId].likes}</>
-            ) : (
+            )
+
+            :
+
+            (
               <>{post.likes}</>
             )}{" "}
             likes

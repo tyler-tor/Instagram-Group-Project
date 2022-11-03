@@ -1,8 +1,12 @@
+import { getCurrentPost } from "./currentPost";
+import { clearCommentsAction } from "./comments";
 const GET_POSTS = "posts/GET_POSTS";
 const GET_FOLLOWING_POSTS = 'following/GET_FOLLOWING_POSTS'
 const ADD_POST = "posts/ADD_POST";
 const UPDATE_POST = 'posts/UPDATE_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+
+
 
 const getPosts = (posts) => ({
   type: GET_POSTS,
@@ -35,6 +39,8 @@ export const deletePost = (id) => async (dispatch) =>{
   })
   if(response.ok){
     dispatch(deletePostAction(id))
+    // dispatch(clearCommentsAction())
+
     return 'Sucess!'
   }
   return response;
@@ -51,12 +57,14 @@ export const updatePost = (caption) => async (dispatch) =>{
   if(response.ok){
     const editedPost = await response.json()
     dispatch(updatePostAction(editedPost))
+    dispatch(getCurrentPost(caption.id))
     // console.log('DEBUG EDITED POST-------------------', editedPost);
     return editedPost
   }
 }
 
 export const addPost = (post) => async (dispatch) =>{
+  console.log('IN THUNK ACTION FOR POST', post);
   const response = await fetch('/api/posts/',{
     method: 'POST',
     headers: {'Content-Type' : 'application/json'},
@@ -114,10 +122,16 @@ export default function postsReducer(state = {}, action) {
       })
       return newState;
     case ADD_POST:
-      return {
-        ...state,
-        [action.payload.post.id] : action.payload.post
-      }
+      newState = {...state}
+      console.log(action.payload.id);
+      newState[action.payload.id] = action.payload
+      return newState
+
+
+      // return {
+      //   ...state,
+      //   [action.payload.post.id] : action.payload.post
+      // }
     case UPDATE_POST:
       newState = {...state}
       // console.log('TEST IN REDUCER', action.payload);
