@@ -1,22 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import screenshot from "../../images/screenshot1-2x.png";
 import PostGrid from "../reUsedComponents/PostGrid";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllUsers } from "../../store/users";
+import { addFollowing, deleteFollowing, getAllFollowing } from "../../store/following";
 
 const UserInfoBox = () => {
   const dispatch = useDispatch()
   const { userId } = useParams()
   const user = useSelector((state) => state.users[userId]);
-  // console.log(user)
+  const currUser = useSelector((state) => state.session.user);
+  const following = useSelector((state) => state.follow)
+  const [follows, setFollows] = useState('Follow')
+  // console.log('following', following)
+  // console.log('user', user)
+  // console.log('userId', user.id)
+
+  const followsBtnSubmit = () => {
+    // if (follows === 'Follow'){
+      setFollows('UnFollow')
+      dispatch(addFollowing(user))
+    // }else {
+    //   setFollows('Follow')
+    //   dispatch(deleteFollowing(userId))
+    // }
+  }
+  const unfollowBtn = () => {
+      dispatch(deleteFollowing(userId))
+
+  }
+
+  useEffect(() => {
+    if(user && following){
+      if(following[userId]){
+        setFollows('UnFollow')
+      }else {
+        setFollows('Follow')
+      }
+    }
+  }, [following, user])
+
   useEffect(() => {
     dispatch(getAllUsers())
+    dispatch(getAllFollowing(currUser.id))
   }, [dispatch])
 
   if (!user) {
     return null
   }
+
 
   return (
     <>
@@ -28,7 +61,10 @@ const UserInfoBox = () => {
           <div className="user-profile-details-container">
             <div className="username-and-follow-button-row">
               <div className="username-for-user-profile">{user.username}</div>
-              <button>Follow</button>
+              <button
+              onClick={followsBtnSubmit}>{follows}</button>
+              <button
+              onClick={unfollowBtn}>UnFollow</button>
             </div>
             <div className="posts-followers-following-row">
               <div>
