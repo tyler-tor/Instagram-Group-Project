@@ -3,33 +3,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { updatePost } from "../../store/post";
 
-
-const EditCaptionForm = ({onClose, postId}) => {
+const EditCaptionForm = ({ onClose, postId }) => {
   const [errors, setErrors] = useState([]);
   const [caption, setCaption] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onCaptionSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Need to create a function that posts to database
     let editedCaption = {
-                id : postId,
-                caption: caption,
-              }
+      id: postId,
+      caption: caption,
+    };
 
-    await dispatch(updatePost(editedCaption)).then(()=>{
-      onClose()
-    })
-    .catch(e => {
-      console.log(e);
-    })
+    await dispatch(updatePost(editedCaption))
+      .then(() => {
+        onClose();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const updateCaption = (e) => {
     setCaption(e.target.value);
   };
-
 
   return (
     <div className="post-form-wrapper">
@@ -41,7 +40,6 @@ const EditCaptionForm = ({onClose, postId}) => {
         </div>
         <div className="post-form-children">
           <input
-            className="post-form-input-text-boxes"
             name="caption"
             type="text"
             placeholder="Caption"
