@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "../../context/Modal";
 import "./SinglePostModal.css";
 import { useSelector, useDispatch } from "react-redux";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { FaRegSmile } from "react-icons/fa";
 import EditCaptionFormModal from "./EditCaptionModal";
@@ -12,10 +12,13 @@ import { getAllComments } from "../../store/comments";
 import { postComment } from "../../store/comments";
 import CommentSettingsModal from "./EditCommentModal";
 import UserLikedListModal from "./UserLikedListModal";
-import { deleteUserLikedPostId, getUserLikedPostId } from "../../store/user_post_like_list";
+import {
+  deleteUserLikedPostId,
+  getUserLikedPostId,
+} from "../../store/user_post_like_list";
 import { addUserLikedPostId } from "../../store/user_post_like_list";
 import { getCurrentPost } from "../../store/currentPost";
-
+import EditCaptionThreeDotsModal from "./EditCaptionSettingsModal";
 
 const SinglePostModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +27,7 @@ const SinglePostModal = ({ post }) => {
   const [comment, setComment] = useState("");
   const [likePost, setLikePost] = useState(false);
   const user = useSelector((state) => state.session.user);
-  const likes = Object.values(useSelector(state=>state.userPostLikes));
+  const likes = Object.values(useSelector((state) => state.userPostLikes));
   const comments = Object.values(useSelector((state) => state.comments));
   const dispatch = useDispatch();
 
@@ -34,26 +37,23 @@ const SinglePostModal = ({ post }) => {
     //!maybe move to the click event? everytime explore page renders it gets ALL of the posts comments.
 
     dispatch(getAllComments(post.id)).then(() => {
-
       setIsLoaded(true);
     });
 
     // console.log(comments);
   }, [dispatch]);
 
-  useEffect(() =>{
-    dispatch(getUserLikedPostId()).then((res)=>{
+  useEffect(() => {
+    dispatch(getUserLikedPostId()).then((res) => {
       console.log(res);
-      res.forEach(el=>{
-        if(el.postId === post.id){
-
+      res.forEach((el) => {
+        if (el.postId === post.id) {
           // console.log('MATCH!!!!!');
-          setLikePost(true)
+          setLikePost(true);
         }
-      })
-    })
-
-  },[dispatch])
+      });
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     if (user.id === post.userId) {
@@ -74,7 +74,7 @@ const SinglePostModal = ({ post }) => {
 
   const submitComment = async (e) => {
     e.preventDefault();
-    setComment('')
+    setComment("");
     const payload = {
       postId: post.id,
       body: comment,
@@ -86,8 +86,6 @@ const SinglePostModal = ({ post }) => {
 
     // console.log(newComment);
   };
-
-
 
   //! This is used to test deleting without a modal. When deleting with modal
   //! there is a warning for a cleanup in a useEffect function.
@@ -101,19 +99,18 @@ const SinglePostModal = ({ post }) => {
   //   })
   // }
 
-  const handleLikeButton = (e) =>{
-    e.preventDefault()
+  const handleLikeButton = (e) => {
+    e.preventDefault();
     // dispatch(getUserLikedPostId())
-    if(!likePost){
-      dispatch(addUserLikedPostId(post.id))
+    if (!likePost) {
+      dispatch(addUserLikedPostId(post.id));
+      // dispatch(getCurrentPost(post.id))
+    } else {
+      dispatch(deleteUserLikedPostId(post.id));
       // dispatch(getCurrentPost(post.id))
     }
-    else{
-      dispatch(deleteUserLikedPostId(post.id))
-      // dispatch(getCurrentPost(post.id))
-    }
-    setLikePost(!likePost)
-  }
+    setLikePost(!likePost);
+  };
 
   return (
     <>
@@ -136,8 +133,7 @@ const SinglePostModal = ({ post }) => {
                 <div className="post-modal-content-container-caption">
                   {myPost && (
                     <>
-                      <EditCaptionFormModal postId={post.id} />
-                      <DeletePostModal postId={post.id} />
+                      <EditCaptionThreeDotsModal postId={post.id} />
                       {/* <button onClick={deletePostTest}>Delete</button> */}
                     </>
                   )}
@@ -187,40 +183,36 @@ const SinglePostModal = ({ post }) => {
                 )}
               </div>
               <div className="post-modal-like-comment-icon">
-                <button onClick={handleLikeButton}>
+                <button className="no-styling" onClick={handleLikeButton}>
                   {/* <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" /> */}
                   {likePost ? (
-                    <>
-                      liked
-                    </>
-                  ):
-                    (
-                      <>
-                        notliked
-                      </>
-                    )
-                  }
+                    <AiFillHeart className="post-modal-icons-likes-comments no-left-padding red" />
+                  ) : (
+                    <AiOutlineHeart className="post-modal-icons-likes-comments no-left-padding" />
+                  )}
                 </button>
                 <IoChatbubbleOutline className="post-modal-icons-likes-comments reverse" />
               </div>
               <div className="post-modal-likes-count">
                 {/* <strong onClick={getUserLikes}> {post.likes} </strong> */}
-                <UserLikedListModal postId={post.id}/>
+                <UserLikedListModal postId={post.id} />
               </div>
               <div className="post-modal-date-posted">{post.createdAt}</div>
               <div className="post-modal-add-comment-container">
                 <div className="left-hand-container-for-post-modal-comment-input">
                   <FaRegSmile className="comment-smiley-face" />
-                  {/* <div>Add a comment</div> */}
                   <form className="comment-form-wrapper">
                     <div className="comment-form-container">
                       <input
                         type="text"
-                        placeholder={"Add a comment"}
+                        placeholder={"Add a comment..."}
                         value={comment}
                         onChange={updateComment}
+                        className="comment-input-styling"
                       />
-                      <div className="right-hand-container-for-post-modal-comment-input">
+                      <div
+                        className={`right-hand-container-for-post-modal-comment-input`}
+                      >
                         <button type="submit" onClick={submitComment}>
                           Post
                         </button>
