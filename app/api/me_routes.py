@@ -19,7 +19,11 @@ def me_following_posts():
         for i in range(len(following)):
             # print(following[i]['userId'])
             posts = Post.query.filter(Post.user_id == following[i]['userId']).all()
-            [post_arr.append(post.to_dict()) for post in posts]
+            [post_arr.append({**post.to_dict(), 'users': {
+                'username': post.users.username,
+                'profilePicture': post.users.profile_picture,
+                'userId': post.users.id
+            }}) for post in posts]
         # print(post_arr)
 
         return {'Posts': post_arr}

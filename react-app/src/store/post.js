@@ -1,4 +1,5 @@
 const GET_POSTS = "posts/GET_POSTS";
+const GET_FOLLOWING_POSTS = 'following/GET_FOLLOWING_POSTS'
 const ADD_POST = "posts/ADD_POST";
 const UPDATE_POST = 'posts/UPDATE_POST';
 const DELETE_POST = 'posts/DELETE_POST';
@@ -6,6 +7,11 @@ const DELETE_POST = 'posts/DELETE_POST';
 const getPosts = (posts) => ({
   type: GET_POSTS,
   payload: posts,
+});
+
+const getFollowingPosts = (posts) => ({
+  type: GET_FOLLOWING_POSTS,
+  payload: posts
 });
 
 const addPostAction = (post) => ({
@@ -68,6 +74,17 @@ export const addPost = (post) => async (dispatch) =>{
   }
 }
 
+export const getAllFollowingPosts = () => async (dispatch) => {
+  const response = await fetch("/api/me/following/posts");
+
+  if (response.ok) {
+      const data = await response.json();
+      dispatch(getFollowingPosts(data.Posts));
+      return data;
+  }
+  return response;
+}
+
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
 
@@ -89,6 +106,12 @@ export default function postsReducer(state = {}, action) {
       action.payload.forEach((post) => {
         newState[post.id] = post;
       });
+      return newState;
+    case GET_FOLLOWING_POSTS:
+      newState = { ...state };
+      action.payload.forEach((post) => {
+        newState[post.id] = post
+      })
       return newState;
     case ADD_POST:
       return {

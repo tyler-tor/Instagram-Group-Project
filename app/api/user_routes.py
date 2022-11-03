@@ -93,7 +93,7 @@ def follow_user(id):
         curr_user = curr_user.to_dict()
         f_user = f_user.to_dict()
 
-        return{'Current User': curr_user, 'Following User' : f_user}
+        return{'currentUser': curr_user, 'followingUser' : f_user}
     #add error handling later!
 
 @user_routes.route('/<int:id>/follow', methods=['DELETE'])
@@ -116,7 +116,7 @@ def unfollow_user(id):
                 curr_user = curr_user.to_dict()
                 f_user = f_user.to_dict()
 
-                return{'Current User': curr_user, 'Following User' : f_user}
+                return {'currentUser': curr_user, 'followingUser' : f_user}
                 # return {'Message': f'user {curr_user.id} unfollows user {f_user.id}'}
         #error handling later!
 
