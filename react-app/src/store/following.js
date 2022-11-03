@@ -30,8 +30,7 @@ export const deleteFollowing = (id) => async(dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-        console.log('data', data)
-        dispatch(deleteFollowingAction(id));
+        dispatch(deleteFollowingAction(data.followingUser.id));
         return data
     }
 }
@@ -46,7 +45,6 @@ export const addFollowing = (user) => async(dispatch) => {
 
     if(response.ok) {
         const data = await response.json()
-        // console.log('data', data)
         dispatch(addFollowingAction(data.followingUser))
         return data
     }
@@ -97,7 +95,7 @@ export default function followingReducer(state = {}, action) {
             }
         case DELETE_FOLLOWING:
             newState = {...state}
-            delete newState[action.paylod]
+            delete newState[action.payload]
             return newState
         default:
             return state;
