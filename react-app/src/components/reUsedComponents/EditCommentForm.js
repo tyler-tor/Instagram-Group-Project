@@ -31,25 +31,29 @@ const EditCommentForm = ({ onClose, commentId }) => {
   };
 
   return (
-    <div className="post-settings-modal-container">
-      <form onSubmit={handleSubmit} className="">
+    <div className="post-form-wrapper">
+      <form onSubmit={handleSubmit} className="post-form-container">
         {/* <ul>
                 {errors.map((error, idx) => (
                   <li key={idx}>{error}</li>
                 ))}
               </ul> */}
-        <input
-          type="text"
-          placeholder="comment"
-          required
-          value={tempComment}
-          onChange={(e) => setTempComment(e.target.value)}
-        />
-        <button className="same-button" type="submit" onClick={handleSubmit}>
-          Submit
-        </button>
+        <div className="post-form-children">
+          <input
+            type="text"
+            placeholder="comment"
+            required
+            value={tempComment}
+            onChange={(e) => setTempComment(e.target.value)}
+          />
+        </div>
+        <div className="post-form-children">
+          <button className="same-button" type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
       </form>
-      <button onClick={destroyComment} className="post-settings-modal-button">
+      <button onClick={destroyComment} className="modal-delete-buttons">
         Delete
       </button>
     </div>
