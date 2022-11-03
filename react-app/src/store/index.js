@@ -5,13 +5,22 @@ import commentsReducer from "./comments";
 import session from "./session";
 import followingReducer from "./following";
 import usersReducer from "./users";
+import userLikesReducer from "./user_likes";
+import userPostLikeReducer from "./user_post_like_list";
+import currentPostReducer from "./currentPost";
+
 
 const rootReducer = combineReducers({
   session,
   posts: postsReducer,
   comments: commentsReducer,
   follow: followingReducer,
-  users: usersReducer
+  users: usersReducer,
+  currentPost: currentPostReducer,
+  comments: commentsReducer,
+  userLikes: userLikesReducer,
+  userPostLikes: userPostLikeReducer
+
 });
 
 let enhancer;

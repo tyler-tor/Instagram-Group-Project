@@ -37,7 +37,7 @@ export const deletePost = (id) => async (dispatch) =>{
     dispatch(deletePostAction(id))
     return 'Sucess!'
   }
-  return response
+  return response;
 }
 
 export const updatePost = (caption) => async (dispatch) =>{

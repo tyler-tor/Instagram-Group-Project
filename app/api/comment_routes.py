@@ -37,6 +37,7 @@ def update_comment(id):
             'username': user['username'],
             'profilePicture' : user['profilePicture']
             }
+            comment_dict['myComment'] = True;
             return comment_dict
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return {'errors': 'This comment does not belong to you!'}

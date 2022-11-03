@@ -48,6 +48,10 @@
   border-radius: 100%;
 }
 
+.post-modal-content-container-caption {
+  margin-left: 324px;
+}
+
 .username-styling-in-post-modal {
   margin-left: 14px;
   width: 50px;
@@ -118,6 +122,7 @@
   border: none;
   align-items: center;
   font-weight: bold;
+  cursor: pointer;
 }
 
 
@@ -149,4 +154,33 @@
 .comment-form-container {
   display: flex;
   justify-content: space-between;
+}
+
+.no-styling {
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: auto;
+  padding: 0px;
+}
+
+.red {
+  color: red;
+}
+
+.no-left-padding {
+  padding-left: 0px;
+}
+
+.no-styling-actual {
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.comment-input-styling {
+  border: none;
+  background-color: transparent;
+  width: 390px;
 }
