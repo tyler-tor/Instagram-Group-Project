@@ -7,7 +7,7 @@ import { getAllPosts } from "../../store/post";
 const ExplorePage = () => {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.posts));
-  console.log(posts);
+  // console.log(posts);
 
   useEffect(() => {
     dispatch(getAllPosts())
@@ -23,7 +23,7 @@ const ExplorePage = () => {
 
   return (
     <div className="explore-page-wrapper">
-      <PostGrid />
+      <PostGrid posts={posts} />
     </div>
   );
 };

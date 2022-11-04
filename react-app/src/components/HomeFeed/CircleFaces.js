@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import stock from "../../images/stock.jpg";
+// import stock from "../../images/stock.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowing } from "../../store/following";
 
@@ -12,7 +12,7 @@ const CircleFaces = () => {
   useEffect(() => {
     dispatch(getAllFollowing(user.id))
   }, [dispatch])
-  console.log(following)
+  // console.log(following)
   return (
     <>
     {following.map(followed => {
@@ -20,7 +20,7 @@ const CircleFaces = () => {
         <NavLink to={`/${followed.userId}`}
         key={followed.userId}
         className="circle-face-children-containers">
-          <img src={followed.profilePic} alt="" />
+          <img src={followed.profilePicture} alt="" />
           <div>{followed.username}</div>
         </NavLink>
       )

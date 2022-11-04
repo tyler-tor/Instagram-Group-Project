@@ -4,7 +4,8 @@ import PostGrid from "../reUsedComponents/PostGrid";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../store/users";
-import { addFollowing, deleteFollowing, getAllFollowing } from "../../store/following";
+import UserFollowerListModal from "../reUsedComponents/UserFollowerListModal";
+import { addFollowing, deleteFollowing, getAllFollowing, getAllFollowers } from "../../store/following";
 
 const UserInfoBox = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ const UserInfoBox = () => {
   const following = useSelector((state) => state.follow)
   const [follows, setFollows] = useState('Follow')
   const [isLoading, setIsLoading] = useState(false)
+  const [followBtn, setFollowBtn] = useState(false)
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
@@ -29,10 +31,9 @@ const UserInfoBox = () => {
       setFollows('Follow')
     }
   }
-  const unfollowBtn = () => {
-    dispatch(deleteFollowing(userId))
-
-  }
+  // const displayFollowers = () => {
+  //   dispatch(getAllFollowers(userId))
+  // }
 
   useEffect(() => {
     if (user && following) {
@@ -43,6 +44,12 @@ const UserInfoBox = () => {
       }
     }
   }, [following, user])
+
+  useEffect(() => {
+    console.log('currUser', currUser.id)
+    console.log('userId', userId)
+    if (currUser.id !== parseInt(userId)) setFollowBtn(true)
+  }, [])
 
   if (!user) {
     return null
@@ -60,9 +67,11 @@ const UserInfoBox = () => {
             <div className="user-profile-details-container">
               <div className="username-and-follow-button-row">
                 <div className="username-for-user-profile">{user.username}</div>
-                <button
+                {followBtn &&
+                (<button
                   onClick={followsBtnSubmit}>{follows}
-                </button>
+                </button>)
+                }
               </div>
               <div className="posts-followers-following-row">
                 <div>
@@ -83,6 +92,10 @@ const UserInfoBox = () => {
               <div className="user-profile-caption">
                 <strong>NBA Shooting Coach</strong>
                 <span>Herro, this is a little bit about who I is.</span>
+                <UserFollowerListModal userId={userId} />
+                {/* <button
+                  onClick={displayFollowers}>List of Followers
+                </button> */}
               </div>
             </div>
           </div>

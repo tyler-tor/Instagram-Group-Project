@@ -62,7 +62,7 @@ export const getAllFollowing = (id) => async (dispatch) => {
 }
 
 export const getAllFollowers = (id) => async (dispatch) => {
-    const response = await fetch(`/api/users/${id}/followers/`)
+    const response = await fetch(`/api/users/${id}/followers`)
 
     if(response.ok){
         const data = await response.json();
