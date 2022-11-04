@@ -3,6 +3,7 @@ import PostGrid from "../reUsedComponents/PostGrid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../store/post";
+import "./ExplorePage.css";
 
 const ExplorePage = () => {
   const dispatch = useDispatch();
@@ -18,12 +19,13 @@ const ExplorePage = () => {
         const data = await res.json();
         console.log(data.errors);
       });
-
   }, [dispatch]);
 
   return (
-    <div className="explore-page-wrapper">
-      <PostGrid />
+    <div className="explore-papa-div">
+      <div className="explore-page-wrapper">
+        <PostGrid />
+      </div>
     </div>
   );
 };

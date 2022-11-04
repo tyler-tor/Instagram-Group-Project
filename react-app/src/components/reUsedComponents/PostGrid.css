@@ -1,5 +1,7 @@
 .post-grid-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr)
+
 }
 
 .post-grid-children {
@@ -18,5 +20,6 @@
 }
 
 .first-two-grid-children {
-  margin-right: 28px
+  margin-right: 28px;
+  margin-bottom: 28px
 }

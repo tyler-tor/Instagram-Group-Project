@@ -1,5 +1,11 @@
+.explore-papa-div {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
 .explore-page-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  align-items: center;
 }
