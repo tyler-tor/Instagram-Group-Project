@@ -15,21 +15,27 @@ const PostForm = ({onClose}) => {
     // Need to create a function that posts to database
     e.preventDefault();
     if(user){
-      console.log('USER OBJECT',user);
-      console.log('USERID', user.id);
+      // console.log('USER OBJECT',user);
+      // console.log('USERID', user.id);
       let post = {
                   userId: user.id,
                   caption: caption,
                   imgUrl: url
                 }
       if(url){
-        await dispatch(addPost(post)).then(()=>{
-          onClose()
+        return await dispatch(addPost(post))
+        .then((res)=>{
+          // console.log(res);
+          if(res){
+            setErrors(res)
+
+          }
+          else{
+            onClose()
+
+          }
         })
-        .catch(e => {
-          console.log(e);
-        })
-      }
+    }
       else{
         window.alert('you must upload an image')
       }

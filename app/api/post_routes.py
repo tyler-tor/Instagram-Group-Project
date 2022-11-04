@@ -169,7 +169,7 @@ def unlike_post(id):
             post_dict = post.to_dict()
             curr_post_dict = curr_post.to_dict()
             if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
-                
+
                 if curr_post.likes > 0:
                     curr_post.likes -= 1
 
@@ -227,4 +227,4 @@ def create_comment_post(id):
             'profilePicture' : user['profilePicture']
         }
         return comment_dict
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': form.errors}, 401
