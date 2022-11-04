@@ -9,6 +9,7 @@ import userLikesReducer from "./user_likes";
 import userPostLikeReducer from "./user_post_like_list";
 import currentPostReducer from "./currentPost";
 import followingPostsReducer from "./followingPosts";
+import followersReducer from "./follower";
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
   userLikes: userLikesReducer,
   userPostLikes: userPostLikeReducer,
-  followingPosts: followingPostsReducer
+  followingPosts: followingPostsReducer,
+  followers: followersReducer
 });
 
 let enhancer;
