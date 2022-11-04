@@ -21,7 +21,7 @@ import { getCurrentPost } from "../../store/currentPost";
 import EditCaptionThreeDotsModal from "./EditCaptionSettingsModal";
 import CommentContainer from "./CommentContainer";
 
-const SinglePostModal = ({ post }) => {
+const SinglePostModalButton = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [myPost, setMyPost] = useState(false);
@@ -122,7 +122,10 @@ const SinglePostModal = ({ post }) => {
 
   return (
     <>
-      <img src={post.imgUrl} alt="" onClick={clickModal} />
+      <IoChatbubbleOutline
+        className="post-icon-button reverse"
+        onClick={clickModal}
+      />
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="post-modal-container">
@@ -149,7 +152,10 @@ const SinglePostModal = ({ post }) => {
               </div>
 
               <div className="post-modal-comments-section">
-                <CommentContainer postId={post.id} setShowModal={setShowModal}/>
+                <CommentContainer
+                  postId={post.id}
+                  setShowModal={setShowModal}
+                />
                 {isLoaded && (
                   <>
                     {/* <ul className="comments-section-container">
@@ -238,4 +244,4 @@ const SinglePostModal = ({ post }) => {
   );
 };
 
-export default SinglePostModal;
+export default SinglePostModalButton;

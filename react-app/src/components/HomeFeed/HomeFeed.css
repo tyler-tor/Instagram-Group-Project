@@ -36,6 +36,10 @@
   text-decoration: none;
 }
 
+.circle-face-children-containers:hover {
+  cursor: pointer;
+}
+
 .circle-face-children-containers img {
   object-fit: cover;
   height: 66px;
@@ -67,7 +71,7 @@
   border-radius: 8px;
   border: 1px solid rgb(219, 219, 219);
   background-color: white;
-
+  margin-bottom: 12px;
 }
 
 .feed-child {
@@ -149,6 +153,7 @@
 
 
 .like-comment-icon-container {
+  display: flex;
   height: 40px;
   padding: 0px 12px 6px;
 }
@@ -263,4 +268,10 @@
 
 .suggestions-for-you-styling {
   padding: 4px 0px;
+}
+
+.username-no-spacing {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }

@@ -15,7 +15,7 @@ const EditCaptionThreeDotsModal = (postId) => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="post-settings-modal-container-new">
-            <EditCaptionFormModal postId={postId} />
+            <EditCaptionFormModal postId={postId} onClose={() => setShowModal(false)}/>
             <DeletePostModal
               postId={postId}
               className="post-settings-modal-button-new except-top"
