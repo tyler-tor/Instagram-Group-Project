@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import EditCaptionForm from "./EditCaptionForm";
 
-const EditCaptionFormModal = ({ postId }) => {
+const EditCaptionFormModal = ({onClose, postId }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const EditCaptionFormModal = ({ postId }) => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditCaptionForm
-            onClose={() => setShowModal(false)}
+            onClose={onClose}
             postId={postId}
           />
         </Modal>

@@ -76,13 +76,13 @@ export default function followingReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case GET_FOLLOWING:
-            newState = {...state}
+            newState = {} //!changed to blank state so it refreshes the list
             action.payload.forEach((followee) => {
                 newState[followee.userId] = followee
             })
             return newState
         case GET_FOLLOWERS:
-            newState = {...state}
+            newState = {} //!changed to blank state so it refreshes the list
             action.payload.forEach((follower) => {
                 newState[follower.userId] = follower
             })
