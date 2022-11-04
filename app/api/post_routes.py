@@ -6,6 +6,7 @@ from app.models import Post, User, Comment, db
 from app.forms.create_post import CreatePost
 from app.forms.update_post import UpdatePost
 from app.forms.create_comment import CreateComment
+
 #!needed for a query to get the latest post.
 from sqlalchemy import desc
 
@@ -49,14 +50,15 @@ def get_post_by_id(id):
 
 @post_routes.route('/', methods=['POST'])
 # @login_required
-def create_post():
+def create_post(): #! start here for backend aws connection
     form = CreatePost()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         post = Post(
             user_id=current_user.id,
             caption=form.data['caption'],
-            img_url=form.data['img_url']
+            img_url= form.data['img_url']
         )
         db.session.add(post)
         db.session.commit()

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { addPost } from "../../store/post";
+import ImageUploadComponent from "./ImageUploadComponent";
 
 const PostForm = ({onClose}) => {
   const [errors, setErrors] = useState([]);
@@ -21,12 +22,17 @@ const PostForm = ({onClose}) => {
                   caption: caption,
                   imgUrl: url
                 }
-      await dispatch(addPost(post)).then(()=>{
-        onClose()
-      })
-      .catch(e => {
-        console.log(e);
-      })
+      if(url){
+        await dispatch(addPost(post)).then(()=>{
+          onClose()
+        })
+        .catch(e => {
+          console.log(e);
+        })
+      }
+      else{
+        window.alert('you must upload an image')
+      }
 
     }
   };
@@ -41,6 +47,7 @@ const PostForm = ({onClose}) => {
 
   return (
     <div className="post-form-wrapper">
+      <ImageUploadComponent setUrl = {setUrl} />
       <form className="post-form-container" onSubmit={onPostSubmit}>
         <div>
           {errors.map((error, ind) => (
@@ -58,14 +65,15 @@ const PostForm = ({onClose}) => {
           />
         </div>
         <div className="post-form-children">
-          <input
+          {/* <input
             className="post-form-input-text-boxes"
             name="Photo URL"
             type="text"
             placeholder="Photo URL"
             value={url}
             onChange={updateUrl}
-          />
+          /> */}
+
         </div>
         <div className="post-form-children">
           <button className="post-form-default-submit-button" type="submit">
