@@ -9,13 +9,17 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowingPosts } from "../../store/post";
 
-const ActualFeed = () => {
-  const posts = Object.values(useSelector((state) => state.posts));
+const ActualFeed = ({posts}) => {
+  // const posts = Object.values(useSelector((state) => state.posts));
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getAllFollowingPosts())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getAllFollowingPosts())
+  // }, [dispatch])
+
+  const handleClick = () => {
+
+  }
 
   return (
     <div className="">
@@ -35,7 +39,7 @@ const ActualFeed = () => {
             <div id="post-image" className="feed-child post-image-wrapper">
               <img
                 className="feed-child post-image-wrapper"
-                src={stock}
+                src={post.imgUrl}
                 alt="example post"
               />
             </div>

@@ -8,6 +8,7 @@ import usersReducer from "./users";
 import userLikesReducer from "./user_likes";
 import userPostLikeReducer from "./user_post_like_list";
 import currentPostReducer from "./currentPost";
+import followingPostsReducer from "./followingPosts";
 
 
 const rootReducer = combineReducers({
@@ -19,8 +20,8 @@ const rootReducer = combineReducers({
   currentPost: currentPostReducer,
   comments: commentsReducer,
   userLikes: userLikesReducer,
-  userPostLikes: userPostLikeReducer
-
+  userPostLikes: userPostLikeReducer,
+  followingPosts: followingPostsReducer
 });
 
 let enhancer;

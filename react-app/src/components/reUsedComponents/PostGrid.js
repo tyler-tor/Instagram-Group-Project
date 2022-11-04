@@ -3,25 +3,40 @@ import "./PostGrid.css";
 import SinglePostModal from "./SinglePostModal";
 import stock from "../../images/stock.jpg";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllFollowingPosts } from "../../store/post";
+import { useParams } from "react-router-dom";
+import { getAllFollowingPosts, getAllPosts } from "../../store/post";
 
 const PostGrid = () => {
-  const posts = Object.values(useSelector((state) => state.posts));
+  const { userId } = useParams()
+  const user = useSelector((state) => state.users[userId])
+  const posts = Object.values(useSelector((state) => state.posts))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllFollowingPosts())
+    dispatch(getAllPosts())
   }, [dispatch])
 
   return (
     <div className="post-grid-container">
-      {posts.map(post => {
+      {user ? (
+      posts.filter(post => {
+        return post.userId === user.id
+      }).map(post => {
         return(
           <div className="post-grid-children first-two-grid-children" key={post.id}>
             <SinglePostModal post={post} />
           </div>
         )
-      })}
+      })) : (
+        posts.map(post => {
+          return(
+            <div className="post-grid-children first-two-grid-children" key={post.id}>
+              <SinglePostModal post={post} />
+            </div>
+          )
+        })
+      )
+      }
       {/* <div className="post-grid-children first-two-grid-children">
         <SinglePostModal img={stock} />
       </div> */}
