@@ -169,7 +169,10 @@ def unlike_post(id):
             post_dict = post.to_dict()
             curr_post_dict = curr_post.to_dict()
             if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
-                curr_post.likes -= 1
+                
+                if curr_post.likes > 0:
+                    curr_post.likes -= 1
+
                 db.session.delete(post)
                 db.session.commit()
 
