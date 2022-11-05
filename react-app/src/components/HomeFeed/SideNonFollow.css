@@ -3,23 +3,23 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: white;
-    height: 2em;
-    width: 2em;
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
     padding: 6px 0px;
-    border-radius: 8px;
-    border: 1px solid rgb(219, 219, 219)
+    border-radius: 100%;
   }
 
 .each-non-follower {
     display: flex;
-    padding: 1em 0em;
+    padding: 5px 0px;
 }
 
 .non-follower-link {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding-left: 2em;
+    padding-left: 14px;
     text-decoration: none;
 }
 

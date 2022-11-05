@@ -32,13 +32,20 @@
     margin: 2px 0;
 
   }
-input {
-    width: 220px;
-  }
+
 .search-inner {
     display: flex;
-
   }
+
+.search-inner input {
+  border: none;
+  background-color: rgb(239, 239, 239);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 268px;
+  height: 36px;
+}
 
 .search-pic{
     height: 10%;

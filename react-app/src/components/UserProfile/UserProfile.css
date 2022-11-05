@@ -73,6 +73,10 @@
   margin-left: 10px;
 }
 
+.posts-followers-following-row-children-except-first a {
+  cursor: pointer;
+}
+
 .user-profile-caption {
   display: flex;
   flex-direction: column;

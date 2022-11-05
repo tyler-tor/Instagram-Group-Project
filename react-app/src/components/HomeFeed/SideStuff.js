@@ -39,7 +39,7 @@ const SideStuff = () => {
           {", and"}
           <a
             className="about-links-styling"
-            href="https://www.linkedin.com/in/theofandrich/"
+            href="https://www.linkedin.com/in/alan-de-leon-b54621212/"
           >
             {" "}
             Alan Deleon

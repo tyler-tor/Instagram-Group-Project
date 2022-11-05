@@ -6,6 +6,7 @@ import PostSettingsModal from "./PostSettingsModal";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowingPosts } from "../../store/followingPosts";
+import SinglePostModal from "../reUsedComponents/SinglePostModal";
 import {
   addUserLikedPostId,
   deleteUserLikedPostId,
@@ -51,6 +52,10 @@ const ActualFeed = () => {
               <PostSettingsModal post={post} />
             </div>
             <div id="post-image" className="feed-child post-image-wrapper">
+              {/* <SinglePostModal
+                post={post}
+                className="feed-child post-image-wrapper"
+              /> */}
               <img
                 className="feed-child post-image-wrapper"
                 src={post.imgUrl}
