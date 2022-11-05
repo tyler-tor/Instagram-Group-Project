@@ -65,12 +65,13 @@
 
 .posts-followers-following-row {
   display: flex;
-  margin: 20px 0px 24px 0px;
+  margin-top: 20px;
+  margin-bottom: 24px;
   height: 24px;
 }
 
 .posts-followers-following-row-children-except-first{
-  margin-left: 0px;
+  margin-left: 14px;
 }
 
 .posts-followers-following-row-children-except-first a {

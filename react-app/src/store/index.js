@@ -12,6 +12,7 @@ import followingPostsReducer from "./followingPosts";
 import followersReducer from "./follower";
 import nonFollowingReducer from "./nonFollowed";
 import searchUserReducer from "./search_users";
+import profileFollowingReducer from "./profile_following_store";
 
 
 const rootReducer = combineReducers({
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   followingPosts: followingPostsReducer,
   followers: followersReducer,
   notFollowed: nonFollowingReducer,
-  searchUsers: searchUserReducer
+  searchUsers: searchUserReducer,
+  profileFollowing: profileFollowingReducer
 });
 
 let enhancer;

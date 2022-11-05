@@ -7,8 +7,8 @@ import "./ExplorePage.css";
 
 const ExplorePage = () => {
   const dispatch = useDispatch();
-  const posts = Object.values(useSelector((state) => state.posts));
-  // console.log(posts);
+  const posts = Object.values(useSelector((state) => state.posts)).reverse();
+  console.log('posts', posts);
 
   useEffect(() => {
     dispatch(getAllPosts())

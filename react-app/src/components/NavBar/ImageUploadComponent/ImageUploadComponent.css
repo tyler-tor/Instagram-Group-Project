@@ -9,9 +9,6 @@
     align-items: center;
 }
 
-.upload-photo-container input {
-}
-
 .upload-photo-container button{
   height: 32px;
   width: 100px;
@@ -21,4 +18,8 @@
   color: white;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.upload-img-btn:hover {
+  cursor: pointer;
 }

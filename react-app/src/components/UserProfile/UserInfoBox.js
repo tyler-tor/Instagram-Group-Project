@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import screenshot from "../../images/screenshot1-2x.png";
 import PostGrid from "../reUsedComponents/PostGrid";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -10,23 +9,56 @@ import {
   deleteFollowing,
   getAllFollowing,
 } from "../../store/following";
+import { getAllFollowers } from "../../store/follower";
+import { getProfileFollowing } from "../../store/profile_following_store";
 
 const UserInfoBox = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
   const currUser = useSelector((state) => state.session.user);
-  const following = useSelector((state) => state.follow);
-  const [follows, setFollows] = useState("Follow");
+  const following = Object.values(useSelector((state) => state.follow));
+  const followers = Object.values(useSelector(state => state.followers))
+  const posts = Object.values(useSelector((state) => state.posts));
+  // const [followingNum, setFollowingNum] = useState([]);
+  const profileFollowing = Object.values(useSelector(state => state.profileFollowing))
   const [isLoading, setIsLoading] = useState(false);
   const [followBtn, setFollowBtn] = useState(false);
   const [followTest, setFollowTest] = useState(false);
+  const [postCount, setPostCount] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)));
-    setIsLoading(true);
+    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
+    .then(()=>{
+
+      setIsLoading(true);
+
+    });
   }, [dispatch]);
 
+  useEffect(() =>{
+    dispatch(getProfileFollowing(userId)).then(() =>{
+
+    })
+  },[dispatch])
+
+
+  useEffect(() =>{
+    dispatch(getAllFollowers(userId)).then((res) =>{
+      res.forEach(el =>{
+        if(currUser.id === el.userId){
+          setFollowTest(true)
+          return;
+        }
+        else{
+          setFollowTest(false)
+        }
+      })
+
+    })
+  },[dispatch])
+
+  console.log(posts.filter((post) => post.userId == user.id).length);
   //!code here causes a crash if you click the follow button multiple times.
   // const followsBtnSubmit = () => {
   //   if (follows === 'Follow') {
@@ -52,6 +84,14 @@ const UserInfoBox = () => {
     setFollowTest(false);
   };
 
+  const userPosts = () => {
+    setPostCount(posts.filter((post) => post.userId == user.id).length);
+  };
+
+  useEffect(() => {
+    userPosts();
+  }, [posts]);
+
   useEffect(() => {
     if (user && following) {
       if (following[userId]) {
@@ -65,8 +105,17 @@ const UserInfoBox = () => {
   useEffect(() => {
     // console.log('currUser', currUser.id)
     // console.log('userId', userId)
-    if (currUser.id !== parseInt(userId)) setFollowBtn(true);
-  }, []);
+    console.log(followBtn);
+    // console.log('currentUser'currUser.id);
+    if (currUser.id !== Number(userId)){
+      setFollowBtn(true);
+
+    }
+    else{
+      setFollowBtn(false)
+    }
+    console.log(followBtn);
+  });
 
   if (!user) {
     return null;
@@ -94,15 +143,18 @@ const UserInfoBox = () => {
                 )}
               </div>
               <div className="posts-followers-following-row">
+                <div className="">
+                  {" "}
+                  <strong>{postCount}</strong> Posts
+                </div>
                 <div className="posts-followers-following-row-children-except-first">
                   {" "}
                   <UserFollowerListModal userId={userId} />
                 </div>
-                {/* <div className="posts-followers-following-row-children-except-first">
-                  {" "}
-                  <strong>1132 </strong>
+                <div className="posts-followers-following-row-children-except-first slight-margin">
+                  <strong>{profileFollowing.length} </strong>
                   following
-                </div> */}
+                </div>
               </div>
               <div className="user-profile-caption">
                 {/* <strong>NBA Shooting Coach</strong>

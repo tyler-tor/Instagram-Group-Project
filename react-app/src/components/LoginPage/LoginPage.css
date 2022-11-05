@@ -65,6 +65,10 @@
   border-radius: 4px;
 }
 
+.form-default-submit-button:hover {
+  cursor: pointer;
+}
+
 .or-styling {
   margin: 15px 0px 0px;
 }
@@ -72,6 +76,10 @@
 .demo {
   background-color: #0057a3;
   margin: 40px;
+}
+
+.demo:hover {
+  cursor: pointer;
 }
 
 .have-an-account-sign-up-box-container {
@@ -142,4 +150,8 @@
   padding: 0px 20%;
   margin: 20px 0px;
 
+}
+
+.sign-up-modal-text:hover {
+  cursor: pointer;
 }

@@ -14,7 +14,7 @@ import {
 
 const ActualFeed = () => {
   const dispatch = useDispatch();
-  const posts = Object.values(useSelector((state) => state.followingPosts));
+  const posts = Object.values(useSelector((state) => state.followingPosts)).reverse();
   const [likePost, setLikePost] = useState(false);
 
   useEffect(() => {

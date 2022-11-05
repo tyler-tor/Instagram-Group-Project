@@ -27,7 +27,7 @@ def validation_errors_to_error_messages(validation_errors):
 @post_routes.route('/')
 @login_required
 def posts():
-    posts = Post.query.options(db.joinedload(Post.users)).all()
+    posts = Post.query.options(db.joinedload(Post.users)).order_by(Post.created_at.desc()).all()
     posts_dict = {}
     posts_dict["Posts"] = [{**post.to_dict(), 'users': {
         'username': post.users.username, 'profilePicture': post.users.profile_picture,
