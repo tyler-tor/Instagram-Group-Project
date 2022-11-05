@@ -65,8 +65,17 @@ const UserInfoBox = () => {
   useEffect(() => {
     // console.log('currUser', currUser.id)
     // console.log('userId', userId)
-    if (currUser.id !== parseInt(userId)) setFollowBtn(true);
-  }, []);
+    console.log(followBtn);
+    // console.log('currentUser'currUser.id);
+    if (currUser.id !== Number(userId)){
+      setFollowBtn(true);
+
+    }
+    else{
+      setFollowBtn(false)
+    }
+    console.log(followBtn);
+  });
 
   if (!user) {
     return null;
