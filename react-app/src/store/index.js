@@ -11,6 +11,7 @@ import currentPostReducer from "./currentPost";
 import followingPostsReducer from "./followingPosts";
 import followersReducer from "./follower";
 import nonFollowingReducer from "./nonFollowed";
+import searchUserReducer from "./search_users";
 
 
 const rootReducer = combineReducers({
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   userPostLikes: userPostLikeReducer,
   followingPosts: followingPostsReducer,
   followers: followersReducer,
-  notFollowed: nonFollowingReducer
+  notFollowed: nonFollowingReducer,
+  searchUsers: searchUserReducer
 });
 
 let enhancer;

@@ -16,36 +16,48 @@ const UserInfoBox = () => {
   const [follows, setFollows] = useState('Follow')
   const [isLoading, setIsLoading] = useState(false)
   const [followBtn, setFollowBtn] = useState(false)
+  const [followTest, setFollowTest] = useState(false)
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
     setIsLoading(true)
   }, [dispatch])
 
-  const followsBtnSubmit = () => {
-    if (follows === 'Follow') {
-      dispatch(addFollowing(user))
-      dispatch(getAllFollowing(userId))
-      setFollows('UnFollow')
-    } else {
-      dispatch(deleteFollowing(userId))
-      dispatch(getAllFollowing(userId))
-      setFollows('Follow')
-    }
-  }
+
+  //!code here causes a crash if you click the follow button multiple times.
+  // const followsBtnSubmit = () => {
+  //   if (follows === 'Follow') {
+  //     dispatch(addFollowing(user, userId))
+  //     // dispatch(getAllFollowing(userId))
+  //     setFollows('UnFollow')
+  //   } else {
+  //     dispatch(deleteFollowing(userId))
+  //     // dispatch(getAllFollowing(userId))
+  //     setFollows('Follow')
+  //   }
+  // }
   // const displayFollowers = () => {
   //   dispatch(getAllFollowers(userId))
   // }
+  const handleFollow = () =>{
+    dispatch(addFollowing(user, userId))
+    setFollowTest(true)
+  }
+
+  const handleUnFollow = () =>{
+    dispatch(deleteFollowing(userId))
+    setFollowTest(false)
+  }
 
   useEffect(() => {
     if (user && following) {
       if (following[userId]) {
-        setFollows('UnFollow')
+        setFollowTest(true)
       } else {
-        setFollows('Follow')
+        setFollowTest(false)
       }
     }
-  }, [following, user])
+  }, [])
 
   useEffect(() => {
     // console.log('currUser', currUser.id)
@@ -69,11 +81,27 @@ const UserInfoBox = () => {
             <div className="user-profile-details-container">
               <div className="username-and-follow-button-row">
                 <div className="username-for-user-profile">{user.username}</div>
-                {followBtn &&
-                (<button
-                  onClick={followsBtnSubmit}>{follows}
-                </button>)
+                {
+                  followBtn && (
+                    <>
+
+                          {followTest ?
+                            (<button onClick={handleUnFollow}>
+                                UnFollow
+                            </button>)
+
+                            :
+                            (
+                              <button onClick={handleFollow}>
+                                Follow
+                              </button>
+                            )
+
+                          }
+                    </>
+                  )
                 }
+
               </div>
               <div className="posts-followers-following-row">
                 <div>
