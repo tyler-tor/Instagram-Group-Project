@@ -38,15 +38,15 @@
   margin-left: 16px;
 }
 
-.post-modal-content-container-image-wrapper {
+/* .post-modal-content-container-image-wrapper {
   height: 32px;
   width: 32px;
-}
+} */
 
 .post-modal-content-container-image-wrapper img{
   object-fit: cover;
-  height: 100%;
-  width: 100%;
+  height: 32px;
+  width: 32px;
   border-radius: 100%;
 }
 
@@ -56,13 +56,12 @@
 
 .username-styling-in-post-modal {
   margin-left: 14px;
-  width: 50px;
+  width: 380px;
   overflow-wrap: break-word;
   height: auto;
 }
 
 .body-styling-in-post-modal {
-  margin-left: 14px;
   width: 310px;
   overflow-wrap: break-word;
 }
@@ -110,6 +109,7 @@
   align-items: center;
   padding: 6px 16px;
   justify-content:space-between;
+  height: 50px;
 }
 
 .left-hand-container-for-post-modal-comment-input {
@@ -120,6 +120,7 @@
 .right-hand-container-for-post-modal-comment-input {
   display: flex;
   align-items: center;
+  padding-left: 20px;
 }
 
 .right-hand-container-for-post-modal-comment-input button{
@@ -153,12 +154,13 @@
 }
 
 .comment-form-wrapper {
-  width: 432px;
+  width: 460px;
 }
 
 .comment-form-container {
   display: flex;
   justify-content: space-between;
+  width: auto;
 }
 
 .no-styling {
