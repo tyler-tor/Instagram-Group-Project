@@ -94,10 +94,6 @@ const UserInfoBox = () => {
                 )}
               </div>
               <div className="posts-followers-following-row">
-                <div>
-                  <strong>123 </strong>
-                  posts
-                </div>
                 <div className="posts-followers-following-row-children-except-first">
                   {" "}
                   <UserFollowerListModal userId={userId} />

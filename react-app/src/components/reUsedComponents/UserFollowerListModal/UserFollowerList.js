@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./UserFollowerList.css";
 
-const UserFollowerList = ({ followers }) => {
+const UserFollowerList = ({ followers, onClose }) => {
   // const [isLoaded, setIsLoaded] = useState(true);
 
   return (
@@ -11,7 +11,7 @@ const UserFollowerList = ({ followers }) => {
       <ul>
         {followers.map((user) => {
           return (
-            <NavLink to={`/${user.userId}`}>
+            <NavLink to={`/${user.userId}`} onClick={() => onClose(false)}>
               <li key={user.userId}>
                 <img src={user.profilePicture} />
                 <span>{user.username}</span>
