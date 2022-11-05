@@ -33,11 +33,12 @@ export const deleteFollowing = (id) => async(dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(deleteFollowingAction(data.followingUser.id));
+        dispatch(getAllFollowing(id))
         return data
     }
 }
 
-export const addFollowing = (user) => async(dispatch) => {
+export const addFollowing = (user, id) => async(dispatch) => {
     const response = await fetch(`/api/users/${user.id}/follow`, {
         method: 'POST',
         headers: {
@@ -48,7 +49,7 @@ export const addFollowing = (user) => async(dispatch) => {
     if(response.ok) {
         const data = await response.json()
         dispatch(addFollowingAction(data.followingUser))
-        // dispatch(getAllFollowing(userId))
+        dispatch(getAllFollowing(id))
         return data
     }
 }
