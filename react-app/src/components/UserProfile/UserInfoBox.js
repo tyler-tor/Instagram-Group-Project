@@ -17,7 +17,8 @@ const UserInfoBox = () => {
   const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
   const currUser = useSelector((state) => state.session.user);
-  const following = Object.values(useSelector((state) => state.follow));
+  const following_arr = Object.values(useSelector((state) => state.follow));
+  const following =useSelector((state) => state.follow);
   const followers = Object.values(useSelector(state => state.followers))
   const posts = Object.values(useSelector((state) => state.posts));
   // const [followingNum, setFollowingNum] = useState([]);
@@ -26,6 +27,8 @@ const UserInfoBox = () => {
   const [followBtn, setFollowBtn] = useState(false);
   const [followTest, setFollowTest] = useState(false);
   const [postCount, setPostCount] = useState(0);
+
+  console.log('CURRENT STATUS', followTest);
 
   useEffect(() => {
     dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
@@ -47,7 +50,9 @@ const UserInfoBox = () => {
     dispatch(getAllFollowers(userId)).then((res) =>{
       res.forEach(el =>{
         if(currUser.id === el.userId){
+          console.log('CHECKING USER FOLLOWING', currUser.id, el.userId);
           setFollowTest(true)
+          console.log('IN FOR LOOP', followTest);
           return;
         }
         else{
@@ -95,17 +100,19 @@ const UserInfoBox = () => {
   useEffect(() => {
     if (user && following) {
       if (following[userId]) {
+        console.log('USERINFO BOX FOLLOWING KEYIN TRUE', following);
         setFollowTest(true);
       } else {
+        console.log('USERINFO BOX FOLLOWING KEYIN FALSE', following);
         setFollowTest(false);
       }
     }
-  }, []);
+  });
 
   useEffect(() => {
     // console.log('currUser', currUser.id)
     // console.log('userId', userId)
-    console.log(followBtn);
+    // console.log(followBtn);
     // console.log('currentUser'currUser.id);
     if (currUser.id !== Number(userId)){
       setFollowBtn(true);
@@ -114,7 +121,7 @@ const UserInfoBox = () => {
     else{
       setFollowBtn(false)
     }
-    console.log(followBtn);
+    // console.log(followBtn);
   });
 
   if (!user) {
