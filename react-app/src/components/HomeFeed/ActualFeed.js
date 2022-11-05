@@ -12,15 +12,15 @@ import {
 } from "../../store/user_post_like_list";
 
 const ActualFeed = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.followingPosts));
   const [likePost, setLikePost] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllFollowingPosts())
-  }, [dispatch])
+    dispatch(getAllFollowingPosts());
+  }, [dispatch]);
 
-  if( !posts ) return null
+  if (!posts) return null;
 
   const handleLikeButton = (post) => {
     if (!likePost) {
@@ -63,17 +63,17 @@ const ActualFeed = () => {
                 onClick={() => handleLikeButton(post)}
               >
                 {/* <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" /> */}
-                {likePost ? (
+                {/* {likePost ? (
                   <AiFillHeart className="post-modal-icons-likes-comments no-left-padding red" />
                 ) : (
                   <AiOutlineHeart className="post-modal-icons-likes-comments no-left-padding" />
-                )}
+                )} */}
               </div>
               {/* <IoChatbubbleOutline className="post-icon-button reverse" /> */}
               {/* <SinglePostModalButton post={post} /> */}
             </div>
             <div className="feed-child likes-count-container">
-              <strong>{post.likes}</strong>
+              <strong>{post.likes} likes </strong>
             </div>
             <div className="post-caption-container-and-show-all-comments">
               <div className="username-caption-div">
