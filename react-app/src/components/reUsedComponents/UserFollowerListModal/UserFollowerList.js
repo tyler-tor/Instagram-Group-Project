@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllFollowers } from "../../../store/follower";
 import { getAllFollowing } from "../../../store/following";
+import { getProfileFollowing } from "../../../store/profile_following_store";
 import "./UserFollowerList.css";
 
 const UserFollowerList = ({ followers, onClose }) => {
@@ -18,6 +19,7 @@ const UserFollowerList = ({ followers, onClose }) => {
             <NavLink to={`/${user.userId}`} onClick={() => {
                 dispatch(getAllFollowers(user.userId))
                 dispatch(getAllFollowing(user.userId))
+                dispatch(getProfileFollowing(user.userId))
                 onClose()
 
             }}>
