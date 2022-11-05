@@ -23,16 +23,21 @@ const SideStuff = () => {
         <div className="suggestions-for-you-styling secondary-gray-text">
           © 2022 Finstagram Built by{" "}
           <a
-            classname="about-links-styling"
+            className="about-links-styling"
             href="https://www.linkedin.com/in/derek-torrero-02823018a/"
           >
             Derek Torrero
           </a>
           {", "}
-          <a href="https://www.linkedin.com/in/theofandrich/">Theo Fandrich</a>
+          <a
+            className="about-links-styling"
+            href="https://www.linkedin.com/in/theofandrich/"
+          >
+            Theo Fandrich
+          </a>
           {", and"}
           <a
-            classname="about-links-styling"
+            className="about-links-styling"
             href="https://www.linkedin.com/in/theofandrich/"
           >
             {" "}

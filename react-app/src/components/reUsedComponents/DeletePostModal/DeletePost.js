@@ -25,8 +25,8 @@ const DeletePost = ({ onClose, postId }) => {
       <div className="delete-post-container">
         <div>Are you sure you want to delete the post?</div>
         <div className="delete-post-button-container">
-          <button onClick={handleYes}>YES</button>
-          <button onClick={handleNo}>NO</button>
+          <button onClick={handleYes}>Yes</button>
+          <button onClick={handleNo}>No</button>
         </div>
       </div>
     </>

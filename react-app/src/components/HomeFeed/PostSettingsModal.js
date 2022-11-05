@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import { TbDots } from "react-icons/tb";
 
@@ -13,7 +14,11 @@ const PostSettingsModal = ({ post }) => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="post-settings-modal-container">
-            <div className="post-settings-modal-button except-top">Follow</div>
+            <NavLink to={`/${post.userId}`}>
+              <div className="post-settings-modal-button except-top">
+                To Profile
+              </div>
+            </NavLink>
             <div
               className="post-settings-modal-button"
               onClick={() => setShowModal(false)}
