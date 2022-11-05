@@ -22,8 +22,7 @@ def upgrade():
     sa.Column('follower_id', sa.Integer(), nullable=True),
     sa.Column('followed_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['followed_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['follower_id'], ['users.id'], ),
-    sa.UniqueConstraint(['follower_id', 'followed_id'])
+    sa.ForeignKeyConstraint(['follower_id'], ['users.id'], )
     )
     op.drop_table('followers')
     # ### end Alembic commands ###
