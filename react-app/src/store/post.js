@@ -59,7 +59,17 @@ export const updatePost = (caption) => async (dispatch) =>{
     dispatch(updatePostAction(editedPost))
     dispatch(getCurrentPost(caption.id))
     // console.log('DEBUG EDITED POST-------------------', editedPost);
-    return editedPost
+    return null
+  }
+  else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      // console.log(data.errors);
+      return data.errors;
+    }
+  }
+  else{
+    return [{'errors': 'an error occured' }]
   }
 }
 

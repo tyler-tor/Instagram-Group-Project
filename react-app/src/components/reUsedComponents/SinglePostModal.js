@@ -29,6 +29,7 @@ const SinglePostModal = ({ post }) => {
   const [myComment, setMyComment] = useState(false);
   const [comment, setComment] = useState("");
   const [likePost, setLikePost] = useState(false);
+  // const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
   const likes = Object.values(useSelector((state) => state.userPostLikes));
   const comments = Object.values(useSelector((state) => state.comments));
@@ -90,7 +91,14 @@ const SinglePostModal = ({ post }) => {
     };
 
     let newComment = await dispatch(postComment(payload)).then((res) => {
-      console.log("Posted Comment", res);
+      // console.log("Posted Comment", res);
+      if(res){
+        // console.log('updateCOMMENTS',res);
+        // setErrors(res)
+        // console.log(res);
+        window.alert('Please Fill in the comment section.')
+      }
+
     });
 
     // console.log(newComment);

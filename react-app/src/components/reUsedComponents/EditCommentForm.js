@@ -19,10 +19,15 @@ const EditCommentForm = ({ onClose, commentId }) => {
       commentId: commentId,
     };
 
-    let updatedComment = await dispatch(updateComment(payload));
-    if (updatedComment) {
-      onClose();
-    }
+    let updatedComment = await dispatch(updateComment(payload)).then((res)=>{
+      if(res){
+        console.log('updateCOMMENTS',res);
+        setErrors(res)
+      }
+      else{
+        onClose();
+      }
+    })
   };
 
   const destroyComment = async (e) => {
@@ -33,11 +38,11 @@ const EditCommentForm = ({ onClose, commentId }) => {
   return (
     <div className="post-form-wrapper">
       <form onSubmit={handleSubmit} className="post-form-container">
-        {/* <ul>
+              <ul>
                 {errors.map((error, idx) => (
                   <li key={idx}>{error}</li>
                 ))}
-              </ul> */}
+              </ul>
         <div className="post-form-children">
           <input
             type="text"

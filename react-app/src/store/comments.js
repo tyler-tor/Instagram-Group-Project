@@ -41,7 +41,17 @@ export const postComment = (comment) => async (dispatch) => {
     const newComment = await response.json();
     // console.log('IN THUNK FOR COMMENTS===================', newComment);
     dispatch(postCommentAction(newComment));
-    return newComment;
+    return null;
+  }
+  else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      console.log(data.errors);
+      return data.errors;
+    }
+  }
+  else{
+    return [{'errors': 'an error occured' }]
   }
 };
 
@@ -60,15 +70,27 @@ export const updateComment = (payload) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const data = await response.json();
+    let updatedComment = await response.json()
+    console.log('update comment thunk ------------------------', updatedComment);
     dispatch(
       updateOneComment({
         body,
         id: commentId,
       })
     );
-    return data;
+    return null;
   }
+  else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      console.log(data.errors);
+      return data.errors;
+    }
+  }
+  else{
+    return [{'errors': 'an error occured' }]
+  }
+
 };
 
 export const deleteComment = (commentId) => async (dispatch) => {
