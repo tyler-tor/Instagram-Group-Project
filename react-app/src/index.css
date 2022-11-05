@@ -205,3 +205,8 @@
 .modal-delete-buttons:hover {
   background-color: red;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+}
