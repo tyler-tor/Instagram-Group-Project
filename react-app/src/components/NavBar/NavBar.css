@@ -57,6 +57,10 @@
   margin-left: 32px;
 }
 
+.side-step:hover {
+  cursor: pointer;
+}
+
 
 /* Profile Button Styling */
 
@@ -134,6 +138,10 @@ div.isHidden  {
 
 .log-out {
   border-top: 1px solid rgb(219, 219, 219);
+}
+
+.post-form-default-submit-button:hover {
+  cursor: pointer;
 }
 
 
