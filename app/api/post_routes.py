@@ -81,7 +81,7 @@ def create_post(): #! start here for backend aws connection
 def update_post(id):
     form = UpdatePost()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit:
+    if form.validate_on_submit():
         post = Post.query.get(id)
         user = User.query.get(post.user_id)
         post.caption = form.data['caption']
@@ -169,7 +169,10 @@ def unlike_post(id):
             post_dict = post.to_dict()
             curr_post_dict = curr_post.to_dict()
             if post_dict['userId'] == current_user.id and post_dict['postId'] == id:
-                curr_post.likes -= 1
+
+                if curr_post.likes > 0:
+                    curr_post.likes -= 1
+
                 db.session.delete(post)
                 db.session.commit()
 
@@ -224,4 +227,4 @@ def create_comment_post(id):
             'profilePicture' : user['profilePicture']
         }
         return comment_dict
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': form.errors}, 401

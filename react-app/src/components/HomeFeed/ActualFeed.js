@@ -3,29 +3,25 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { FaRegSmile } from "react-icons/fa";
 import PostSettingsModal from "./PostSettingsModal";
-import stock from "../../images/stock.jpg";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllFollowingPosts } from "../../store/post";
-import SinglePostModalButton from "../reUsedComponents/SinglePostModalButton";
+import { getAllFollowingPosts } from "../../store/followingPosts";
+import SinglePostModal from "../reUsedComponents/SinglePostModal";
 import {
   addUserLikedPostId,
   deleteUserLikedPostId,
 } from "../../store/user_post_like_list";
 
-const ActualFeed = ({posts}) => {
-  // const posts = Object.values(useSelector((state) => state.posts));
-  const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(getAllFollowingPosts())
-  // }, [dispatch])
-
-  // const handleClick = () => {
-
-  // }
-
+const ActualFeed = () => {
+  const dispatch = useDispatch();
+  const posts = Object.values(useSelector((state) => state.followingPosts));
   const [likePost, setLikePost] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllFollowingPosts());
+  }, [dispatch]);
+
+  if (!posts) return null;
 
   const handleLikeButton = (post) => {
     if (!likePost) {
@@ -53,9 +49,13 @@ const ActualFeed = ({posts}) => {
                   </strong>
                 </NavLink>
               </div>
-              <PostSettingsModal />
+              <PostSettingsModal post={post} />
             </div>
             <div id="post-image" className="feed-child post-image-wrapper">
+              {/* <SinglePostModal
+                post={post}
+                className="feed-child post-image-wrapper"
+              /> */}
               <img
                 className="feed-child post-image-wrapper"
                 src={post.imgUrl}
@@ -68,17 +68,17 @@ const ActualFeed = ({posts}) => {
                 onClick={() => handleLikeButton(post)}
               >
                 {/* <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" /> */}
-                {likePost ? (
+                {/* {likePost ? (
                   <AiFillHeart className="post-modal-icons-likes-comments no-left-padding red" />
                 ) : (
                   <AiOutlineHeart className="post-modal-icons-likes-comments no-left-padding" />
-                )}
+                )} */}
               </div>
               {/* <IoChatbubbleOutline className="post-icon-button reverse" /> */}
-              <SinglePostModalButton post={post} />
+              {/* <SinglePostModalButton post={post} /> */}
             </div>
             <div className="feed-child likes-count-container">
-              <strong>{post.likes}</strong>
+              <strong>{post.likes} likes </strong>
             </div>
             <div className="post-caption-container-and-show-all-comments">
               <div className="username-caption-div">
@@ -92,20 +92,13 @@ const ActualFeed = ({posts}) => {
                   {post.caption}
                 </span>
               </div>
-              <div>
-                <span className="secondary-text-grey">
-                  View all xxx comments
-                </span>
-              </div>
             </div>
             <div className="feed-child post-time-passed-container">
               <span className="secondary-text-grey font-size-10">
                 {post.createdAt}
               </span>
             </div>
-            <div className="feed-child add-a-comment">
-              <FaRegSmile className="comment-smiley-face" />
-            </div>
+            <div className="feed-child add-a-comment"></div>
           </div>
         );
       })}

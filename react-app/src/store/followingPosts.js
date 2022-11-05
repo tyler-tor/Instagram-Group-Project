@@ -20,7 +20,7 @@ export default function followingPostsReducer( state = {}, action ) {
     let newState;
     switch(action.type) {
         case GET_FOLLOWING_POSTS:
-        newState = {...state};
+        newState = {};
         action.payload.forEach((post) => {
             newState[post.id] = post
         })

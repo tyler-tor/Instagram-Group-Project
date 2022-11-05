@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import "./SinglePostModal.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +29,7 @@ const SinglePostModal = ({ post }) => {
   const [myComment, setMyComment] = useState(false);
   const [comment, setComment] = useState("");
   const [likePost, setLikePost] = useState(false);
+  // const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
   const likes = Object.values(useSelector((state) => state.userPostLikes));
   const comments = Object.values(useSelector((state) => state.comments));
@@ -89,7 +91,14 @@ const SinglePostModal = ({ post }) => {
     };
 
     let newComment = await dispatch(postComment(payload)).then((res) => {
-      console.log("Posted Comment", res);
+      // console.log("Posted Comment", res);
+      if(res){
+        // console.log('updateCOMMENTS',res);
+        // setErrors(res)
+        // console.log(res);
+        window.alert('Please Fill in the comment section.')
+      }
+
     });
 
     // console.log(newComment);
@@ -134,9 +143,12 @@ const SinglePostModal = ({ post }) => {
                 <div className="post-modal-content-container-image-wrapper">
                   <img src={post.users.profilePicture} alt="" />
                 </div>
-                <div className="username-styling-in-post-modal">
+                <NavLink
+                  to={`/${post.users.userId}`}
+                  className="username-styling-in-post-modal"
+                >
                   <strong>{post.users.username}</strong>
-                </div>
+                </NavLink>
 
                 <div className="post-modal-content-container-caption">
                   {myPost && (
@@ -149,7 +161,10 @@ const SinglePostModal = ({ post }) => {
               </div>
 
               <div className="post-modal-comments-section">
-                <CommentContainer postId={post.id} setShowModal={setShowModal}/>
+                <CommentContainer
+                  postId={post.id}
+                  setShowModal={setShowModal}
+                />
                 {isLoaded && (
                   <>
                     {/* <ul className="comments-section-container">
@@ -200,7 +215,7 @@ const SinglePostModal = ({ post }) => {
                     <AiOutlineHeart className="post-modal-icons-likes-comments no-left-padding" />
                   )}
                 </button>
-                <IoChatbubbleOutline className="post-modal-icons-likes-comments reverse" />
+                {/* <IoChatbubbleOutline className="post-modal-icons-likes-comments reverse" /> */}
               </div>
               <div className="post-modal-likes-count">
                 {/* <strong onClick={getUserLikes}> {post.likes} </strong> */}
@@ -209,7 +224,7 @@ const SinglePostModal = ({ post }) => {
               <div className="post-modal-date-posted">{post.createdAt}</div>
               <div className="post-modal-add-comment-container">
                 <div className="left-hand-container-for-post-modal-comment-input">
-                  <FaRegSmile className="comment-smiley-face" />
+                  {/* <FaRegSmile className="comment-smiley-face" /> */}
                   <form className="comment-form-wrapper">
                     <div className="comment-form-container">
                       <input

@@ -70,7 +70,11 @@
 }
 
 .posts-followers-following-row-children-except-first{
-  margin-left: 10px;
+  margin-left: 0px;
+}
+
+.posts-followers-following-row-children-except-first a {
+  cursor: pointer;
 }
 
 .user-profile-caption {

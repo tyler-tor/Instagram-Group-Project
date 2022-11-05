@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './UserFollowerList.css'
+import { NavLink } from "react-router-dom";
+import "./UserFollowerList.css";
 
-const UserFollowerList = ({ followers }) => {
-    // const [isLoaded, setIsLoaded] = useState(true);
+const UserFollowerList = ({ followers, onClose }) => {
+  // const [isLoaded, setIsLoaded] = useState(true);
 
-    return (
-        <div className='user-follower-list'>
-            <ul>
-                {followers.map(user => {
-                    return (
-                        <li key={user.id}>
-                            <img src={user.profilePicture} className='user-likes-profile' />
-                            {user.username}
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
-    )
-}
+  return (
+    <div className="user-liked-list">
+      <ul>
+        {followers.map((user) => {
+          return (
+            <NavLink to={`/${user.userId}`} onClick={() => onClose(false)}>
+              <li key={user.userId}>
+                <img src={user.profilePicture} />
+                <span>{user.username}</span>
+              </li>
+            </NavLink>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 export default UserFollowerList;

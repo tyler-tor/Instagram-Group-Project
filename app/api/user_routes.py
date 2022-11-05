@@ -77,6 +77,21 @@ def get_following(id):
         # print('TEST------------------------->',user['following'])
         return{'following': user['following']}
 
+@user_routes.route('/<int:id>/notfollowing', methods=['GET'])
+@login_required
+def get_not_following(id):
+    currUser = User.query.get(id)
+    if(currUser):
+        currUserDict = currUser.to_dict()
+        following = currUserDict['following']
+        users = User.query.filter(User.username.notin_([dict(followee)['username'] for followee in following])).all()
+        # print('-----------------------------------------------------------')
+        # print([user.to_dict()['username'] for user in users if user.id != currUser.id])
+        # print('-----------------------------------------------------------')
+        return {'users': [user.to_dict() for user in users if user.id != currUser.id]}
+
+
+
 @user_routes.route('/<int:id>/follow', methods=['POST'])
 @login_required
 #test with id 6 and id 7
@@ -84,6 +99,10 @@ def follow_user(id):
     curr_user = User.query.get(current_user.id)
     f_user = User.query.get(id)
     if(curr_user and f_user):
+        for follower in f_user.followers:
+            if follower.id == current_user.id:
+                return{'error' : 'you are already following this user!'}
+
 
         f_user.followers.append(curr_user)
 

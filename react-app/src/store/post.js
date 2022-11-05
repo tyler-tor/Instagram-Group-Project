@@ -59,12 +59,22 @@ export const updatePost = (caption) => async (dispatch) =>{
     dispatch(updatePostAction(editedPost))
     dispatch(getCurrentPost(caption.id))
     // console.log('DEBUG EDITED POST-------------------', editedPost);
-    return editedPost
+    return null
+  }
+  else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      // console.log(data.errors);
+      return data.errors;
+    }
+  }
+  else{
+    return [{'errors': 'an error occured' }]
   }
 }
 
 export const addPost = (post) => async (dispatch) =>{
-  console.log('IN THUNK ACTION FOR POST', post);
+  // console.log('IN THUNK ACTION FOR POST', post);
   const response = await fetch('/api/posts/',{
     method: 'POST',
     headers: {'Content-Type' : 'application/json'},
@@ -78,8 +88,19 @@ export const addPost = (post) => async (dispatch) =>{
   if(response.ok){
     const newPost = await response.json()
     dispatch(addPostAction(newPost))
-    return newPost
+    return null
   }
+  else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      // console.log(data.errors);
+      return data.errors;
+    }
+  }
+  else{
+    return [{'errors': 'an error occured' }]
+  }
+
 }
 
 // export const getAllFollowingPosts = () => async (dispatch) => {

@@ -28,7 +28,7 @@ def update_comment(id):
     user = User.query.get(current_user.id)
     user = user.to_dict()
     if comment.user_id == current_user.id:
-        if form.validate_on_submit:
+        if form.validate_on_submit():
             comment.body = form.data['body']
             db.session.commit()
             comment_dict = comment.to_dict()

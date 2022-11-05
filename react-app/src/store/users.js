@@ -15,12 +15,18 @@ export const getAllUsers = () => async (dispatch) => {
     }
     return response
 }
+//!moved to its own store.
+// export const setSearchUsers = (users) => (dispatch) =>{
+//     if(users){
+//         dispatch(getUsers(users))
+//     }
+// }
 
 export default function usersReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case GET_USERS:
-            newState = {...state}
+            newState = {}
             action.payload.forEach((user) => {
                 newState[user.id] = user
             });

@@ -16,14 +16,9 @@
   margin-right: 120px;
 }
 
-.search-portion{
-  background-color: rgb(239, 239, 239);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  width: 268px;
-  height: 36px;
-}
+/* .search-portion{
+
+} */
 
 .search-portion-input-area {
   color: rgb(119, 119, 119);
@@ -143,17 +138,3 @@ div.isHidden  {
 
 
 /* Post Form Styling */
-
-
-
-.post-form-input-text-boxes {
-
-}
-
-.post-form-default-submit-button {
-
-}
-
-.post-form-modal-text {
-
-}
