@@ -34,6 +34,11 @@
   width: auto;
   color: black;
   text-decoration: none;
+
+}
+
+.circle-face-children-containers div{
+  text-align: center;
 }
 
 .circle-face-children-containers:hover {
@@ -267,6 +272,7 @@
 }
 
 .suggestions-for-you-styling {
+  margin-top: 10px;
   padding: 4px 0px;
 }
 

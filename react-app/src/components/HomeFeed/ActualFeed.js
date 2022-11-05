@@ -3,27 +3,16 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { FaRegSmile } from "react-icons/fa";
 import PostSettingsModal from "./PostSettingsModal";
-import stock from "../../images/stock.jpg";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllFollowingPosts } from "../../store/post";
-import SinglePostModalButton from "../reUsedComponents/SinglePostModalButton";
 import {
   addUserLikedPostId,
   deleteUserLikedPostId,
 } from "../../store/user_post_like_list";
 
-const ActualFeed = ({posts}) => {
+const ActualFeed = ({ posts }) => {
   // const posts = Object.values(useSelector((state) => state.posts));
-  const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(getAllFollowingPosts())
-  // }, [dispatch])
-
-  // const handleClick = () => {
-
-  // }
+  const dispatch = useDispatch();
 
   const [likePost, setLikePost] = useState(false);
 
@@ -53,7 +42,7 @@ const ActualFeed = ({posts}) => {
                   </strong>
                 </NavLink>
               </div>
-              <PostSettingsModal />
+              <PostSettingsModal post={post} />
             </div>
             <div id="post-image" className="feed-child post-image-wrapper">
               <img
@@ -75,7 +64,7 @@ const ActualFeed = ({posts}) => {
                 )}
               </div>
               {/* <IoChatbubbleOutline className="post-icon-button reverse" /> */}
-              <SinglePostModalButton post={post} />
+              {/* <SinglePostModalButton post={post} /> */}
             </div>
             <div className="feed-child likes-count-container">
               <strong>{post.likes}</strong>
@@ -92,20 +81,13 @@ const ActualFeed = ({posts}) => {
                   {post.caption}
                 </span>
               </div>
-              <div>
-                <span className="secondary-text-grey">
-                  View all xxx comments
-                </span>
-              </div>
             </div>
             <div className="feed-child post-time-passed-container">
               <span className="secondary-text-grey font-size-10">
                 {post.createdAt}
               </span>
             </div>
-            <div className="feed-child add-a-comment">
-              <FaRegSmile className="comment-smiley-face" />
-            </div>
+            <div className="feed-child add-a-comment"></div>
           </div>
         );
       })}

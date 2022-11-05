@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import { TbDots } from "react-icons/tb";
 
-const PostSettingsModal = () => {
+const PostSettingsModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,9 +14,12 @@ const PostSettingsModal = () => {
         <Modal onClose={() => setShowModal(false)}>
           <div className="post-settings-modal-container">
             <div className="post-settings-modal-button except-top">Follow</div>
-            <div className="post-settings-modal-button">Go to Post</div>
-            <div className="post-settings-modal-button">Copy Link</div>
-            <div className="post-settings-modal-button">Cancel</div>
+            <div
+              className="post-settings-modal-button"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </div>
           </div>
         </Modal>
       )}
