@@ -6,26 +6,23 @@ import PostSettingsModal from "./PostSettingsModal";
 import stock from "../../images/stock.jpg";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllFollowingPosts } from "../../store/post";
+import { getAllFollowingPosts } from "../../store/followingPosts";
 import SinglePostModalButton from "../reUsedComponents/SinglePostModalButton";
 import {
   addUserLikedPostId,
   deleteUserLikedPostId,
 } from "../../store/user_post_like_list";
 
-const ActualFeed = ({posts}) => {
-  // const posts = Object.values(useSelector((state) => state.posts));
+const ActualFeed = () => {
   const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(getAllFollowingPosts())
-  // }, [dispatch])
-
-  // const handleClick = () => {
-
-  // }
-
+  const posts = Object.values(useSelector((state) => state.followingPosts));
   const [likePost, setLikePost] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllFollowingPosts())
+  }, [dispatch])
+
+  if( !posts ) return null
 
   const handleLikeButton = (post) => {
     if (!likePost) {
