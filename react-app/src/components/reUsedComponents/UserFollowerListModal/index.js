@@ -53,5 +53,4 @@ const UserFollowerListModal = ({ userId }) => {
     );
 }
 
-
 export default UserFollowerListModal;
