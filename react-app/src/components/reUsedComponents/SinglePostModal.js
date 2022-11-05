@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import "./SinglePostModal.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -134,9 +135,9 @@ const SinglePostModal = ({ post }) => {
                 <div className="post-modal-content-container-image-wrapper">
                   <img src={post.users.profilePicture} alt="" />
                 </div>
-                <div className="username-styling-in-post-modal">
+                <NavLink to={`/${post.users.userId}`} className="username-styling-in-post-modal">
                   <strong>{post.users.username}</strong>
-                </div>
+                </NavLink>
 
                 <div className="post-modal-content-container-caption">
                   {myPost && (

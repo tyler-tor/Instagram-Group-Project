@@ -7,13 +7,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowingPosts } from "../../store/followingPosts";
 
 const HomeFeed = () => {
-  const posts = Object.values(useSelector((state) => state.followingPosts));
-  const dispatch = useDispatch()
+  // const posts = Object.values(useSelector((state) => state.followingPosts));
+  // const dispatch = useDispatch()
 
 
-  useEffect(() => {
-    dispatch(getAllFollowingPosts())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getAllFollowingPosts())
+  // }, [dispatch])
+
+  // if( !posts ) return null
 
   return (
     <div className="home-feed-page-wrapper">
@@ -23,7 +25,7 @@ const HomeFeed = () => {
             <CircleFaces />
           </div>
           <div className="actual-home-feed-container">
-            <ActualFeed posts={posts} />
+            <ActualFeed />
           </div>
         </div>
         <div>

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../store/users";
 import UserFollowerListModal from "../reUsedComponents/UserFollowerListModal";
-import { addFollowing, deleteFollowing, getAllFollowing, getAllFollowers } from "../../store/following";
+import { addFollowing, deleteFollowing, getAllFollowing } from "../../store/following";
 
 const UserInfoBox = () => {
   const dispatch = useDispatch()
@@ -25,9 +25,11 @@ const UserInfoBox = () => {
   const followsBtnSubmit = () => {
     if (follows === 'Follow') {
       dispatch(addFollowing(user))
+      dispatch(getAllFollowing(userId))
       setFollows('UnFollow')
     } else {
       dispatch(deleteFollowing(userId))
+      dispatch(getAllFollowing(userId))
       setFollows('Follow')
     }
   }
@@ -46,8 +48,8 @@ const UserInfoBox = () => {
   }, [following, user])
 
   useEffect(() => {
-    console.log('currUser', currUser.id)
-    console.log('userId', userId)
+    // console.log('currUser', currUser.id)
+    // console.log('userId', userId)
     if (currUser.id !== parseInt(userId)) setFollowBtn(true)
   }, [])
 
