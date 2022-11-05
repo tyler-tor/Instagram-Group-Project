@@ -270,7 +270,18 @@
   padding: 4px 0px;
 }
 
+.suggestions-for-you-styling a{
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
 .username-no-spacing {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.about-links-styling {
   text-decoration: none;
   color: black;
   font-weight: bold;

@@ -55,11 +55,14 @@
 .username-styling-in-post-modal {
   margin-left: 14px;
   width: 50px;
+  overflow-wrap: break-word;
+  height: auto;
 }
 
 .body-styling-in-post-modal {
   margin-left: 14px;
   width: 310px;
+  overflow-wrap: break-word;
 }
 
 .post-modal-comments-section {
