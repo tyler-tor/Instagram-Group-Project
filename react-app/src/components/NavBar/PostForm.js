@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect,useHistory } from "react-router-dom";
 import { addPost } from "../../store/post";
 import ImageUploadComponent from "./ImageUploadComponent";
 
@@ -10,6 +10,7 @@ const PostForm = ({onClose}) => {
   const [url, setUrl] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onPostSubmit = async (e) => {
     // Need to create a function that posts to database
@@ -31,6 +32,8 @@ const PostForm = ({onClose}) => {
 
           }
           else{
+            history.push(`/${user.id}`)
+
             onClose()
 
           }

@@ -84,6 +84,10 @@ def follow_user(id):
     curr_user = User.query.get(current_user.id)
     f_user = User.query.get(id)
     if(curr_user and f_user):
+        for follower in f_user.followers:
+            if follower.id == current_user.id:
+                return{'error' : 'you are already following this user!'}
+
 
         f_user.followers.append(curr_user)
 

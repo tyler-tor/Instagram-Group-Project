@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 const GET_FOLLOWING = 'following/GET_FOLLOWING'
 // const GET_FOLLOWERS = 'following/GET_FOLLOWERS'
 const ADD_FOLLOWING = 'following/ADD_FOLLOWING'
@@ -46,6 +48,7 @@ export const addFollowing = (user) => async(dispatch) => {
     if(response.ok) {
         const data = await response.json()
         dispatch(addFollowingAction(data.followingUser))
+        // dispatch(getAllFollowing(userId))
         return data
     }
 }
