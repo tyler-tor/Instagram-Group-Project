@@ -1,6 +1,8 @@
 import { getCurrentPost } from "./currentPost";
 import { clearCommentsAction } from "./comments";
 import { getAllFollowing } from "./following";
+import { getAllFollowers } from "./follower";
+import { getProfileFollowing } from "./profile_following_store";
 const GET_POSTS = "posts/GET_POSTS";
 // const GET_FOLLOWING_POSTS = 'following/GET_FOLLOWING_POSTS'
 const ADD_POST = "posts/ADD_POST";
@@ -90,6 +92,9 @@ export const addPost = (post) => async (dispatch) =>{
     const newPost = await response.json()
     dispatch(addPostAction(newPost))
     dispatch(getAllFollowing(post.userId))
+    //!added this to update follower numbers
+    dispatch(getAllFollowers(post.userId))
+    dispatch(getProfileFollowing(post.userId))
     return null
   }
   else if (response.status < 500) {

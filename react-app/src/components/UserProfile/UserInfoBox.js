@@ -9,6 +9,8 @@ import {
   deleteFollowing,
   getAllFollowing,
 } from "../../store/following";
+import { getAllFollowers } from "../../store/follower";
+import { getProfileFollowing } from "../../store/profile_following_store";
 
 const UserInfoBox = () => {
   const dispatch = useDispatch();
@@ -16,17 +18,45 @@ const UserInfoBox = () => {
   const user = useSelector((state) => state.users[userId]);
   const currUser = useSelector((state) => state.session.user);
   const following = Object.values(useSelector((state) => state.follow));
+  const followers = Object.values(useSelector(state => state.followers))
   const posts = Object.values(useSelector((state) => state.posts));
-  const [follows, setFollows] = useState("Follow");
+  // const [followingNum, setFollowingNum] = useState([]);
+  const profileFollowing = Object.values(useSelector(state => state.profileFollowing))
   const [isLoading, setIsLoading] = useState(false);
   const [followBtn, setFollowBtn] = useState(false);
   const [followTest, setFollowTest] = useState(false);
   const [postCount, setPostCount] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)));
-    setIsLoading(true);
+    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
+    .then(()=>{
+
+      setIsLoading(true);
+
+    });
   }, [dispatch]);
+
+  useEffect(() =>{
+    dispatch(getProfileFollowing(userId)).then(() =>{
+
+    })
+  },[dispatch])
+
+
+  useEffect(() =>{
+    dispatch(getAllFollowers(userId)).then((res) =>{
+      res.forEach(el =>{
+        if(currUser.id === el.userId){
+          setFollowTest(true)
+          return;
+        }
+        else{
+          setFollowTest(false)
+        }
+      })
+
+    })
+  },[dispatch])
 
   console.log(posts.filter((post) => post.userId == user.id).length);
   //!code here causes a crash if you click the follow button multiple times.
@@ -122,7 +152,7 @@ const UserInfoBox = () => {
                   <UserFollowerListModal userId={userId} />
                 </div>
                 <div className="posts-followers-following-row-children-except-first slight-margin">
-                  <strong>{following.length} </strong>
+                  <strong>{profileFollowing.length} </strong>
                   following
                 </div>
               </div>
