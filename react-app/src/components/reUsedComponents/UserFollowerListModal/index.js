@@ -8,12 +8,27 @@ const UserFollowerListModal = ({ userId }) => {
     const followers = Object.values(useSelector((state) => state.followers))
     const [showModal, setShowModal] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    console.log(userId)
+    const [followNum, setFollowNum] = useState(0);
+    // console.log(userId)
     const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch(getAllFollowers(userId)).then((res)=>{
+
+
+            if(res){
+                setFollowNum(res.length)
+                // console.log('TESTING', res);
+            }
+        })
+
+    },[dispatch])
 
 
     const displayFollowers = () => {
-            dispatch(getAllFollowers(userId))
+            dispatch(getAllFollowers(userId)).then(()=>{
+
+            })
     }
 
     return (
@@ -22,7 +37,7 @@ const UserFollowerListModal = ({ userId }) => {
                 setShowModal(!showModal)
                 displayFollowers()
                 }}>
-                Show all Followers
+                Followers: {followNum}
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

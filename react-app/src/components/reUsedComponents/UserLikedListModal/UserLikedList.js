@@ -22,7 +22,7 @@ const UserLikedList = ({postId}) =>{
             <ul>
                 {isLoaded && (
                     <>
-                        {likes.map(user =>{
+                        {likes.map((user) =>{
                             return(
                                 <li key={user.id}>
                                     <img src={user.profilePicture} className='user-likes-profile'/>
