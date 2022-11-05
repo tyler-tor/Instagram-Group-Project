@@ -12,7 +12,7 @@ export const getAllFollowers = (id) => async (dispatch) => {
     if(response.ok){
         const data = await response.json();
         dispatch(getFollowers(data.followers));
-        return data
+        return data.followers
     }
     return response
 }

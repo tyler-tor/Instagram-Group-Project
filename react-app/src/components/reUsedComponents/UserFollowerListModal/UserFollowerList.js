@@ -10,7 +10,7 @@ const UserFollowerList = ({ followers }) => {
             <ul>
                 {followers.map(user => {
                     return (
-                        <li key={user.id}>
+                        <li key = {user.id}>
                             <img src={user.profilePicture} className='user-likes-profile' />
                             {user.username}
                         </li>
