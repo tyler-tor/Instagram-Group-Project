@@ -5,24 +5,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../store/users";
 import UserFollowerListModal from "../reUsedComponents/UserFollowerListModal";
-import { addFollowing, deleteFollowing, getAllFollowing } from "../../store/following";
+import {
+  addFollowing,
+  deleteFollowing,
+  getAllFollowing,
+} from "../../store/following";
 
 const UserInfoBox = () => {
-  const dispatch = useDispatch()
-  const { userId } = useParams()
+  const dispatch = useDispatch();
+  const { userId } = useParams();
   const user = useSelector((state) => state.users[userId]);
   const currUser = useSelector((state) => state.session.user);
-  const following = useSelector((state) => state.follow)
-  const [follows, setFollows] = useState('Follow')
-  const [isLoading, setIsLoading] = useState(false)
-  const [followBtn, setFollowBtn] = useState(false)
-  const [followTest, setFollowTest] = useState(false)
+  const following = useSelector((state) => state.follow);
+  const [follows, setFollows] = useState("Follow");
+  const [isLoading, setIsLoading] = useState(false);
+  const [followBtn, setFollowBtn] = useState(false);
+  const [followTest, setFollowTest] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)))
-    setIsLoading(true)
-  }, [dispatch])
-
+    dispatch(getAllUsers()).then(() => dispatch(getAllFollowing(currUser.id)));
+    setIsLoading(true);
+  }, [dispatch]);
 
   //!code here causes a crash if you click the follow button multiple times.
   // const followsBtnSubmit = () => {
@@ -39,39 +42,38 @@ const UserInfoBox = () => {
   // const displayFollowers = () => {
   //   dispatch(getAllFollowers(userId))
   // }
-  const handleFollow = () =>{
-    dispatch(addFollowing(user, userId))
-    setFollowTest(true)
-  }
+  const handleFollow = () => {
+    dispatch(addFollowing(user, userId));
+    setFollowTest(true);
+  };
 
-  const handleUnFollow = () =>{
-    dispatch(deleteFollowing(userId))
-    setFollowTest(false)
-  }
+  const handleUnFollow = () => {
+    dispatch(deleteFollowing(userId));
+    setFollowTest(false);
+  };
 
   useEffect(() => {
     if (user && following) {
       if (following[userId]) {
-        setFollowTest(true)
+        setFollowTest(true);
       } else {
-        setFollowTest(false)
+        setFollowTest(false);
       }
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     // console.log('currUser', currUser.id)
     // console.log('userId', userId)
-    if (currUser.id !== parseInt(userId)) setFollowBtn(true)
-  }, [])
+    if (currUser.id !== parseInt(userId)) setFollowBtn(true);
+  }, []);
 
   if (!user) {
-    return null
+    return null;
   }
 
-
   return (
-     isLoading && (
+    isLoading && (
       <>
         <div className="user-profile-header-container">
           <div className="user-info-box-profile-photo-container">
@@ -81,27 +83,15 @@ const UserInfoBox = () => {
             <div className="user-profile-details-container">
               <div className="username-and-follow-button-row">
                 <div className="username-for-user-profile">{user.username}</div>
-                {
-                  followBtn && (
-                    <>
-
-                          {followTest ?
-                            (<button onClick={handleUnFollow}>
-                                UnFollow
-                            </button>)
-
-                            :
-                            (
-                              <button onClick={handleFollow}>
-                                Follow
-                              </button>
-                            )
-
-                          }
-                    </>
-                  )
-                }
-
+                {followBtn && (
+                  <>
+                    {followTest ? (
+                      <button onClick={handleUnFollow}>UnFollow</button>
+                    ) : (
+                      <button onClick={handleFollow}>Follow</button>
+                    )}
+                  </>
+                )}
               </div>
               <div className="posts-followers-following-row">
                 <div>
@@ -120,8 +110,8 @@ const UserInfoBox = () => {
                 </div>
               </div>
               <div className="user-profile-caption">
-                <strong>NBA Shooting Coach</strong>
-                <span>Herro, this is a little bit about who I is.</span>
+                {/* <strong>NBA Shooting Coach</strong>
+                <span>Herro, this is a little bit about who I is.</span> */}
                 <UserFollowerListModal userId={userId} />
                 {/* <button
                   onClick={displayFollowers}>List of Followers
