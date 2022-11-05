@@ -19,11 +19,15 @@ const UserFollowerListModal = ({ userId }) => {
             if(res){
                 setFollowNum(res.length)
                 // console.log('TESTING', res);
+                // setFollowNum(followers.length)
             }
         })
 
     },[dispatch])
 
+    useEffect(() =>{
+        setFollowNum(followers.length)
+    })
 
     const displayFollowers = () => {
             dispatch(getAllFollowers(userId)).then(()=>{

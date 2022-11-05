@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { getAllFollowers } from "./follower";
 
 const GET_FOLLOWING = 'following/GET_FOLLOWING'
 // const GET_FOLLOWERS = 'following/GET_FOLLOWERS'
@@ -34,6 +35,7 @@ export const deleteFollowing = (id) => async(dispatch) => {
         const data = await response.json()
         dispatch(deleteFollowingAction(data.followingUser.id));
         dispatch(getAllFollowing(id))
+        dispatch(getAllFollowers(id))
         return data
     }
 }
@@ -50,6 +52,7 @@ export const addFollowing = (user, id) => async(dispatch) => {
         const data = await response.json()
         dispatch(addFollowingAction(data.followingUser))
         dispatch(getAllFollowing(id))
+        dispatch(getAllFollowers(id))
         return data
     }
 }
