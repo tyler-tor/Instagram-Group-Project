@@ -100,19 +100,18 @@ const UserInfoBox = () => {
                 </div>
                 <div className="posts-followers-following-row-children-except-first">
                   {" "}
-                  <strong>2.2M </strong>
-                  followers
+                  <UserFollowerListModal userId={userId} />
                 </div>
-                <div className="posts-followers-following-row-children-except-first">
+                {/* <div className="posts-followers-following-row-children-except-first">
                   {" "}
                   <strong>1132 </strong>
                   following
-                </div>
+                </div> */}
               </div>
               <div className="user-profile-caption">
                 {/* <strong>NBA Shooting Coach</strong>
                 <span>Herro, this is a little bit about who I is.</span> */}
-                <UserFollowerListModal userId={userId} />
+
                 {/* <button
                   onClick={displayFollowers}>List of Followers
                 </button> */}

@@ -48,7 +48,7 @@ const ImageUploadComponent = ({ setUrl }) => {
       <form onSubmit={handleSubmit}>
         <div className="upload-photo-container">
           <input type="file" accept="image/*" onChange={updateImage} />
-          <button type="submit">Upload Image</button>
+          <button type="submit">Upload</button>
         </div>
         {imageLoading && <p>Loading...</p>}
       </form>
