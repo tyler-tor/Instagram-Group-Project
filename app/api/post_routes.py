@@ -81,7 +81,7 @@ def create_post(): #! start here for backend aws connection
 def update_post(id):
     form = UpdatePost()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit:
+    if form.validate_on_submit():
         post = Post.query.get(id)
         user = User.query.get(post.user_id)
         post.caption = form.data['caption']

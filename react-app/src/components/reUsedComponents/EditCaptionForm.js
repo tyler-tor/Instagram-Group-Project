@@ -20,7 +20,13 @@ const EditCaptionForm = ({ onClose, postId }) => {
               }
 
     await dispatch(updatePost(editedCaption)).then((res)=>{
-      onClose()
+      if(res){
+        console.log('caption modal',res);
+        setErrors(res)
+      }
+      else{
+        onClose();
+      }
     })
     .catch(e => {
       console.log(e);
