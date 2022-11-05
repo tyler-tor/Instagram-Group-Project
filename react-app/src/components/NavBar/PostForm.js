@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect,useHistory } from "react-router-dom";
 import { addPost } from "../../store/post";
 import ImageUploadComponent from "./ImageUploadComponent";
 
@@ -10,29 +10,39 @@ const PostForm = ({ onClose }) => {
   const [url, setUrl] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onPostSubmit = async (e) => {
     // Need to create a function that posts to database
     e.preventDefault();
-    if (user) {
-      console.log("USER OBJECT", user);
-      console.log("USERID", user.id);
+    if(user){
+      // console.log('USER OBJECT',user);
+      // console.log('USERID', user.id);
       let post = {
-        userId: user.id,
-        caption: caption,
-        imgUrl: url,
-      };
-      if (url) {
-        await dispatch(addPost(post))
-          .then(() => {
-            onClose();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      } else {
-        window.alert("you must upload an image");
+                  userId: user.id,
+                  caption: caption,
+                  imgUrl: url
+                }
+      if(url){
+        return await dispatch(addPost(post))
+        .then((res)=>{
+          // console.log(res);
+          if(res){
+            setErrors(res)
+
+          }
+          else{
+            history.push(`/${user.id}`)
+
+            onClose()
+
+          }
+        })
+    }
+      else{
+        window.alert('you must upload an image')
       }
+
     }
   };
 

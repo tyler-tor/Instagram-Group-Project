@@ -5,7 +5,8 @@ from datetime import datetime
 
 follows = db.Table('follows',
     db.Column('follower_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('users.id'))
+    db.Column('followed_id', db.Integer, db.ForeignKey('users.id')),
+    db.UniqueConstraint('follower_id', 'followed_id')
 )
 
 class User(db.Model, UserMixin):

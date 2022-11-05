@@ -14,11 +14,13 @@
   border-radius: 4px 0px 0px 4px;
 }
 
-.post-modal-image-wrapper img {
-  object-fit: cover;
+.post-modal-image-wrapper > img {
+  /* object-fit: contain;  */ /* for full image*/
+  object-fit: cover; /* for cropped image*/
   height: 100%;
   width: 100%;
 }
+
 
 .post-modal-content-container {
   display: flex;

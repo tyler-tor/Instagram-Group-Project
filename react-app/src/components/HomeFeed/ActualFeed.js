@@ -5,16 +5,22 @@ import { FaRegSmile } from "react-icons/fa";
 import PostSettingsModal from "./PostSettingsModal";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllFollowingPosts } from "../../store/followingPosts";
 import {
   addUserLikedPostId,
   deleteUserLikedPostId,
 } from "../../store/user_post_like_list";
 
-const ActualFeed = ({ posts }) => {
-  // const posts = Object.values(useSelector((state) => state.posts));
-  const dispatch = useDispatch();
-
+const ActualFeed = () => {
+  const dispatch = useDispatch()
+  const posts = Object.values(useSelector((state) => state.followingPosts));
   const [likePost, setLikePost] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllFollowingPosts())
+  }, [dispatch])
+
+  if( !posts ) return null
 
   const handleLikeButton = (post) => {
     if (!likePost) {
