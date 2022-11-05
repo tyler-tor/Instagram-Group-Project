@@ -8,30 +8,31 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    border: 1px solid gray;
+    border-radius: 4px;
     position: absolute;
-    margin-top:20px;
+    margin-top: 50px;
     width: 280px;
-
-
+    border: 1px solid black;
 
   }
 .dropdown:empty {
     border: none;
   }
+
 .dropdown-row {
+    padding: 5px;
     display: flex;
     justify-content: start;
     align-items: center;
     cursor: pointer;
     text-align: start;
-    color: red;
+    color: black;
     font-size: 20px;
-
-
     margin: 2px 0;
 
   }
+
+
 
 .search-inner {
     display: flex;
@@ -48,8 +49,10 @@
 }
 
 .search-pic{
-    height: 10%;
-    width: 10%;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    object-fit: cover;
   }
 
 a, u{
