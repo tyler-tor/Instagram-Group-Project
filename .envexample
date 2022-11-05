@@ -1,0 +1,7 @@
+REACT_APP_BASE_URL=<backendURL>
+SECRET_KEY=<SECRET>
+DATABASE_URL=<dbUrl>
+S3_BUCKET=<bucket>
+S3_KEY=<s3_key>
+S3_SECRET=<s3_secret>
+FLASK_ENV=<flask_env>
