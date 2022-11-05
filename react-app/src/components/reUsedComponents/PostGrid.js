@@ -9,7 +9,14 @@ import { getAllFollowingPosts, getAllPosts } from "../../store/post";
 const PostGrid = () => {
   const { userId } = useParams()
   const user = useSelector((state) => state.users[userId])
-  const posts = Object.values(useSelector((state) => state.posts))
+  const posts = Object.values(useSelector((state) => state.posts)).reverse()
+  const userPosts = posts.filter(post => {
+    if(user){
+      return post.userId === user.id
+    }
+  });
+  console.log('posts', posts)
+  console.log('userPosts', userPosts.reverse())
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,9 +26,7 @@ const PostGrid = () => {
   return (
     <div className="post-grid-container">
       {user ? (
-      posts.filter(post => {
-        return post.userId === user.id
-      }).map(post => {
+      userPosts.reverse().map(post => {
         return(
           <div className="post-grid-children first-two-grid-children" key={post.id}>
             <SinglePostModal post={post} />
