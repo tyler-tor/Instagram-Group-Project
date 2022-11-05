@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 // import pic from "../../images/screenshot1-2x.png";
 import { useSelector } from "react-redux";
+import SideNonFollowedUsers from "./SideNonFollowedUsers";
 
 
 const SideStuff = () => {
@@ -21,7 +22,8 @@ const SideStuff = () => {
       </NavLink>
       <div className="side-stuff-second-container"></div>
       <span className="suggestions-for-you-styling secondary-gray-text">
-        Suggestions For You
+        Check out these Users!
+        <SideNonFollowedUsers userId={user.id} />
       </span>
     </div>
   );
