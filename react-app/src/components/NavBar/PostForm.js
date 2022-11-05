@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect,useHistory } from "react-router-dom";
 import { addPost } from "../../store/post";
 import ImageUploadComponent from "./ImageUploadComponent";
+import './NavBar.css'
 
 const PostForm = ({ onClose }) => {
   const [errors, setErrors] = useState([]);
