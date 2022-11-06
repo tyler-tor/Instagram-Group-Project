@@ -98,7 +98,7 @@ export default function followingReducer(state = {}, action) {
         //     })
         //     return newState
         case ADD_FOLLOWING:
-            console.log('inReducer', action.payload)
+            // console.log('inReducer', action.payload)
             return {
                 ...state,
                 [action.payload.id]: action.payload

@@ -3,9 +3,15 @@ import { NavLink } from "react-router-dom";
 // import pic from "../../images/screenshot1-2x.png";
 import { useSelector } from "react-redux";
 import SideNonFollowedUsers from "./SideNonFollowedUsers";
+import './HomeFeed.css'
 
 const SideStuff = () => {
   const user = useSelector((state) => state.session.user);
+  // const history = useHistory()
+
+  // const redirectGithub = () => {
+  //   history.push('https://github.com/tyler-tor/Instagram-Group-Project')
+  // }
 
   return (
     <div className="side-stuff-container">
@@ -45,6 +51,13 @@ const SideStuff = () => {
             Alan Deleon
           </a>
         </div>
+        {/* <div className="github-img-container">
+          <img
+          alt="Github"
+          src="https://pngimg.com/uploads/github/github_PNG40.png"
+          className="github-img"
+          onClick={redirectGithub}></img>
+        </div> */}
       </div>
       <div className="side-stuff-second-container"></div>
       <span className="suggestions-for-you-styling secondary-gray-text">

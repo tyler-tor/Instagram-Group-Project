@@ -15,8 +15,8 @@ const PostGrid = () => {
       return post.userId === user.id
     }
   });
-  console.log('posts', posts)
-  console.log('userPosts', userPosts.reverse())
+  // console.log('posts', posts)
+  // console.log('userPosts', userPosts.reverse())
   const dispatch = useDispatch()
 
   useEffect(() => {

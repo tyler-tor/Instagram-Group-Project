@@ -23,33 +23,35 @@ const UserInfoBox = () => {
 
   // const following_arr = Object.values(useSelector((state) => state.follow)); //!unused
 
-  const following =useSelector((state) => state.follow);
+  // const following =useSelector((state) => state.follow);
 
   // const followers = Object.values(useSelector(state => state.followers)) //! unused
 
   const posts = Object.values(useSelector((state) => state.posts));
   // const [followingNum, setFollowingNum] = useState([]);
-  const profileFollowing = Object.values(useSelector(state => state.profileFollowing))
+  // const profileFollowing = Object.values(useSelector(state => state.profileFollowing))
   const [isLoading, setIsLoading] = useState(false);
   const [followBtn, setFollowBtn] = useState(false);
   const [followTest, setFollowTest] = useState(false);
   const [postCount, setPostCount] = useState(0);
   const profileUser = useSelector(state => state.profileUser)
-  const [followSubmitted,setFollowSubmitted] = useState(0);
+  // const [followSubmitted,setFollowSubmitted] = useState(0);
 
   useEffect(() =>{
 
     dispatch(getProfileUser(Number(userId))).then(() =>{
       setIsLoading(true)
     })
-  },[dispatch])
+  },[dispatch, userId])
 
   useEffect(()=>{
-    if(profileUser.followers){
+    console.log('profileUser', profileUser)
+    if(profileUser.followers && profileUser.id == Number(userId)){
       for(let i = 0; i < profileUser.followers.length ; i++){
         let el = profileUser.followers[i]
         if(el.userId === currUser.id){
           setFollowTest(true)
+          console.log('here')
           return () =>{
 
           }
@@ -58,9 +60,11 @@ const UserInfoBox = () => {
           setFollowTest(false)
         }
       }
+    }else {
+      setFollowTest(false)
     }
 
-  },[profileUser])
+  },[userId, profileUser])
 
   // console.log('CURRENT STATUS', followTest);
 
@@ -145,13 +149,13 @@ const UserInfoBox = () => {
   const handleFollow = () => {
     dispatch(addFollowing(Number(userId)));
     setFollowTest(true);
-    console.log('CHANGING FOLLOW TEST AFTER HITTING FOLLOW', followTest);
+    // console.log('CHANGING FOLLOW TEST AFTER HITTING FOLLOW', followTest);
   };
 
   const handleUnFollow = () => {
     dispatch(deleteFollowing(userId));
     setFollowTest(false);
-    console.log('CHANGING FOLLOW TEST AFTER HITTING UNFOLLOW', followTest);
+    // console.log('CHANGING FOLLOW TEST AFTER HITTING UNFOLLOW', followTest);
   };
 
   const userPosts = () => {
@@ -234,7 +238,7 @@ const UserInfoBox = () => {
                     <UserFollowingListModal userId={userId}/>
                   </strong>
 
-                 
+
                 </div>
               </div>
               <div className="user-profile-caption">

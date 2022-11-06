@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const TempFollow = () => {
   const user = useSelector((state) => state.session.user);
-  console.log(user.id);
+  // console.log(user.id);
   const [followingId, setFollowingId] = useState(0);
   const [unFollowingId, setUnFollowingId] = useState(0);
 
@@ -17,7 +17,7 @@ const TempFollow = () => {
     });
     if (response.ok) {
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
     }
   };
   const onSubUnFollow = async (e) => {
@@ -30,7 +30,7 @@ const TempFollow = () => {
     });
     if (response.ok) {
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
     }
   };
 

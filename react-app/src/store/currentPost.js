@@ -21,7 +21,7 @@ export default function currentPostReducer(state = {}, action){
     switch(action.type){
         case GET_CURRENT_POST:
             newState= {}
-            console.log('IN CURRENT POST REDUCER-------------',action.payload);
+            // console.log('IN CURRENT POST REDUCER-------------',action.payload);
             newState = {...action.payload}
             return newState;
         default:

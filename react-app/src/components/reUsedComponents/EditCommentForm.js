@@ -7,7 +7,7 @@ import { updateComment, deleteComment } from "../../store/comments";
 const EditCommentForm = ({ onClose, commentId }) => {
   const [errors, setErrors] = useState([]);
   const comment = useSelector((state) => state.comments[commentId].body);
-  console.log(comment);
+  // console.log(comment);
   const [tempComment, setTempComment] = useState(comment);
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ const EditCommentForm = ({ onClose, commentId }) => {
 
     let updatedComment = await dispatch(updateComment(payload)).then((res)=>{
       if(res){
-        console.log('updateCOMMENTS',res);
+        // console.log('updateCOMMENTS',res);
         setErrors(res)
       }
       else{

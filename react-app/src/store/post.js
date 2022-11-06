@@ -153,7 +153,7 @@ export default function postsReducer(state = {}, action) {
     //   return newState;
     case ADD_POST:
       newState = {...state}
-      console.log(action.payload.id);
+      // console.log(action.payload.id);
       newState[action.payload.id] = action.payload
       return newState
 

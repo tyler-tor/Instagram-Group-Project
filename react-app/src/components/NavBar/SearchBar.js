@@ -35,7 +35,7 @@ const SearchBar = () => {
         return true;
       }
     });
-    console.log(res);
+    // console.log(res);
     dispatch(setSearchUsers(res));
     // history.push('/search')
   };

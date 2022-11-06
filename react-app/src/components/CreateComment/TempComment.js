@@ -35,7 +35,7 @@ const TempComment = () => {
         })
         if(response.ok){
             let data = await response.json()
-            console.log(data)
+            // console.log(data)
         }
         // -------------------------delete-----------------------------------------------
         // const response = await fetch('/api/comments/4', {

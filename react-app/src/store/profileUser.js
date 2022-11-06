@@ -10,8 +10,9 @@ export const getProfileUser = (id) => async dispatch =>{
     const response = await fetch(`/api/users/${id}`)
     if(response.ok){
         const data = await response.json();
+        console.log('data', data)
         dispatch(getProfileUserAction(data))
-
+        return data
     }
 }
 

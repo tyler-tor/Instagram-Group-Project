@@ -9,7 +9,7 @@ const getNonFollowingAction = (nonFollowing) => ({
 
 export const getNonFollowing = (id) => async(dispatch) => {
     const response = await fetch(`/api/users/${id}/notfollowing`)
-    console.log('response', response)
+    // console.log('response', response)
     if(response.ok){
         const data = await response.json();
         dispatch(getNonFollowingAction(data.users));
