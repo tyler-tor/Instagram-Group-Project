@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getAllFollowers } from "../../../store/follower";
 import { getAllFollowing } from "../../../store/following";
 import { getProfileFollowing } from "../../../store/profile_following_store";
+import { getProfileUser } from "../../../store/profileUser";
 import "./UserFollowerList.css";
 
 const UserFollowerList = ({ followers, onClose }) => {
@@ -20,6 +21,7 @@ const UserFollowerList = ({ followers, onClose }) => {
                 dispatch(getAllFollowers(user.userId))
                 dispatch(getAllFollowing(user.userId))
                 dispatch(getProfileFollowing(user.userId))
+                dispatch(getProfileUser(user.userId))
                 onClose()
 
             }}>

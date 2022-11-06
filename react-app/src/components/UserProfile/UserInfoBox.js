@@ -11,8 +11,9 @@ import {
 } from "../../store/following";
 import { getAllFollowers } from "../../store/follower";
 import { getProfileFollowing } from "../../store/profile_following_store";
-import { TbCloudComputing } from "react-icons/tb";
 import { getProfileUser } from "../../store/profileUser";
+import UserFollowingListModal from "../reUsedComponents/UserFollowingListModal";
+
 
 const UserInfoBox = () => {
   const dispatch = useDispatch();
@@ -228,9 +229,12 @@ const UserInfoBox = () => {
                   <UserFollowerListModal userId={userId} />
                 </div>
                 <div className="posts-followers-following-row-children-except-first slight-margin">
-                  <strong>{profileUser.following.length} </strong>
-                  
-                  following
+                  {/* <strong>{profileUser.following.length} </strong> */}
+                  <strong>
+                    <UserFollowingListModal userId={userId}/>
+                  </strong>
+
+                 
                 </div>
               </div>
               <div className="user-profile-caption">

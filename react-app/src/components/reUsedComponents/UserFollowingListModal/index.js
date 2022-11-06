@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "../../../context/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowers } from "../../../store/follower";
-import UserFollowerList from "./UserFollowerList";
+import { getAllFollowing } from "../../../store/following";
+import UserFollowingList from "./UserFollowingList";
 import { getProfileUser } from "../../../store/profileUser";
 
 const UserFollowingListModal = ({ userId }) => {
-  const followers = Object.values(useSelector((state) => state.followers));
+//   const following = Object.values(useSelector((state) => state.following));
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [followNum, setFollowNum] = useState(0);
@@ -15,7 +16,7 @@ const UserFollowingListModal = ({ userId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllFollowers(userId)).then((res) => {
+    dispatch(getAllFollowing(userId)).then((res) => {
       if (res) {
         setFollowNum(res.length);
         // console.log('TESTING', res);
@@ -29,7 +30,7 @@ const UserFollowingListModal = ({ userId }) => {
   }, [dispatch])
 
   useEffect(() => {
-    setFollowNum(followers.length);
+    setFollowNum(profileUser.following.length);
   });
 
   const displayFollowers = () => {
@@ -44,14 +45,14 @@ const UserFollowingListModal = ({ userId }) => {
           displayFollowers();
         }}
       >
-        <strong>{profileUser.following.length}</strong> followers
+        <strong>{profileUser.following.length}</strong> following
       </a>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           {/* <UserLikedList onClose={() => setShowModal(false)} userId={userId} followers={followers} /> */}
-          <UserFollowerList
+          <UserFollowingList
             onClose={() => setShowModal(false)}
-            followers={followers}
+            following={profileUser.following}
           />
         </Modal>
       )}
