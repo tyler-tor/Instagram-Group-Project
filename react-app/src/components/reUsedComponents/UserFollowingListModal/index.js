@@ -5,7 +5,7 @@ import { getAllFollowers } from "../../../store/follower";
 import UserFollowerList from "./UserFollowerList";
 import { getProfileUser } from "../../../store/profileUser";
 
-const UserFollowerListModal = ({ userId }) => {
+const UserFollowingListModal = ({ userId }) => {
   const followers = Object.values(useSelector((state) => state.followers));
   const [showModal, setShowModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -44,7 +44,7 @@ const UserFollowerListModal = ({ userId }) => {
           displayFollowers();
         }}
       >
-        <strong>{profileUser.followers.length}</strong> followers
+        <strong>{profileUser.following.length}</strong> followers
       </a>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
@@ -59,4 +59,4 @@ const UserFollowerListModal = ({ userId }) => {
   );
 };
 
-export default UserFollowerListModal;
+export default UserFollowingListModal;

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { getAllFollowers } from "./follower";
+import { getProfileUser } from "./profileUser";
 
 const GET_FOLLOWING = 'following/GET_FOLLOWING'
 // const GET_FOLLOWERS = 'following/GET_FOLLOWERS'
@@ -36,12 +37,13 @@ export const deleteFollowing = (id) => async(dispatch) => {
         dispatch(deleteFollowingAction(data.followingUser.id));
         dispatch(getAllFollowing(id))
         dispatch(getAllFollowers(id))
+        dispatch(getProfileUser(id))
         return data
     }
 }
 
-export const addFollowing = (user, id) => async(dispatch) => {
-    const response = await fetch(`/api/users/${user.id}/follow`, {
+export const addFollowing = (id) => async(dispatch) => {
+    const response = await fetch(`/api/users/${id}/follow`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -53,6 +55,7 @@ export const addFollowing = (user, id) => async(dispatch) => {
         dispatch(addFollowingAction(data.followingUser))
         dispatch(getAllFollowing(id))
         dispatch(getAllFollowers(id))
+        dispatch(getProfileUser(id))
         return data
     }
 }
