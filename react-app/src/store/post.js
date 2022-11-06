@@ -3,6 +3,7 @@ import { clearCommentsAction } from "./comments";
 import { getAllFollowing } from "./following";
 import { getAllFollowers } from "./follower";
 import { getProfileFollowing } from "./profile_following_store";
+import { getProfileUser } from "./profileUser";
 const GET_POSTS = "posts/GET_POSTS";
 // const GET_FOLLOWING_POSTS = 'following/GET_FOLLOWING_POSTS'
 const ADD_POST = "posts/ADD_POST";
@@ -95,6 +96,7 @@ export const addPost = (post) => async (dispatch) =>{
     //!added this to update follower numbers
     dispatch(getAllFollowers(post.userId))
     dispatch(getProfileFollowing(post.userId))
+    dispatch(getProfileUser(post.userId))
     return null
   }
   else if (response.status < 500) {
@@ -151,7 +153,7 @@ export default function postsReducer(state = {}, action) {
     //   return newState;
     case ADD_POST:
       newState = {...state}
-      console.log(action.payload.id);
+      // console.log(action.payload.id);
       newState[action.payload.id] = action.payload
       return newState
 

@@ -7,7 +7,7 @@ import './SideNonFollow.css'
 const SideNonFollowedUsers = ({userId}) => {
     const dispatch = useDispatch()
     const nonFollowers = Object.values(useSelector(state => state.notFollowed))
-    console.log(nonFollowers)
+    // console.log(nonFollowers)
     useEffect(() => {
         dispatch(getNonFollowing(userId))
     }, [dispatch])

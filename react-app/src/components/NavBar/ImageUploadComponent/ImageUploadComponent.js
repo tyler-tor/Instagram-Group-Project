@@ -29,12 +29,12 @@ const ImageUploadComponent = ({ setUrl }) => {
       setUrl(img_url.url);
       setUploadImg(true);
       setPrevImgUrl(img_url.url);
-      console.log(img_url.url);
+      // console.log(img_url.url);
     } else {
       setImageLoading(false);
       // a real app would probably use more advanced
       // error handling
-      console.log("error");
+      // console.log("error");
     }
   };
 

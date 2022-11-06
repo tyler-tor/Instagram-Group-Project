@@ -79,10 +79,6 @@
   margin-bottom: 12px;
 }
 
-.feed-child {
-
-}
-
 .post-username-and-settings-container{
   display: flex;
   align-items: center;
@@ -302,3 +298,15 @@
   text-decoration: none;
   color: black;
 }
+
+
+/* .github-img {
+  width: 2em;
+  height: 2em;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+
+.github-img:hover {
+  cursor: pointer;
+} */

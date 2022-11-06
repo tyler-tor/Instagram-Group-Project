@@ -8,16 +8,16 @@ import "./ExplorePage.css";
 const ExplorePage = () => {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.posts)).reverse();
-  console.log('posts', posts);
+  // console.log('posts', posts);
 
   useEffect(() => {
     dispatch(getAllPosts())
       .then((e) => {
-        console.log(e);
+        // console.log(e);
       })
       .catch(async (res) => {
         const data = await res.json();
-        console.log(data.errors);
+        // console.log(data.errors);
       });
   }, [dispatch]);
 

@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../store/users";
 import { setSearchUsers } from "../../store/search_users";
 import "./SearchBar.css";
+import { getProfileUser } from "../../store/profileUser";
 
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -34,7 +35,7 @@ const SearchBar = () => {
         return true;
       }
     });
-    console.log(res);
+    // console.log(res);
     dispatch(setSearchUsers(res));
     // history.push('/search')
   };
@@ -73,7 +74,11 @@ const SearchBar = () => {
                   <NavLink
                     key={item.id}
                     to={`/${item.id}`}
-                    onClick={handleNavClick}
+                    onClick={() => {
+                      dispatch(getProfileUser(item.id))
+                      setSearchInput('')
+
+                    }}
                     className={"dropdown-row"}
                   >
                     <img src={item.profilePicture} className="search-pic" />

@@ -30,7 +30,7 @@ export default function userLikesReducer(state = {}, action) {
     switch (action.type) {
         case GET_LIKES:
             newState = {}
-            console.log('IN REDUCER-----------',action.payload);
+            // console.log('IN REDUCER-----------',action.payload);
             action.payload.forEach(user => {
                 newState[user.id] = user
             })

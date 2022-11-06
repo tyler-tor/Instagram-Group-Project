@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllFollowers } from "../../../store/follower";
 import { getAllFollowing } from "../../../store/following";
-import { getProfileFollowing } from "../../../store/profile_following_store";
 import { getProfileUser } from "../../../store/profileUser";
-import "./UserFollowerList.css";
+import { getProfileFollowing } from "../../../store/profile_following_store";
+import "./UserFollowingList.css";
 
-const UserFollowerList = ({ followers, onClose }) => {
+const UserFollowingList = ({ following, onClose }) => {
   // const [isLoaded, setIsLoaded] = useState(true);
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ const UserFollowerList = ({ followers, onClose }) => {
   return (
     <div className="user-liked-list">
       <ul>
-        {followers.map((user) => {
+        {following.map((user) => {
           return (
             <NavLink to={`/${user.userId}`} onClick={() => {
                 dispatch(getAllFollowers(user.userId))
@@ -37,4 +37,4 @@ const UserFollowerList = ({ followers, onClose }) => {
   );
 };
 
-export default UserFollowerList;
+export default UserFollowingList;

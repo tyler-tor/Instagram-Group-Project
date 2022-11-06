@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import PostForm from "./PostForm";
 import { AiOutlinePlusSquare } from "react-icons/ai";
+import './NavBar.css'
 
 const PostFormModal = () => {
   const [showModal, setShowModal] = useState(false);

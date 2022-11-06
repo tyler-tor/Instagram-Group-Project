@@ -49,7 +49,7 @@ const SinglePostModal = ({ post }) => {
 
   useEffect(() => {
     dispatch(getUserLikedPostId()).then((res) => {
-      console.log(res);
+      // console.log(res);
       res.forEach((el) => {
         if (el.postId === post.id) {
           // console.log('MATCH!!!!!');

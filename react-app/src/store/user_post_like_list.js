@@ -25,13 +25,13 @@ const deleteUserLikedPostIdAction = (id) =>({
 
 //TODO need to make delete like thunk action. can probly just update list instead of removing since response returns updated list.
 export const deleteUserLikedPostId = (postId) => async (dispatch) =>{
-    console.log('THUNK POST ID IN DELETE------------------------------------------------',postId);
+    // console.log('THUNK POST ID IN DELETE------------------------------------------------',postId);
     const response = await fetch(`/api/posts/${postId}/likes`,{
         method: 'DELETE'
     })
     if(response.ok){
         const data = await response.json();
-        console.log('IN THUNK FOR DELETE POST', data);
+        // console.log('IN THUNK FOR DELETE POST', data);
         //!added a dispatch to current post to update with this thunk
         dispatch(getCurrentPost(data.postId))
         dispatch(deleteUserLikedPostIdAction(data.postId))
@@ -44,7 +44,7 @@ export const getUserLikedPostId = () => async (dispatch) =>{
     const response = await fetch('/api/users/likes')
     if(response.ok){
         const data = await response.json()
-        console.log(data.likes);
+        // console.log(data.likes);
         //!added a dispatch to current post to update with this thunk
         dispatch(getUserLikedPostIdAction(data.likes))
         return data.likes
@@ -59,7 +59,7 @@ export const addUserLikedPostId = (postId) => async (dispatch) =>{
     })
     if(response.ok){
         const data = await response.json()
-        console.log('ADD LIKE THUNK', data);
+        // console.log('ADD LIKE THUNK', data);
         // dispatch(getUserLikedPostIdAction(data.likes))
         dispatch(getCurrentPost(data.postId))
         dispatch(addUserLikedPostIdAction(data))

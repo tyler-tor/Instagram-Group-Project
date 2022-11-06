@@ -46,7 +46,7 @@ export const postComment = (comment) => async (dispatch) => {
   else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data.errors);
+      // console.log(data.errors);
       return data.errors;
     }
   }
@@ -71,7 +71,7 @@ export const updateComment = (payload) => async (dispatch) => {
 
   if (response.ok) {
     let updatedComment = await response.json()
-    console.log('update comment thunk ------------------------', updatedComment);
+    // console.log('update comment thunk ------------------------', updatedComment);
     dispatch(
       updateOneComment({
         body,
@@ -83,7 +83,7 @@ export const updateComment = (payload) => async (dispatch) => {
   else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data.errors);
+      // console.log(data.errors);
       return data.errors;
     }
   }
@@ -97,7 +97,7 @@ export const deleteComment = (commentId) => async (dispatch) => {
   const response = await fetch(`api/comments/${commentId}`, {
     method: "DELETE",
   });
-  console.log(response);
+  // console.log(response);
   if (response.ok) {
     const data = await response.json();
     dispatch(deleteOneComment(commentId));
@@ -112,7 +112,7 @@ export const getAllComments = (id) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    console.log('IN THUNK---------------------', data);
+    // console.log('IN THUNK---------------------', data);
     dispatch(getComments(data.Comments));
     return data;
   }
