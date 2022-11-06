@@ -45,7 +45,7 @@ const UserInfoBox = () => {
   },[dispatch, userId])
 
   useEffect(()=>{
-    console.log('profileUser', profileUser)
+    // console.log('profileUser', profileUser)
     if(profileUser.followers && profileUser.id == Number(userId)){
       for(let i = 0; i < profileUser.followers.length ; i++){
         let el = profileUser.followers[i]

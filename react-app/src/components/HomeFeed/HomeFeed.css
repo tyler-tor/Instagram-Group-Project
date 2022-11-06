@@ -310,3 +310,15 @@
 .github-img:hover {
   cursor: pointer;
 } */
+
+
+.about-links-styling {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(142, 142, 142);
+  padding: 8px;
+}
+
+.styling-for-about-links-icons {
+  margin-left: 5px;
+}

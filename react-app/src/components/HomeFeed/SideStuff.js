@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 // import pic from "../../images/screenshot1-2x.png";
 import { useSelector } from "react-redux";
 import SideNonFollowedUsers from "./SideNonFollowedUsers";
-import './HomeFeed.css'
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import "./HomeFeed.css";
 
 const SideStuff = () => {
   const user = useSelector((state) => state.session.user);
@@ -28,28 +29,40 @@ const SideStuff = () => {
       </NavLink>
       <div className="side-stuff-second-container">
         <div className="suggestions-for-you-styling secondary-gray-text">
-          © 2022 Finstagram Built by{" "}
-          <a
-            className="about-links-styling"
-            href="https://www.linkedin.com/in/derek-torrero-02823018a/"
-          >
+          © 2022 Finstagram built by:
+          <div className="about-links-styling">
             Derek Torrero
-          </a>
-          {", "}
-          <a
-            className="about-links-styling"
-            href="https://www.linkedin.com/in/theofandrich/"
-          >
+            <div>
+              <a href="https://www.linkedin.com/in/derek-torrero-02823018a/">
+                <AiFillLinkedin />
+              </a>
+              <a href="https://github.com/tyler-tor">
+                <AiFillGithub className="styling-for-about-links-icons" />
+              </a>
+            </div>
+          </div>
+          <div className="about-links-styling">
             Theo Fandrich
-          </a>
-          {", and"}
-          <a
-            className="about-links-styling"
-            href="https://www.linkedin.com/in/alan-de-leon-b54621212/"
-          >
-            {" "}
+            <div>
+              <a href="https://www.linkedin.com/in/theofandrich/">
+                <AiFillLinkedin />
+              </a>
+              <a href="https://github.com/theoman42">
+                <AiFillGithub className="styling-for-about-links-icons" />
+              </a>
+            </div>
+          </div>
+          <div className="about-links-styling">
             Alan Deleon
-          </a>
+            <div>
+              <a href="https://www.linkedin.com/in/alan-de-leon-b54621212/">
+                <AiFillLinkedin />
+              </a>
+              <a href="https://github.com/AlanDeleon88">
+                <AiFillGithub className="styling-for-about-links-icons" />
+              </a>
+            </div>
+          </div>
         </div>
         {/* <div className="github-img-container">
           <img
