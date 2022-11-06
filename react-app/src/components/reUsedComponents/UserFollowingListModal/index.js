@@ -45,7 +45,11 @@ const UserFollowingListModal = ({ userId }) => {
           displayFollowers();
         }}
       >
-        <strong>{profileUser.following.length}</strong> following
+        <strong>{profileUser.following.length}</strong>
+        {' '}
+        <span className="following-text-list">
+        following
+        </span>
       </a>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

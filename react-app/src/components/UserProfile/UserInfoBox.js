@@ -51,7 +51,7 @@ const UserInfoBox = () => {
         let el = profileUser.followers[i]
         if(el.userId === currUser.id){
           setFollowTest(true)
-          console.log('here')
+          // console.log('here')
           return () =>{
 
           }
