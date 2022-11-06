@@ -33,11 +33,11 @@ const SideStuff = () => {
           <div className="about-links-styling">
             Derek Torrero
             <div>
-              <a href="https://github.com/tyler-tor">
+              <a href="https://www.linkedin.com/in/derek-torrero-02823018a/">
                 <AiFillLinkedin />
               </a>
-              <a href="https://www.linkedin.com/in/derek-torrero-02823018a/">
-                <AiFillGithub />
+              <a href="https://github.com/tyler-tor">
+                <AiFillGithub className="styling-for-about-links-icons" />
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ const SideStuff = () => {
                 <AiFillLinkedin />
               </a>
               <a href="https://github.com/theoman42">
-                <AiFillGithub />
+                <AiFillGithub className="styling-for-about-links-icons" />
               </a>
             </div>
           </div>
@@ -58,8 +58,8 @@ const SideStuff = () => {
               <a href="https://www.linkedin.com/in/alan-de-leon-b54621212/">
                 <AiFillLinkedin />
               </a>
-              <a href="https://github.com/theoman42">
-                <AiFillGithub />
+              <a href="https://github.com/AlanDeleon88">
+                <AiFillGithub className="styling-for-about-links-icons" />
               </a>
             </div>
           </div>
