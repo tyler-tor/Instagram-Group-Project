@@ -154,6 +154,7 @@
 #post-image {
   height: 470px;
   width: 470px;
+  cursor: pointer;
 }
 
 #post-image img {

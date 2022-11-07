@@ -21,6 +21,7 @@ import { addUserLikedPostId } from "../../store/user_post_like_list";
 import { getCurrentPost } from "../../store/currentPost";
 import EditCaptionThreeDotsModal from "./EditCaptionSettingsModal";
 import CommentContainer from "./CommentContainer";
+import { getAllFollowingPosts } from "../../store/followingPosts";
 
 const SinglePostModal = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +32,9 @@ const SinglePostModal = ({ post }) => {
   const [likePost, setLikePost] = useState(false);
   // const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
-  const likes = Object.values(useSelector((state) => state.userPostLikes));
+  const likes = Object.values(useSelector((state) => state.userPostLikes)).map(
+    (x) => x.postId
+  );
   const comments = Object.values(useSelector((state) => state.comments));
   const dispatch = useDispatch();
 
@@ -48,6 +51,7 @@ const SinglePostModal = ({ post }) => {
   // }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getAllFollowingPosts());
     dispatch(getUserLikedPostId()).then((res) => {
       // console.log(res);
       res.forEach((el) => {
@@ -64,6 +68,11 @@ const SinglePostModal = ({ post }) => {
       setMyPost(true);
     }
   }, [post, user]);
+
+  useEffect(() => {
+    if (likes.includes(post.id)) setLikePost(true);
+    else setLikePost(false);
+  }, [likes]);
 
   // useEffect(() => {
   //   comments.map(comment => {
@@ -92,13 +101,12 @@ const SinglePostModal = ({ post }) => {
 
     let newComment = await dispatch(postComment(payload)).then((res) => {
       // console.log("Posted Comment", res);
-      if(res){
+      if (res) {
         // console.log('updateCOMMENTS',res);
         // setErrors(res)
         // console.log(res);
-        window.alert('Please Fill in the comment section.')
+        window.alert("Please Fill in the comment section.");
       }
-
     });
 
     // console.log(newComment);
@@ -126,6 +134,7 @@ const SinglePostModal = ({ post }) => {
       dispatch(deleteUserLikedPostId(post.id));
       // dispatch(getCurrentPost(post.id))
     }
+    dispatch(getAllFollowingPosts());
     setLikePost(!likePost);
   };
 

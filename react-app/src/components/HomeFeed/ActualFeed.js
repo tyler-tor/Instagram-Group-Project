@@ -7,18 +7,26 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllFollowingPosts } from "../../store/followingPosts";
 import SinglePostModal from "../reUsedComponents/SinglePostModal";
+import { addUserLikedPostId } from "../../store/user_post_like_list";
 import {
-  addUserLikedPostId,
   deleteUserLikedPostId,
+  getUserLikedPostId,
 } from "../../store/user_post_like_list";
+import UserLikedListModal from "../reUsedComponents/UserLikedListModal";
 
 const ActualFeed = () => {
   const dispatch = useDispatch();
-  const posts = Object.values(useSelector((state) => state.followingPosts)).reverse();
+  const posts = Object.values(
+    useSelector((state) => state.followingPosts)
+  ).reverse();
+  const likedPosts = Object.values(
+    useSelector((state) => state.userPostLikes)
+  ).map((x) => x.postId);
   const [likePost, setLikePost] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     dispatch(getAllFollowingPosts());
+    dispatch(getUserLikedPostId());
   }, [dispatch]);
 
   if (!posts) return null;
@@ -52,33 +60,32 @@ const ActualFeed = () => {
               <PostSettingsModal post={post} />
             </div>
             <div id="post-image" className="feed-child post-image-wrapper">
-              {/* <SinglePostModal
+              <SinglePostModal
                 post={post}
                 className="feed-child post-image-wrapper"
-              /> */}
-              <img
+              />
+              {/* <img
                 className="feed-child post-image-wrapper"
                 src={post.imgUrl}
                 alt="example post"
-              />
+              /> */}
             </div>
             <div className="feed-child like-comment-icon-container">
-              <div
+              {/* <div
                 className="no-styling"
                 onClick={() => handleLikeButton(post)}
               >
-                {/* <AiOutlineHeart className="post-modal-icons-likes-comments except-first-icon-in-modal" /> */}
-                {/* {likePost ? (
+                {likedPosts.includes(post.id) ? (
                   <AiFillHeart className="post-modal-icons-likes-comments no-left-padding red" />
                 ) : (
                   <AiOutlineHeart className="post-modal-icons-likes-comments no-left-padding" />
-                )} */}
-              </div>
+                )}
+              </div> */}
               {/* <IoChatbubbleOutline className="post-icon-button reverse" /> */}
               {/* <SinglePostModalButton post={post} /> */}
             </div>
             <div className="feed-child likes-count-container">
-              <strong>{post.likes} likes </strong>
+              <UserLikedListModal postId={post.id} />
             </div>
             <div className="post-caption-container-and-show-all-comments">
               <div className="username-caption-div">

@@ -15,7 +15,6 @@ import searchUserReducer from "./search_users";
 import profileFollowingReducer from "./profile_following_store";
 import profileUserReducer from "./profileUser";
 
-
 const rootReducer = combineReducers({
   session,
   posts: postsReducer,
@@ -31,7 +30,7 @@ const rootReducer = combineReducers({
   notFollowed: nonFollowingReducer,
   searchUsers: searchUserReducer,
   profileFollowing: profileFollowingReducer,
-  profileUser: profileUserReducer
+  profileUser: profileUserReducer,
 });
 
 let enhancer;

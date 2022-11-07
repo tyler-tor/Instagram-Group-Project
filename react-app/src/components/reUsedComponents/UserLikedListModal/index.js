@@ -10,6 +10,7 @@ const UserLikedListModal = ({ postId }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const post = useSelector((state) => state.currentPost); //TODO make a current post store
   const postLikes = useSelector((state) => state.userPostLikes);
+  const followingPosts = useSelector((state) => state.followingPosts);
   const dispatch = useDispatch();
   //TODO make a useEffect to dispatch and load the correct likes.
 
@@ -22,8 +23,8 @@ const UserLikedListModal = ({ postId }) => {
   useEffect(() => {
     dispatch(getUserLikedPostId());
   }, [dispatch]);
-//   console.log(postId);
-//   console.log(postLikes);
+  //   console.log(postId);
+  //   console.log(postLikes);
 
   return (
     <>
@@ -35,17 +36,7 @@ const UserLikedListModal = ({ postId }) => {
           <>
             {/* {postLikes[postId].likes} */}
             {/* {post.likes} */}
-
-            {postLikes[postId] ? (
-              <>{postLikes[postId].likes}</>
-            )
-
-            :
-
-            (
-              <>{post.likes}</>
-            )}{" "}
-            likes
+            {followingPosts[postId].likes} <span>likes</span>
           </>
         )}
       </button>
