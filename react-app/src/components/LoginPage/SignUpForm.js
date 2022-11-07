@@ -21,7 +21,14 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data);
       }
+    }else{
+
+      setErrors(['The passwords do not match, Try again'])
+      setPassword('')
+      setRepeatPassword('')
+      return
     }
+
   };
 
   const updateUsername = (e) => {
@@ -62,7 +69,7 @@ const SignUpForm = () => {
     <div className="sign-up-container">
       <div className="logo-holder sign-up-logo"></div>
       <form className="form-container" onSubmit={onSignUp}>
-        <div>
+        <div className="signup-errors">
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
@@ -115,7 +122,7 @@ const SignUpForm = () => {
             className="form-input-text-boxes"
             type="password"
             name="password"
-            placeholder="Repeat Password"
+            placeholder="Set Password"
             onChange={updatePassword}
             value={password}
           ></input>
