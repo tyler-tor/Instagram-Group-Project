@@ -51,7 +51,7 @@ Welcome to our Instagram Clone Group Project. This is a web app that allows you 
 
 
 ### Adding a new post
-![image](![image](https://user-images.githubusercontent.com/92609467/200462164-d79f74d3-cc54-40a4-b3c3-1286482abef8.png)
+![image](https://user-images.githubusercontent.com/92609467/200462164-d79f74d3-cc54-40a4-b3c3-1286482abef8.png)
 ![image](https://user-images.githubusercontent.com/93111660/200460428-54643f9e-e174-4167-8992-40e01c5ff7c0.png)
 - Using this form you can add a post to your profile where other viewers that are following you will see in there feed or if not will be able to view on the explore page.
 
