@@ -33,39 +33,45 @@ Welcome to our Instagram Clone Group Project. This is a web app that allows you 
 
 ### Login page
 ![image](https://user-images.githubusercontent.com/93111660/200135487-4549b9b5-d2b9-4dc7-9d13-506b20e87976.png)
+- For existing users you can Login here.
 
 
 ### Landing page after login
-![image](https://user-images.githubusercontent.com/93111660/200135509-9c455225-e765-4379-b7f6-fec20080cc85.png)
+![image](https://user-images.githubusercontent.com/93111660/200460268-8db72d0b-3bf8-4a5e-a090-bd34b04d4088.png)
+- Once logged in this is your feed showing posts of users that you are currently following.
 
 
 ### Signup page
-![image](https://user-images.githubusercontent.com/93111660/200135527-8f677339-31c9-4d8c-9a4e-b8a662323ce5.png)
-
+![image](https://user-images.githubusercontent.com/93111660/200460308-89bfe4ba-ca24-46db-a16c-75cf98795b24.png)
+- If you do not have a profile yet you can signup using the following credentials to start your experience.
 
 ### A users profile page
-![image](https://user-images.githubusercontent.com/93111660/200135585-558f3e35-ebb7-4a4f-bac9-cdf531c613c8.png)
+![image](https://user-images.githubusercontent.com/93111660/200460373-5e6f8f0e-a772-4995-9f1f-29a3033bc12e.png)
+- Here you can view posts by the selected user.
 
 
 ### Adding a new post
-![image](https://user-images.githubusercontent.com/93111660/200135568-6208df08-bf75-4096-a885-b97269cec934.png)
+![image](https://user-images.githubusercontent.com/93111660/200460428-54643f9e-e174-4167-8992-40e01c5ff7c0.png)
+- Using this form you can add a post to your profile where other viewers that are following you will see in there feed or if not will be able to view on the explore page.
 
 
 ### Viewing a individual post
-![image](https://user-images.githubusercontent.com/93111660/200135622-b3b44eca-9ab3-4917-8e2e-696ca744be6a.png)
-
+![image](https://user-images.githubusercontent.com/93111660/200460553-41b3a8f3-76a9-4ff5-9283-0d661633efe4.png)
+- Here you can comment on a post and delete/update your personal comment.
+- Like and unlike a post.
 
 
 ### Viewing the explore page of all users posts
-![image](https://user-images.githubusercontent.com/93111660/200135669-1fe40ca4-d883-4a9d-8277-c6aae6e25cc9.png)
-
+![image](https://user-images.githubusercontent.com/93111660/200460687-1cb05a68-73ab-40e5-8010-8d0954195b7f.png)
+- Here you can view every post by every user.
 
 ### Editing a caption on a post
-![image](https://user-images.githubusercontent.com/93111660/200135707-500e31dc-0f7e-44a7-8a95-8a7da742ef89.png)
-
+![image](https://user-images.githubusercontent.com/93111660/200460819-e91399ef-1260-4c12-852e-d39ca59201f8.png)
+- On a individual post that is owned by the current user you can edit a caption on a post.
 
 ### Viewing all users that you are not currently following
-![image](https://user-images.githubusercontent.com/93111660/200135733-a2355bef-832f-41d0-9654-124a6f10b956.png)
+![image](https://user-images.githubusercontent.com/93111660/200460932-f108e328-2b6c-4327-9ccc-10b970e38139.png)
+- Each one is clickable to visit a users profile page.
 
 
 
