@@ -51,17 +51,21 @@ Welcome to our Instagram Clone Group Project. This is a web app that allows you 
 
 
 ### Adding a new post
+![image](![image](https://user-images.githubusercontent.com/92609467/200462164-d79f74d3-cc54-40a4-b3c3-1286482abef8.png)
 ![image](https://user-images.githubusercontent.com/93111660/200460428-54643f9e-e174-4167-8992-40e01c5ff7c0.png)
 - Using this form you can add a post to your profile where other viewers that are following you will see in there feed or if not will be able to view on the explore page.
 
 
 ### Viewing a individual post
+![image](https://user-images.githubusercontent.com/92609467/200462613-804f9bea-2ca6-42f5-8ac8-5f76addb5479.png)
 ![image](https://user-images.githubusercontent.com/93111660/200460553-41b3a8f3-76a9-4ff5-9283-0d661633efe4.png)
 - Here you can comment on a post and delete/update your personal comment.
 - Like and unlike a post.
 
 
 ### Viewing the explore page of all users posts
+![image](https://user-images.githubusercontent.com/92609467/200463657-d5c61ccb-936c-4632-9239-4038ed86554e.png)
+
 ![image](https://user-images.githubusercontent.com/93111660/200460687-1cb05a68-73ab-40e5-8010-8d0954195b7f.png)
 - Here you can view every post by every user.
 
