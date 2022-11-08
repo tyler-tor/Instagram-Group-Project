@@ -23,7 +23,11 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data);
       }
-      history.push('/explore')
+      else{
+
+        history.push('/explore')
+
+      }
     }else{
 
       setErrors(['The passwords do not match, Try again'])
