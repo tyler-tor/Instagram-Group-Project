@@ -11,7 +11,7 @@ def me_following_posts():
     user = User.query.get(current_user.id)
     if(user):
         #can get associated tables by using their relationship properties IE user.posts to get all posts associated with the user.
-        print('TEST IN ME_ROUTE!-----',[post.to_dict() for post in user.posts])
+        # print('TEST IN ME_ROUTE!-----',[post.to_dict() for post in user.posts])
         user = user.to_dict()
         # print('test-------------------------------',user['following'])
         following = user['following']

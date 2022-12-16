@@ -126,7 +126,7 @@ def get_user_liked(id):
         post_user_dict = {'user' : []}
         for user in post_user_liked_arr:
             post_user_dict['user'].append({'id':user['id'], 'username':user['username'], 'profilePicture':user['profilePicture']})
-            print(user)
+            # print(user)
         return post_user_dict
     return {'errors': 'This post does not exist'}, 404
 
@@ -177,7 +177,7 @@ def unlike_post(id):
                 db.session.commit()
 
                 #! update return with full user dict.
-                print('DELETE LIKE ENDPOINT---------------------------------------------', curr_post_dict)
+                # print('DELETE LIKE ENDPOINT---------------------------------------------', curr_post_dict)
                 return {'postId': post_dict['postId'], 'likes' : curr_post_dict['likes']}
         return {'errors' : 'coult not find post'}
 
@@ -188,7 +188,7 @@ def comments_on_post(id):
     post = Post.query.get(id)
     if post:
         comments = Comment.query.filter(Comment.post_id == post.id).options(db.joinedload(Comment.users)).all()
-        print(comments)
+        # print(comments)
         comments_dict = {}
         comments_dict["Comments"] = [{**comment.to_dict(), 'users': {
             'username': comment.users.username, 'id': comment.users.id, 'profilePicture' : comment.users.profile_picture
