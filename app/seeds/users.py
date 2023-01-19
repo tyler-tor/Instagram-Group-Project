@@ -1,5 +1,14 @@
 from app.models import db, User
+from faker import Faker
 
+fake = Faker()
+user_data = []
+
+for i in range(16):
+    user_data.append(
+        {'first_name': fake.first_name(), 'last_name': fake.last_name(), 'password': fake.password(), 'username': fake.simple_profile()['username'], 'email': fake.free_email(), 'profile_picture': fake.image_url()}
+    )
+print(user_data)
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
