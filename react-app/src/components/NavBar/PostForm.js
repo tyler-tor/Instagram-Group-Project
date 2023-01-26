@@ -17,8 +17,6 @@ const PostForm = ({ onClose }) => {
     // Need to create a function that posts to database
     e.preventDefault();
     if(user){
-      // console.log('USER OBJECT',user);
-      // console.log('USERID', user.id);
       let post = {
                   userId: user.id,
                   caption: caption,

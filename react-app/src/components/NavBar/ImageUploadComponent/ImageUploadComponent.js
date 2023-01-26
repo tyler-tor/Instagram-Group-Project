@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import "./ImageUploadComponent.css";
 //!pass in a setValue from postForm to get the image url.
 const ImageUploadComponent = ({ setUrl }) => {
-  const history = useHistory(); // so that we can redirect after the image upload is successful
+  // const history = useHistory(); // so that we can redirect after the image upload is successful
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [uploadedImg, setUploadImg] = useState(false);

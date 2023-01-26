@@ -35,7 +35,7 @@ const CommentContainer = ({ postId, setShowModal }) => {
                   className="comments-section-child-container"
                   key={comment.id}
                 >
-                  <img src={post.users.profilePicture} alt="" />
+                  <img src={comment.users.profilePicture} alt="" />
                   <div className="username-styling-in-post-modal">
                     <strong>{comment.users.username} </strong>
                     <span className="body-styling-in-post-modal">
