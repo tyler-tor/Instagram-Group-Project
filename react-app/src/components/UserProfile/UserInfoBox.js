@@ -13,6 +13,7 @@ import { getAllFollowers } from "../../store/follower";
 import { getProfileFollowing } from "../../store/profile_following_store";
 import { getProfileUser } from "../../store/profileUser";
 import UserFollowingListModal from "../reUsedComponents/UserFollowingListModal";
+import './UserProfile.css'
 
 
 const UserInfoBox = () => {
@@ -216,9 +217,9 @@ const UserInfoBox = () => {
                 {followBtn && (
                   <>
                     {followTest ? (
-                      <button onClick={handleUnFollow}>UnFollow</button>
+                      <button onClick={handleUnFollow} className="unfollow-button">Following</button>
                     ) : (
-                      <button onClick={handleFollow}>Follow</button>
+                      <button onClick={handleFollow} className="follow-button">Follow</button>
                     )}
                   </>
                 )}

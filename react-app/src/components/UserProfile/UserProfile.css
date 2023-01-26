@@ -48,7 +48,7 @@
   justify-content:space-between;
 }
 
-.username-and-follow-button-row button{
+/* .username-and-follow-button-row button{
   color: white;
   width: 75.4px;
   background-color: rgb(0, 149, 246);
@@ -57,7 +57,7 @@
   padding: 5px 9px;
   cursor: pointer;
   margin: 0px 20% 0px;
-}
+} */
 
 .username-and-follow-button-row div{
   font-size: 28px;
@@ -81,4 +81,39 @@
 .user-profile-caption {
   display: flex;
   flex-direction: column;
+}
+.follow-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 90px;
+  color: white;
+  background-color: rgb(0, 149, 246);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0px 20% 0px;
+}
+
+.follow-button:hover{
+  background-color: #0074cc;
+}
+
+.unfollow-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 90px;
+  color:  black;
+  background-color: rgb(245, 245, 245);
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin: 0px 20% 0px;
+}
+
+.unfollow-button:hover{
+  background-color: rgba(234, 234, 234);
 }

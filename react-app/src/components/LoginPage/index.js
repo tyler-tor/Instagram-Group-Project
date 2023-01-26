@@ -13,7 +13,7 @@ const LoginPage = () => {
       <div className="login-page-right-side-container">
         <LoginForm />
         <div className="have-an-account-sign-up-box-container">
-          Don't have an account? <SignUpFormModal />
+          Don't have an account?&nbsp; <SignUpFormModal />
         </div>
       </div>
     </div>
