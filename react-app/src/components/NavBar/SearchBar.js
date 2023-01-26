@@ -64,7 +64,7 @@ const SearchBar = () => {
             type="text"
             value={searchInput}
             onChange={updateSearch}
-            placeholder="Search"
+            placeholder="Search for a user"
           />
         </div>
 
