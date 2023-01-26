@@ -9,6 +9,9 @@ import { getProfileUser } from "../../store/profileUser";
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const users = Object.values(useSelector((state) => state.users));
+  const [searchEmpty, setSearchEmpty] = useState(true);
+  const [hasInputted, setHasInputted] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -17,6 +20,16 @@ const SearchBar = () => {
       // console.log(users);
     });
   }, [dispatch]);
+
+  useEffect(() =>{
+    if(document.getElementById('search-nav-link')){
+      setSearchEmpty(false)
+    }
+    else{
+      setSearchEmpty(true)
+    }
+  },[searchInput])
+
 
   const updateSearch = (e) => {
     setSearchInput(e.target.value);
@@ -51,7 +64,7 @@ const SearchBar = () => {
             type="text"
             value={searchInput}
             onChange={updateSearch}
-            placeholder="Search"
+            placeholder="Search for a user"
           />
         </div>
 
@@ -61,11 +74,9 @@ const SearchBar = () => {
               .filter((user) => {
                 const searchTerm = searchInput.toLowerCase();
                 const name = user.username.toLowerCase();
-
                 return (
                   searchTerm &&
-                  name.startsWith(searchTerm) &&
-                  name !== searchTerm
+                  name.startsWith(searchTerm)
                 );
               })
               .slice(0, 10)
@@ -77,15 +88,19 @@ const SearchBar = () => {
                     onClick={() => {
                       dispatch(getProfileUser(item.id))
                       setSearchInput('')
-
                     }}
                     className={"dropdown-row"}
+                    id='search-nav-link'
                   >
                     <img src={item.profilePicture} className="search-pic" />
                     <div className="search-dropdown-name">{item.username}</div>
                   </NavLink>
                 );
               })}
+              {
+                searchEmpty && searchInput &&
+                  <div> No users with that username found! </div>
+              }
         </div>
       </div>
     </>
