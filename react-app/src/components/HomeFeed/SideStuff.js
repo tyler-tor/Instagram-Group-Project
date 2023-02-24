@@ -29,7 +29,7 @@ const SideStuff = () => {
       </NavLink>
       <div className="side-stuff-second-container">
         <div className="suggestions-for-you-styling secondary-gray-text">
-          © 2022 Finstagram built by:
+          {/* © 2022 Finstagram built by: */}
           <div className="about-links-styling">
             Derek Torrero
             <div>

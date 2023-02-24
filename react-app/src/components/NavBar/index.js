@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ProfileDropDownMenu from "./ProfileDropDownMenu";
-import logo from "../../images/Instagram_logo.png";
+import logo from "../../images/text-1677259699931.png";
 import SearchBar from "./SearchBar";
 import PostFormModal from "./PostFormModal";
 import { AiOutlineCompass, AiFillHome } from "react-icons/ai";
 import "./NavBar.css";
 
 const NavBar = () => {
-  
+
   return (
     <div className="navbar-container">
       <div className="navbar-child logo-portion">

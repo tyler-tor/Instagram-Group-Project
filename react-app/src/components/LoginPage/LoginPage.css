@@ -26,7 +26,8 @@
 }
 
 .logo-holder {
-  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yi/r/ZFtnMBJnHU_.png");
+  /* background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yi/r/ZFtnMBJnHU_.png"); */
+  background-image: url("../../images/text-1677259699931.png");
   background-position: 0px -554px;
   background-size: auto;
   width: 175px;
