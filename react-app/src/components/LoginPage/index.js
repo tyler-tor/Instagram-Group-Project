@@ -7,9 +7,9 @@ import "./LoginPage.css";
 const LoginPage = () => {
   return (
     <div className="papa-div">
-      <div className="login-page-left-side-container">
+      {/* <div className="login-page-left-side-container">
         <Carousel />
-      </div>
+      </div> */}
       <div className="login-page-right-side-container">
         <LoginForm />
         <div className="have-an-account-sign-up-box-container">
